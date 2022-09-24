@@ -100,8 +100,8 @@ PulaMovimentaMenu:
 	la	a2, PosicaoAnteriorCursor 	# carrego o endereco da posicao atual do cursor em a2
 	lw	a1, 0(a2)		# carrego o valor x da posicao atual do cursor
 	lw	a2, 4(a2)		# carrego o valor y da posicao atual do cursor
-	li	a4, 28
-	li	a5, 28
+	li	a4, 20
+	li	a5, 20
 	mv	s5, sp
 	call	SalvaSprite
 	mv	s3, sp 			# final do espaco reservado para os argumentos das Idles
@@ -163,8 +163,8 @@ PulaImprimeMenu:
 	sw 	s1, 0(t0) 		# troca de frame
 	mv	a3, s1 			# move o valor de s1 para a3
 	xori	a3, a3, 1 		# inverte o valor de a3
-	li	a4, 28			# carrega xmax = 20 para a funcao RecuperaSprite
-	li	a5, 28 			# carrega ymax = 20 para a funcao RecuperaSprite
+	li	a4, 20			# carrega xmax = 20 para a funcao RecuperaSprite
+	li	a5, 20			# carrega ymax = 20 para a funcao RecuperaSprite
 	la	t0, PosicaoAnteriorCursor 	# carrega a label da posicao atual do cursor
 	lw	a1, 0(t0) 		# carrega x
 	lw	a2, 4(t0) 		# carrega y
