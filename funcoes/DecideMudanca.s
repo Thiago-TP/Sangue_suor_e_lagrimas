@@ -4,7 +4,7 @@
 #################################################
 #	Retorna:				#
 #	Nada,  mas e aqui que mudamos os regis-	#
-#	tradores s7, s8, s9, s10. Esses regis-	#
+#	tradores s7, s8, s9. Esses regis-	#
 #	tradores sao utilizados na movimentacao	#
 #	do personagem do mapa seja ele qual	#
 #	for. Tambem preparamos a Movimentacao	#
@@ -37,8 +37,6 @@ LoopRetornaStandBy:
 	bge	t1, t2, PulaReiniciaMoveSet	# se o Moveset for maior ou igual a 5 nao reinicio ele	
 	beqz 	t1,PulaReiniciaMoveSet
 	sh	zero, 16(a1)			# reinicio o moveset de todos os personagens que nao estamos mortos ou nao estao cinzas
-			
-	# aqui o a1 é a posição do personagem que queremos reiniciar a area de movimento
 	lw	t0, 0(a1)
 	lw	t1, 4(a1)
 	li	t2,16
@@ -74,9 +72,6 @@ PulaReiniciaMoveSet:
 	addi	t6, t6, 2			# incremento em 2 o contador
 	bne	t6, s4, LoopRetornaStandBy	# verifico se o contador eh diferente de s4 e se for volto pro Loop		
 SaiReiniciaMoveSet:
-	lw	t1,16(s5)
-	li	t2,5
-	bge	t1, t2, FimDecide		# se o Moveset for maior ou igual a 5 eu vou pro FimDecide
 	li	t1, 1				# carrego 1 em t1 para preparar a movimentacao do personagem
 	la	a0, PosicaoAtualCursor		# carrego a Posicao atual do cursor em a0 para passar como argumento
 	sw	t1, 16(s5)			# salvo o valor em t1 no indicador de move set do personagem
@@ -85,6 +80,23 @@ SaiReiniciaMoveSet:
 PulaCliquePersonagem:
 	addi	t6, t6, 2			# incrementa o contador em 2
 	bne	t6, s4, LoopVerificaCliquePersonagem	# verifico se o contador eh diferente de s4 e se for volto pro Loop
+	mv	t6,zero
+LoopVerificaAliadoCursor:
+	mv	a7, t6				# move o contador para a7 para passar como argumento para a funcao abaixo
+	call	EscolhePersonagem 
+	li	t0,1
+	lw	t1, 16(a1)
+	lw	t2, 0(a0)
+	lw 	t3, 4(a0)
+	lw 	t4, 0(a1)
+	lw	t5, 4(a1)
+	beq	t1,t0,PulaPersonagemCursor
+	bne	t2,t4,PulaPersonagemCursor
+	bne	t3,t5,PulaPersonagemCursor
+	j	FimDecide
+PulaPersonagemCursor:
+	addi	t6,t6,2
+	blt	t6,s4,LoopVerificaAliadoCursor
 	mv	t6, zero			# reinicio o contador em t6
 	li	t2, 1				# carrego 1 em t2 para verificar se aquele personagem ja estava preparado para andar
 LoopVerificaMovimento:
