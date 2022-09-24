@@ -10,7 +10,7 @@ Repositório do projeto final de OAC - 2022/2 - Grupo 5
 - [ ] IA de controle de inimigos e turnos                                (1.0)
 - [x] Três tipos de armas                                                (1.0)
 - [x] Cenas de batalhas                                                  (0.5)
-- [ ] Menu de ações                                                      (0.5)
+- [x] Menu de ações                                                      (0.5)
 - [x] Movimentação dos personagens                                       (0.5)
 - [ ] Dois tipos de terrenos especiais                                   (0.5)
 
