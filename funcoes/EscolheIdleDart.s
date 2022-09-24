@@ -23,7 +23,7 @@ EscolheIdleDart:
 	beq	t1, t2, MovimentaDartE		# se t1 for igual a t2 pula para MovimentaDartE
 	li	t2, 4				# carrega 4 em t2 para verificar o proximo moveset
 	beq	t1, t2, MovimentaDartN		# se t1 for igual a t2 pula para MovimentaDartN
-	j	StandByDartGray			# pula para a StandByDartGray
+	#j	StandByDartGray			# pula para a StandByDartGray
 	# Se formos colocar morte teriamos que mudar duas linhas de codigo a de cima e acrescentar mais uma
 	# possibilidade
 StandByDart:

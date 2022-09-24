@@ -23,7 +23,7 @@ EscolheIdleSain:
 	beq	t1, t2, MovimentaSainE		# se t1 for igual a t2 pula para MovimentaSainE
 	li	t2, 4				# carrega 4 em t2 para verificar o proximo moveset
 	beq	t1, t2, MovimentaSainN		# se t1 for igual a t2 pula para MovimentaSainN
-	j	StandBySainGray			# pula para a StandBySainGray
+	#j	StandBySainGray			# pula para a StandBySainGray
 	# Se formos colocar morte teriamos que mudar duas linhas de codigo a de cima e acrescentar mais uma
 	# possibilidade
 StandBySain:

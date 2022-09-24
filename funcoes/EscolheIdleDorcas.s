@@ -23,7 +23,7 @@ EscolheIdleDorcas:
 	beq	t1, t2, MovimentaDorcasE		# se t1 for igual a t2 pula para MovimentaDorcasE
 	li	t2, 4				# carrega 4 em t2 para verificar o proximo moveset
 	beq	t1, t2, MovimentaDorcasN		# se t1 for igual a t2 pula para MovimentaDorcasN
-	j	StandByDorcasGray			# pula para a StandByDorcasGray
+	#j	StandByDorcasGray			# pula para a StandByDorcasGray
 	# Se formos colocar morte teriamos que mudar duas linhas de codigo a de cima e acrescentar mais uma
 	# possibilidade
 StandByDorcas:

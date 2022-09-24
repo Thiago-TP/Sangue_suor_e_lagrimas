@@ -23,7 +23,7 @@ EscolheIdleYogi:
 	beq	t1, t2, MovimentaKnightE	# se t1 for igual a t2 pula para MovimentaKnightE
 	li	t2, 4				# carrega 4 em t2 para verificar o proximo moveset
 	beq	t1, t2, MovimentaKnightN	# se t1 for igual a t2 pula para MovimentaKnightN
-	j	StandByKnightGray		# pula para a StandByKnightGray
+	#j	StandByKnightGray		# pula para a StandByKnightGray
 	# Se formos colocar morte teriamos que mudar duas linhas de codigo a de cima e acrescentar mais uma
 	# possibilidade
 StandByKnight:

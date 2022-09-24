@@ -23,7 +23,7 @@ EscolheIdleBrigand:
 	beq	t1, t2, MovimentaBrigandE	# se t1 for igual a t2 pula para MovimentaBrigandE
 	li	t2, 4				# carrega 4 em t2 para verificar o proximo moveset
 	beq	t1, t2, MovimentaBrigandN	# se t1 for igual a t2 pula para MovimentaBrigandN
-	j	StandByBrigandGray		# pula para a StandByBrigandGray
+	#j	StandByBrigandGray		# pula para a StandByBrigandGray
 	# Se formos colocar morte teriamos que mudar duas linhas de codigo a de cima e acrescentar mais uma
 	# possibilidade
 StandByBrigand:

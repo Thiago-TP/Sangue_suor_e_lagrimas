@@ -23,8 +23,8 @@ CHAR_ENTER.Menu:
 	# aqui eu imprimo a area de ataque
 	j	FimMovimentaMenu
 PulaDecideAcao:
-	#li	t0,5
-	#sw	t0,16(s7)
+	li	t0,5
+	sw	t0,16(s7)
 	li	a1, 0
 	li	a2, 0
 	li	a4, 6

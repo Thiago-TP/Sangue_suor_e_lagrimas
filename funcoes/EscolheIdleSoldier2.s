@@ -23,7 +23,7 @@ EscolheIdleSoldier2:
 	beq	t1, t2, MovimentaLanca2E	# se t1 for igual a t2 pula para MovimentaLanca2E
 	li	t2, 4				# carrega 4 em t2 para verificar o proximo moveset
 	beq	t1, t2, MovimentaLanca2N	# se t1 for igual a t2 pula para MovimentaLanca2N
-	j	StandByLanca2Gray		# pula para a StandByLanca2Gray
+	#j	StandByLanca2Gray		# pula para a StandByLanca2Gray
 	# Se formos colocar morte teriamos que mudar duas linhas de codigo a de cima e acrescentar mais uma
 	# possibilidade
 StandByLanca2:

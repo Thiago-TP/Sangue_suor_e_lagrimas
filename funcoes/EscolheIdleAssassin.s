@@ -23,7 +23,7 @@ EscolheIdleAssassin:
 	beq	t1, t2, MovimentaAssassinE		# se t1 for igual a t2 pula para MovimentaAssassinE
 	li	t2, 4				# carrega 4 em t2 para verificar o proximo moveset
 	beq	t1, t2, MovimentaAssassinN		# se t1 for igual a t2 pula para MovimentaAssassinN
-	j	StandByAssassinGray			# pula para a StandByAssassinGray
+	#j	StandByAssassinGray			# pula para a StandByAssassinGray
 	# Se formos colocar morte teriamos que mudar duas linhas de codigo a de cima e acrescentar mais uma
 	# possibilidade
 StandByAssassin:

@@ -126,12 +126,17 @@ LoopRecuperaArgumentos:
 	lw	t0, 16(a1)
 	lw	a2, 4(a1) 		# carrega y
 	lw	a1, 0(a1) 		# carrega x
+	li	t1, 5
+	bltu	t0, t1, colorido
+	li	a4, 1
+colorido:	
 	li	t1, 2
 	bne	t0, t1, PulaEscolhaPrint	# imprime a sprite espelhada se a movimentacao eh para a direita
 	call	PrintByteInverso
 	j	FinalEscolhaPrint
 PulaEscolhaPrint:
 	call 	PrintByte 		# chama a funcao PrintByte
+	mv	a4, zero
 FinalEscolhaPrint:
 	addi	t6, t6, 1 		# incrementa o contador
 	blt	t6, s4, LoopRecuperaArgumentos # se a quantidade maxima for atingida sai da funcao
