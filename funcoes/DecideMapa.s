@@ -23,10 +23,10 @@ mapa3:
 	la 	a0, tilemap_estrada		
 	j	fimEscolheMapa
 mapa4:	
-	la 	a0, tilemap_estrada
+	la 	a0, tilemap_FimDaEstrada
 	j	fimEscolheMapa
 mapa5:	
-	la 	a0, tilemap_praia
+	la 	a0, tilemap_himalaia
 	j	fimEscolheMapa		
 fimEscolheMapa:
 	ret

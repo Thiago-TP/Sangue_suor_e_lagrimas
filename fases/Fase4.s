@@ -16,11 +16,9 @@ Fase4:
 	#call	Dialogo4		# nao existe no momento	
 			
 	li	a5, 8			# a5 <- quantidade de personagens (aliados + inimigos)
-	la	a0, tilemap_estrada
+	la	a0, tilemap_FimDaEstrada
 	call 	SetupMapa		# funcao no MapaMain	
 	
 	lw	ra, 0(sp)
 	addi	sp, sp, 4
 	ret																
-
-#.include "Dialogo4.s"

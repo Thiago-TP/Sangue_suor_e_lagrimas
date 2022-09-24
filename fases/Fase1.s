@@ -21,7 +21,4 @@ Fase1:
 	
 	lw	ra, 0(sp)
 	addi	sp, sp, 4
-	ret																
-
-.include "Dialogo1.s"
-
+	ret															

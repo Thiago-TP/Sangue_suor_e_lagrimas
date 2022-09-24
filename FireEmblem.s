@@ -6,7 +6,7 @@ noteCounter:	.word	0	# quantidade de notas tocadas
 
 # Cor do menu de batalha #
 
-MenuBatalha:	.byte	0,255
+MenuBatalha:	.byte	0, 255
 
 # posicoes em quantidade de pulos 16x16
 PosicaoAtualCursor: 	.word 0, 0
@@ -64,83 +64,160 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 	fim: 	j fim	
 																
 
-.include "Fase1.s"
-.include "Fase2.s"
-.include "Fase3.s"
-.include "Fase4.s"
-.include "Fase5.s"
+.include "fases/Fase1.s"
+.include "fases/Fase2.s"
+.include "fases/Fase3.s"
+.include "fases/Fase4.s"
+.include "fases/Fase5.s"
 
-.include "DecideMapa.s"
-.include "InicializaPersonagens.s"
+.include "fases/Dialogo1.s"
+#.include "fases/Dialogo2.s"
+#.include "fases/Dialogo3.s"
+#.include "fases/Dialogo4.s"
+#.include "fases/Dialogo5.s"
 
+.include "funcoes/DecideMapa.s"
+.include "funcoes/InicializaPersonagens.s"	
+.include "funcoes/PrintByteInverso.s"
+.include "funcoes/SetupMapa.s" 
+.include "funcoes/ImprimeAreaMovimentacao.s" 
+.include "funcoes/EscolhePersonagem.s" 
+.include "funcoes/DecideMudanca.s" 
+.include "funcoes/MovimentaMenu.s"
 
-.include "../funcoes/funcoes.s"
+.include "funcoes/EscolheIdleAssassin.s" 
+.include "funcoes/EscolheIdleBrigand.s" 
+.include "funcoes/EscolheIdleBrigand2.s"
+.include "funcoes/EscolheIdleLyn.s" 
+.include "funcoes/EscolheIdleDart.s"		
+.include "funcoes/EscolheIdleDorcas.s"		
+.include "funcoes/EscolheIdleSain.s"
+.include "funcoes/EscolheIdleSoldier.s"
+.include "funcoes/EscolheIdleSoldier2.s"
+.include "funcoes/EscolheIdleYogi.s"
 
-# funcoes do Rodrigo		
-.include "FuncaoDeEscritaNoBitmap/PrintByteInverso.s"
-.include "Mapa/FuncaoMapa/MapaMain.s" 
-.include "Mapa/FuncaoMapa/ImprimeAreaMovimentacao.s" 
-.include "Mapa/FuncaoMapa/EscolhePersonagem.s" 
-.include "Mapa/FuncaoMapa/DecideMudanca.s" 
-.include "Mapa/FuncaoMapa/MovimentaMenu.s"
+.include "funcoes/RecuperaSprite.s" 
+.include "funcoes/SalvaSprite.s"
+.include "funcoes/MovimentaCursor.s"
+.include "funcoes/MontaMenu.s" 
+.include "funcoes/PrintBalao.s"
 
-.include "Mapa/FuncaoMapa/EscolheIdleAssassin.s" 
-.include "Mapa/FuncaoMapa/EscolheIdleBrigand.s" 
-.include "Mapa/FuncaoMapa/EscolheIdleBrigand2.s"
-.include "Mapa/FuncaoMapa/EscolheIdleLyn.s" 
-.include "Mapa/FuncaoMapa/EscolheIdleDart.s"		
-.include "Mapa/FuncaoMapa/EscolheIdleDorcas.s"		
-.include "Mapa/FuncaoMapa/EscolheIdleSain.s"
-.include "Mapa/FuncaoMapa/EscolheIdleSoldier.s"
-.include "Mapa/FuncaoMapa/EscolheIdleSoldier2.s"
-.include "Mapa/FuncaoMapa/EscolheIdleYogi.s"
+.include "funcoes/Ataque.s"
+.include "funcoes/AtualizaHP.s"
+.include "funcoes/ClearScreen.s"
+.include "funcoes/DecideLutador.s"
+.include "funcoes/Dialogo.s"
+.include "funcoes/FuncoesDoSystem.s"
+.include "funcoes/GetEnt.s"
+.include "funcoes/Luta.s"
+.include "funcoes/midiAtaque.s"
+.include "funcoes/midiDano.s"
+.include "funcoes/midiHP.s"
+.include "funcoes/midiTexto.s"
+.include "funcoes/Musica.s"
+.include "funcoes/PRINT.s"
+.include "funcoes/PrintByte.s"
+.include "funcoes/PrintFala.s"
+.include "funcoes/PrintHP.s"
+.include "funcoes/PrintTiling.s"
+.include "funcoes/VerificaLuta.s"
 
-.include "Mapa/FuncaoMapa/RecuperaSprite.s" 
-.include "Mapa/FuncaoMapa/SalvaSprite.s"
-.include "Mapa/FuncaoMapa/MovimentaCursor.s"
-.include "Mapa/FuncaoMapa/MontaMenu.s" 
-.include "../funcoes/PrintBalao.s"
 
 
 
 .data
-.include "../sprites_e_tilemaps/datas.s"
-.include "../falas/falas.s"
+# datas de tilemap
+.include "sprites/tilemaps/tilemap_praia.data"
+.include "sprites/tilemaps/tilemap_floresta.data"
+.include "sprites/tilemaps/tilemap_estrada.data"
+.include "sprites/tilemaps/tilemap_FimDaEstrada.data"
+.include "sprites/tilemaps/tilemap_himalaia.data"
 
-.include "Mapa/SpritesMapa/Cursor1.s"
-.include "Mapa/SpritesMapa/Cursor2.s"
-.include "Mapa/SpritesMapa/seletor_verm.data"
-.include "Mapa/SpritesMapa/seletor_azul.data"
+# sprites da fase 1
+.include "sprites/tiles/TileAreia.data"
+.include "sprites/tiles/TileBeiraMar.data"
+.include "sprites/tiles/TileMar.data"
+.include "sprites/tiles/TileTubarao.data"
 
-# sprites de mapa da Lyn
-.include "Mapa/SpritesMapa/Lyn_datas.data"
+# sprites da fase 2
+.include "sprites/tiles/TileGrama.data"
+.include "sprites/tiles/TileFloresta.data"
+.include "sprites/tiles/TileCasa.data"
+.include "sprites/tiles/TilePedra.data"
 
-# sprites de mapa do Yogi
-.include "Mapa/SpritesMapa/Knight_datas.data"
+# sprites da fase 3
+.include "sprites/tiles/TileGramaTarde.data"
+.include "sprites/tiles/TileFlorestaTarde.data"
+.include "sprites/tiles/TileChao.data"
+.include "sprites/tiles/TileGramaChaoD.data"
+.include "sprites/tiles/TileGramaChaoE.data"
 
-# sprites de mapa do Dorcas
-.include "Mapa/SpritesMapa/Dorcas_datas.data"
+# sprites da fase 4
+.include "sprites/tiles/TileNeve.data"
+.include "sprites/tiles/TilePedraFria.data"
+.include "sprites/tiles/TileChaoFrio.data"
+.include "sprites/tiles/TileArvoreNeve.data"
 
-# sprites de mapa do Dart
-.include "Mapa/SpritesMapa/Dart_datas.data"
+# sprites da fase 5
+.include "sprites/tiles/TileGramaNoite.data"
+.include "sprites/tiles/TileFlorestaNoite.data"
+.include "sprites/tiles/TileGramaChaoNoite.data"
+.include "sprites/tiles/TileChaoNoite.data"
+.include "sprites/tiles/TileGramaChaoNoiteD.data"
+.include "sprites/tiles/TileCD.data"
+.include "sprites/tiles/TileCE.data"
+.include "sprites/tiles/TileFim.data"
 
-# sprites de mapa do Sain
-.include "Mapa/SpritesMapa/Sain_datas.data"
+# sprites de mugshots
+.include "sprites/personagens/mugshot_Lyn.data"	
+.include "sprites/personagens/mugshot_garota.data"	
 
-# sprites de mapa do Brigand 
-.include "Mapa/SpritesMapa/Brigand_datas.data"
+# sprites de mapa dos personagens
+.include "sprites/personagens/Lyn_datas.data"
+.include "sprites/personagens/Knight_datas.data"
+.include "sprites/personagens/Dorcas_datas.data"
+.include "sprites/personagens/Dart_datas.data"
+.include "sprites/personagens/Sain_datas.data"
+.include "sprites/personagens/Brigand_datas.data"
+.include "sprites/personagens/Lanca_datas.data"
+.include "sprites/personagens/Assassin_datas.data"
 
-# sprites de mapa do Soldier
-.include "Mapa/SpritesMapa/Lanca_datas.data"
+# sprites de luta
+.include "sprites/personagens/LutaAssassin.data"
+.include "sprites/personagens/LutaBrigand.data"
+.include "sprites/personagens/LutaDart.data"
+.include "sprites/personagens/LutaDorcas.data"
+.include "sprites/personagens/LutaLyn.data"
+.include "sprites/personagens/LutaSain.data"
+.include "sprites/personagens/LutaSoldier.data"
+.include "sprites/personagens/LutaYogi.data"
+.include "sprites/tiles/umHP.data"
+.include "sprites/tiles/umHPinvisivel.data"
 
-# sprites de mapa do Assassin
-.include "Mapa/SpritesMapa/Assassin_datas.data"
+# strings do jogo
+.include "falas/falas.s"
 
 # sprites de menu
+.include "sprites/menus/LadoMenu.data"
+.include "sprites/menus/BordaMenuC.data"
+.include "sprites/menus/LadoMenuB.data"
+.include "sprites/menus/BordaMenuB.data"
+.include "sprites/menus/LadoMenuC.data"
+.include "sprites/menus/MioloMenu.data"
 
-.include "Mapa/SpritesMapa/LadoMenu.data"
-.include "Mapa/SpritesMapa/BordaMenuC.data"
-.include "Mapa/SpritesMapa/LadoMenuB.data"
-.include "Mapa/SpritesMapa/BordaMenuB.data"
-.include "Mapa/SpritesMapa/LadoMenuC.data"
-.include "Mapa/SpritesMapa/MioloMenu.data"
+# sprites de cursor
+.include "sprites/cursor/Cursor1.s"
+.include "sprites/cursor/Cursor2.s"
+.include "sprites/cursor/seletor_verm.data"
+.include "sprites/cursor/seletor_azul.data"
+
+# sprites do balao
+.include "sprites/tiles/cantoSD.data"
+.include "sprites/tiles/cantoID.data"
+.include "sprites/tiles/arestaD.data"
+.include "sprites/tiles/arestaS.data"
+.include "sprites/tiles/arestaR.data"
+.include "sprites/tiles/arestaI.data"
+.include "sprites/tiles/miolo.data"
+.include "sprites/tiles/rabo_esquerdo.data"
+.include "sprites/tiles/rabo_direito.data"

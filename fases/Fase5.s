@@ -16,11 +16,9 @@ Fase5:
 	#call	Dialogo5
 				
 	li	a5, 10			# a5 <- quantidade de personagens (aliados + inimigos)
-	la	a0, tilemap_praia
+	la	a0, tilemap_himalaia
 	call 	SetupMapa		# funcao no MapaMain	
 	
 	lw	ra, 0(sp)
 	addi	sp, sp, 4
-	ret																
-
-#.include "Dialogo5.s"
+	ret		

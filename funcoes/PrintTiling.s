@@ -62,6 +62,7 @@ tile12:	li	t0, 12
 	j	endPrintTile
 #-----------------------------------#
 
+
 # tiles da tela jogavel 2 #
 tile13:	li	t0, 13
 	bne	t1, t0, tile14
@@ -81,6 +82,7 @@ tile16:	li	t0, 16
 	j	endPrintTile
 #-----------------------------------#
 
+
 # tiles da tela jogavel 3 #
 tile17:	li	t0, 17
 	bne	t1, t0, tile18
@@ -99,9 +101,68 @@ tile20:	li	t0, 20
 	la	a0, TileGramaChaoE
 	j	endPrintTile
 tile21:
+	li	t0, 21
+	bne	t1, t0, tile22
 	la	a0, TileChao
 	j	endPrintTile
 #-----------------------------------#
+
+
+# tiles da tela jogavel 4 #
+tile22:	li	t0, 22
+	bne	t1, t0, tile23
+	la	a0, TileNeve
+	j	endPrintTile
+tile23:	li	t0, 23
+	bne	t1, t0, tile24
+	la	a0, TilePedraFria
+	j	endPrintTile
+tile24:	li	t0, 24
+	bne	t1, t0, tile25
+	la	a0, TileChaoFrio
+	j	endPrintTile
+tile25:	li	t0, 25
+	bne	t1, t0, tile26
+	la	a0, TileArvoreNeve
+	j	endPrintTile
+#-----------------------------------#	
+
+
+# tiles da tela jogavel 5 #
+tile26:	li	t0, 26
+	bne	t1, t0, tile27
+	la	a0, TileGramaNoite
+	j	endPrintTile
+tile27:	li	t0, 27
+	bne	t1, t0, tile28
+	la	a0, TileFlorestaNoite
+	j	endPrintTile
+tile28:	li	t0, 28
+	bne	t1, t0, tile29
+	la	a0, TileGramaChaoNoite
+	j	endPrintTile
+tile29:	li	t0, 29
+	bne	t1, t0, tile30
+	la	a0, TileChaoNoite
+	j	endPrintTile
+tile30:	li	t0, 30
+	bne	t1, t0, tile31
+	la	a0, TileGramaChaoNoiteD
+	j	endPrintTile
+tile31:	li	t0, 31
+	bne	t1, t0, tile32
+	la	a0, TileCD
+	j	endPrintTile
+tile32:	li	t0, 32
+	bne	t1, t0, tile33
+	la	a0, TileCE
+	j	endPrintTile
+tile33:	li	t0, 33
+	bne	t1, t0, endPrintTile
+	la	a0, TileFim
+	j	endPrintTile
+#-----------------------------------#
+	
 	
 endPrintTile:
 	# aqui eu preciso converter para bits

@@ -3,8 +3,8 @@ Dialogo1:
 	sw	ra, 0(sp)
 	li 	a1, 0	
 	li	a2, 0	
-	li	a4,20
-	li	a5,15
+	li	a4, 20
+	li	a5, 15
 	call	ClearScreen		# imprime a tela jogavel em ambas as frames
 
 	la	a0, fala1	# fala do personagem da esquerda
