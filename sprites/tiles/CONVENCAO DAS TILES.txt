@@ -1,44 +1,45 @@
 # tiles da fase 1
 #------------------------#
-1- 13 - areia
-2- 14 - beira-mar
-3- 15 - mar
-4- 16 - tubarao
-5 7- 11 - casa	# misc
-6 8- 12 - pedra	# misc
+1 - areia
+2 - beira-mar
+3 - mar
+4 - tubarao
+5 - casa	
+6 - pedra	
 #------------------------#
 
 # tiles da fase 2
 #------------------------#
-7 5- 09 - grama	# misc
-8 6- 10 - floresta	# misc
+7 - grama	
+8 - floresta	
 #------------------------#
 
 # tiles da fase 3
 #------------------------#
-9- 17 - floresta de tarde
-10- 18 - grama de tarde
-11- 19 - transição grama chão direita
-12- 20 - transição grama chão esquerda
-13- 21 - chão (pavimentado)
+9 - floresta de tarde
+10 - grama de tarde
+11 - transição grama chão direita
+12 - transição grama chão esquerda
+13 - chão (pavimentado)
 #------------------------#
 
 # tiles da fase 4
 #------------------------#
-14- 26 - grama de noite
-15- 27 - floresta de noite
-16- 28 - transição grama chão noite (esquerda)
-17- 29 - chão pavimentado de noite
-18- 30 - transição grama chão noite (direita)
-19- 31 - transição grama chão noite canto direito
-20- 32 - transição grama chão noite canto esquerdo
-21- 33 - transição grama chão noite inferior
+14 - grama de noite
+15 - floresta de noite
+16 - transição grama chão noite (esquerda)
+17 - chão pavimentado de noite
+18 - transição grama chão noite (direita)
+19 - transição grama chão noite canto direito
+20 - transição grama chão noite canto esquerdo
+21 - transição grama chão noite inferior
 #------------------------#
 
 # tiles da fase 5
 #------------------------#
-22- 22 - neve
-23- 23 - pedra com gelo
-chão gelado	 # ainda não usado
-24- 25 - árvores com neve
+22 - neve
+23 - pedra com gelo
+24 - árvores com neve
 #------------------------#
+
+chão gelado	 # ainda não usado
