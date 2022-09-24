@@ -138,12 +138,12 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 .include "sprites/tiles/TileBeiraMar.data"
 .include "sprites/tiles/TileMar.data"
 .include "sprites/tiles/TileTubarao.data"
+.include "sprites/tiles/TileCasa.data"
+.include "sprites/tiles/TilePedra.data"
 
 # sprites da fase 2
 .include "sprites/tiles/TileGrama.data"
 .include "sprites/tiles/TileFloresta.data"
-.include "sprites/tiles/TileCasa.data"
-.include "sprites/tiles/TilePedra.data"
 
 # sprites da fase 3
 .include "sprites/tiles/TileGramaTarde.data"
@@ -155,7 +155,6 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 # sprites da fase 4
 .include "sprites/tiles/TileNeve.data"
 .include "sprites/tiles/TilePedraFria.data"
-.include "sprites/tiles/TileChaoFrio.data"
 .include "sprites/tiles/TileArvoreNeve.data"
 
 # sprites da fase 5

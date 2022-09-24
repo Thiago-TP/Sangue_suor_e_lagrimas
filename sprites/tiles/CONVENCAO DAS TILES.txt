@@ -1,45 +1,44 @@
-# tiles do balao de fala
-#------------#
-00 - canto SE
-01 - aresta S
-02 - canto SD
-03 - aresta E
-04 - miolo
-05 - aresta D
-06 - canto IE
-07 - aresta E
-08 - canto ID
-#------------#
-
-# tiles da tela jogavel 1
+# tiles da fase 1
 #------------------------#
-09 - grama	# misc
-10 - floresta	# misc
-11 - casa	# misc
-12 - pedra	# misc
+1- 13 - areia
+2- 14 - beira-mar
+3- 15 - mar
+4- 16 - tubarao
+5 7- 11 - casa	# misc
+6 8- 12 - pedra	# misc
 #------------------------#
 
-# tiles da tela jogavel 2
+# tiles da fase 2
 #------------------------#
-13 - areia
-14 - beira-mar
-15 - mar
-16 - tubarao
+7 5- 09 - grama	# misc
+8 6- 10 - floresta	# misc
 #------------------------#
 
-# tiles da tela jogavel 3
+# tiles da fase 3
 #------------------------#
-17 - floresta de tarde
-18 - grama de tarde
-19 - transição grama chão direita
-20 - transição grama chão esquerda
-21 - chão (pavimentado)
+9- 17 - floresta de tarde
+10- 18 - grama de tarde
+11- 19 - transição grama chão direita
+12- 20 - transição grama chão esquerda
+13- 21 - chão (pavimentado)
 #------------------------#
 
-# tiles da tela jogavel 4
+# tiles da fase 4
 #------------------------#
-22 - neve
-23 - pedra com gelo
-24 - chão gelado	 # ainda não usado
-25 - árvores com neve
+14- 26 - grama de noite
+15- 27 - floresta de noite
+16- 28 - transição grama chão noite (esquerda)
+17- 29 - chão pavimentado de noite
+18- 30 - transição grama chão noite (direita)
+19- 31 - transição grama chão noite canto direito
+20- 32 - transição grama chão noite canto esquerdo
+21- 33 - transição grama chão noite inferior
+#------------------------#
+
+# tiles da fase 5
+#------------------------#
+22- 22 - neve
+23- 23 - pedra com gelo
+chão gelado	 # ainda não usado
+24- 25 - árvores com neve
 #------------------------#

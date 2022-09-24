@@ -43,72 +43,109 @@ tilingLoop:
 	lb	t1, 0(a0)	# t1 recebe o mapeamento do tiling
 	addi	a0, a0, 1
 	sw	a0, 4(sp)
-# tiles da tela jogavel 1 #
-tile9:	li	t0, 9
-	bne	t1, t0, tile10
-	la	a0, TileGrama
+
+
+# tiles da fase 1 #
+tile1:	li	t0, 1
+	bne	t1, t0, tile2
+	la	a0, TileAreia
 	j	endPrintTile
-tile10:	li	t0, 10
-	bne	t1, t0, tile11
-	la	a0, TileFloresta
-	j	endPrintTile	
-tile11:	li	t0, 11
-	bne	t1, t0, tile12
+tile2:	li	t0, 2
+	bne	t1, t0, tile3
+	la	a0, TileBeiraMar
+	j	endPrintTile
+tile3:	li	t0, 3
+	bne	t1, t0, tile4
+	la	a0, TileMar
+	j	endPrintTile
+tile4:	li	t0, 4
+	bne	t1, t0, tile5
+	la	a0, TileTubarao
+	j	endPrintTile
+tile5:	li	t0, 5
+	bne	t1, t0, tile6
 	la	a0, TileCasa
 	j	endPrintTile
-tile12:	li	t0, 12
-	bne	t1, t0, tile13
+tile6:	li	t0, 6
+	bne	t1, t0, tile7
 	la	a0, TilePedra
 	j	endPrintTile
 #-----------------------------------#
 
 
-# tiles da tela jogavel 2 #
-tile13:	li	t0, 13
-	bne	t1, t0, tile14
-	la	a0, TileAreia
+# tiles da fase 2 #
+tile7:	li	t0, 7
+	bne	t1, t0, tile8
+	la	a0, TileGrama
 	j	endPrintTile
-tile14:	li	t0, 14
-	bne	t1, t0, tile15
-	la	a0, TileBeiraMar
-	j	endPrintTile
-tile15:	li	t0, 15
-	bne	t1, t0, tile16
-	la	a0, TileMar
-	j	endPrintTile
-tile16:	li	t0, 16
-	bne	t1, t0, tile17
-	la	a0, TileTubarao
-	j	endPrintTile
+tile8:	li	t0, 8
+	bne	t1, t0, tile9
+	la	a0, TileFloresta
+	j	endPrintTile	
 #-----------------------------------#
 
 
-# tiles da tela jogavel 3 #
-tile17:	li	t0, 17
-	bne	t1, t0, tile18
+# tiles da fase 3 #
+tile9:	li	t0, 9
+	bne	t1, t0, tile10
 	la	a0, TileFlorestaTarde
 	j	endPrintTile
-tile18:	li	t0, 18
-	bne	t1, t0, tile19
+tile10:	li	t0, 10
+	bne	t1, t0, tile11
 	la	a0, TileGramaTarde
 	j	endPrintTile
-tile19:	li	t0, 19
-	bne	t1, t0, tile20
+tile11:	li	t0, 11
+	bne	t1, t0, tile12
 	la	a0, TileGramaChaoD
 	j	endPrintTile
-tile20:	li	t0, 20
-	bne	t1, t0, tile21
+tile12:	li	t0, 12
+	bne	t1, t0, tile13
 	la	a0, TileGramaChaoE
 	j	endPrintTile
-tile21:
-	li	t0, 21
-	bne	t1, t0, tile22
+tile13:	li	t0, 13
+	bne	t1, t0, tile14
 	la	a0, TileChao
 	j	endPrintTile
 #-----------------------------------#
 
 
-# tiles da tela jogavel 4 #
+# tiles da fase 4 #
+tile14:	li	t0, 14
+	bne	t1, t0, tile15
+	la	a0, TileGramaNoite
+	j	endPrintTile
+tile15:	li	t0, 15
+	bne	t1, t0, tile16
+	la	a0, TileFlorestaNoite
+	j	endPrintTile
+tile16:	li	t0, 16
+	bne	t1, t0, tile17
+	la	a0, TileGramaChaoNoite
+	j	endPrintTile
+tile17:	li	t0, 17
+	bne	t1, t0, tile18
+	la	a0, TileChaoNoite
+	j	endPrintTile
+tile18:	li	t0, 18
+	bne	t1, t0, tile19
+	la	a0, TileGramaChaoNoiteD
+	j	endPrintTile
+tile19:	li	t0, 19
+	bne	t1, t0, tile20
+	la	a0, TileCD
+	j	endPrintTile
+tile20:	li	t0, 20
+	bne	t1, t0, tile21
+	la	a0, TileCE
+	j	endPrintTile
+tile21:	li	t0, 21
+	bne	t1, t0, tile22
+	la	a0, TileFim
+	j	endPrintTile
+#-----------------------------------#
+
+
+# tiles da fase 5 #
 tile22:	li	t0, 22
 	bne	t1, t0, tile23
 	la	a0, TileNeve
@@ -118,50 +155,10 @@ tile23:	li	t0, 23
 	la	a0, TilePedraFria
 	j	endPrintTile
 tile24:	li	t0, 24
-	bne	t1, t0, tile25
-	la	a0, TileChaoFrio
-	j	endPrintTile
-tile25:	li	t0, 25
-	bne	t1, t0, tile26
+	bne	t1, t0, endPrintTile
 	la	a0, TileArvoreNeve
 	j	endPrintTile
 #-----------------------------------#	
-
-
-# tiles da tela jogavel 5 #
-tile26:	li	t0, 26
-	bne	t1, t0, tile27
-	la	a0, TileGramaNoite
-	j	endPrintTile
-tile27:	li	t0, 27
-	bne	t1, t0, tile28
-	la	a0, TileFlorestaNoite
-	j	endPrintTile
-tile28:	li	t0, 28
-	bne	t1, t0, tile29
-	la	a0, TileGramaChaoNoite
-	j	endPrintTile
-tile29:	li	t0, 29
-	bne	t1, t0, tile30
-	la	a0, TileChaoNoite
-	j	endPrintTile
-tile30:	li	t0, 30
-	bne	t1, t0, tile31
-	la	a0, TileGramaChaoNoiteD
-	j	endPrintTile
-tile31:	li	t0, 31
-	bne	t1, t0, tile32
-	la	a0, TileCD
-	j	endPrintTile
-tile32:	li	t0, 32
-	bne	t1, t0, tile33
-	la	a0, TileCE
-	j	endPrintTile
-tile33:	li	t0, 33
-	bne	t1, t0, endPrintTile
-	la	a0, TileFim
-	j	endPrintTile
-#-----------------------------------#
 	
 	
 endPrintTile:
