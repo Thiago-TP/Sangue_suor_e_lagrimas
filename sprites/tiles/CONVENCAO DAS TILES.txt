@@ -1,0 +1,45 @@
+# tiles do balao de fala
+#------------#
+00 - canto SE
+01 - aresta S
+02 - canto SD
+03 - aresta E
+04 - miolo
+05 - aresta D
+06 - canto IE
+07 - aresta E
+08 - canto ID
+#------------#
+
+# tiles da tela jogavel 1
+#------------------------#
+09 - grama	# misc
+10 - floresta	# misc
+11 - casa	# misc
+12 - pedra	# misc
+#------------------------#
+
+# tiles da tela jogavel 2
+#------------------------#
+13 - areia
+14 - beira-mar
+15 - mar
+16 - tubarao
+#------------------------#
+
+# tiles da tela jogavel 3
+#------------------------#
+17 - floresta de tarde
+18 - grama de tarde
+19 - transição grama chão direita
+20 - transição grama chão esquerda
+21 - chão (pavimentado)
+#------------------------#
+
+# tiles da tela jogavel 4
+#------------------------#
+22 - neve
+23 - pedra com gelo
+24 - chão gelado	 # ainda não usado
+25 - árvores com neve
+#------------------------#
