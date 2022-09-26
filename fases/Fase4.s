@@ -13,7 +13,7 @@ Fase4:
 	li	t1, 4
 	sb	t1, 0(t0)		# num fase = 4 
 	
-	#call	Dialogo4		# nao existe no momento	
+	call	Dialogo4		# nao existe no momento	
 			
 	li	a5, 8			# a5 <- quantidade de personagens (aliados + inimigos)
 	la	a0, tilemap_FimDaEstrada

@@ -13,7 +13,7 @@ Fase3:
 	li	t1, 3
 	sb	t1, 0(t0)		# num fase = 3
 	
-	#call	Dialogo3		# nao existe no momento	
+	call	Dialogo3		# nao existe no momento	
 			
 	li	a5, 6			# a5 <- quantidade de personagens (aliados + inimigos)
 	la	a0, tilemap_estrada
@@ -21,6 +21,4 @@ Fase3:
 	
 	lw	ra, 0(sp)
 	addi	sp, sp, 4
-	ret																
-
-#.include "Dialogo3.s"
+	ret		

@@ -70,10 +70,10 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 .include "fases/Fase5.s"
 
 .include "fases/Dialogo1.s"
-#.include "fases/Dialogo2.s"
-#.include "fases/Dialogo3.s"
-#.include "fases/Dialogo4.s"
-#.include "fases/Dialogo5.s"
+.include "fases/Dialogo2.s"
+.include "fases/Dialogo3.s"
+.include "fases/Dialogo4.s"
+.include "fases/Dialogo5.s"
 
 .include "funcoes/DecideMapa.s"
 .include "funcoes/InicializaPersonagens.s"	
@@ -167,8 +167,9 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 .include "sprites/tiles/TileFim.data"
 
 # sprites de mugshots
+.include "sprites/personagens/mugshot_juLynete.data"	
 .include "sprites/personagens/mugshot_Lyn.data"	
-.include "sprites/personagens/mugshot_garota.data"	
+.include "sprites/personagens/mugshot_Carolina.data"	
 
 # sprites de mapa dos personagens
 .include "sprites/personagens/Lyn_datas.data"

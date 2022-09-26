@@ -13,7 +13,7 @@ Fase2:
 	li	t1, 2
 	sb	t1, 0(t0)		# num fase = 2
 
-	#call	Dialogo2		# nao existe no momento	
+	call	Dialogo2		# nao existe no momento	
 			
 	li	a5, 4			# a5 <- quantidade de personagens (aliados + inimigos)
 	la	a0, tilemap_floresta

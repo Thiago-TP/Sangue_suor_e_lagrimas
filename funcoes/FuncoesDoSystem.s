@@ -56,9 +56,9 @@ loopprintString:lb	a0, 0(s0)                 	# le em a0 o caracter a ser impres
     		jal     printChar       		# imprime char
     		
 		addi    a1, a1, 8                 	# incrementa a coluna
-		li 	t0, 293		
+		li 	t0, 300		
 		blt	a1, t0, NaoPulaLinha	    	# se ainda tiver lugar na linha
-    		addi    a2, a2, 8                 	# incrementa a linha
+    		addi    a2, a2, 10                 	# incrementa a linha
     		li    	a1, 10				# volta a coluna 10 (x=10)
 
 NaoPulaLinha:	addi    s0, s0, 1			# proximo caractere
