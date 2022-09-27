@@ -30,24 +30,18 @@ FimAtualizaHP:
 	slt	t0, a0, t0	# a0 < 10 ? t0=1 : t0=0
 
 	li	a2, 184		# y
-	li	a3, 0		# cor
-	li	a4, 0		# frame
 	beqz	a1, HPesquerdo
-	li	a1, 284#256		# x direito
+	li	a1, 284		# x direito
 	j	pulaHPesquerdo
 HPesquerdo:
-	li	a1, 24#48		# x esquerdo
+	li	a1, 24		# x esquerdo
 pulaHPesquerdo:
-	beqz	a0, print2digitos	# caso especial a0=0, para evitar 00 no HP
-	bnez	t1, print2digitos	# 
-	beqz	t0, print2digitos	# HP tem 2 digitos ? impressao normal : cobre-se o digito da esquerda
-	addi	sp, sp, -4
-	sw	a0, 0(sp)	# a0 eh guardado na pilha
-	mv	a0, x0	
-	call	printInt
-	lw	a0, 0(sp)	# a0 eh recuperado
-	addi	sp, sp, 4
+	li	a3, 16		# largura
+	li	a4, 8		# altura
+	call	CobreMensagem	# cobre o valor antigo
 print2digitos:	
+	li	a3, 0		# cor
+	li	a4, 0		# frame
 	call	printInt	# imprime a quantidade de HP
 	
 	lw	ra, 0(sp)

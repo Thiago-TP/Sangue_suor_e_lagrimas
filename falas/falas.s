@@ -8,6 +8,12 @@
 menu1opcao1:	.string "Attack"	
 menu1opcao2:	.string "Wait"
 
+# strings da luta
+VoceAtacou:	.string	"Voce atacou!"
+PcAtacou:	.string "O inimigo atacou!"
+Critou:		.string "Critico!"
+Errou:		.string "Errou!"
+
 # fala impar => Carolina, fala par => Lyn
 # falas da fase 1
 fala1:	.string	"Lyn, o Himalaia ta tao longe que vai demorar pelo menos um dia para chegar la, e o caminho ta cheio de inimigos..."
@@ -30,7 +36,7 @@ fala12: .string "Entendido chefa, fica tranquila que o churrasco eh nosso!"
 # falas da fase 4
 fala13:	.string "Estamos quase la, mas eu to com muito sono. Nao consigo imaginar como voces que estao lutando devem estar cansados."
 fala14: .string "Deixa disso, os meninos aliviam muito a barra. Falando nisso, entrei em contato com mais dois amigos e um deles, o Dart, ta pra chegar e ajudar, enquanto o outro vai se encontrar com a gente nas montanhas."
-fala15: .string "(Nao estao cansados? A vida deles regenera entre lutas?) Nas montanhas? Como ele consegue chegar la tao rapido? Poxa, a gente podia ter so pedido pra ele ir la pegar o sal e voltar ne..."
+fala15: .string "Nas montanhas? Como ele consegue chegar la tao rapido? Poxa, a gente podia ter so pedido pra ele ir la pegar o sal e voltar ne..."
 fala16: .string "Ele so consegue ir rapido porque tem cavalo, e so consegue usar o cavalo sozinho. A gente ia deixar ele sozinho para enfrentar tanto vegano?! Sem chance! O jeito eh ir la com todo mundo. Agora, aproveita pra tentar dormir agora que a gente so sai daqui de manha."
 
 # falas da fase 5

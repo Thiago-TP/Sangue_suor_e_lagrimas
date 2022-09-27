@@ -4,8 +4,14 @@ Fase2:
 	
 	la	t0, musicTime	
 	la	t1, noteCounter
+	la	t2, Vez
+	la	t3, GameOver
+	la	t4, Win
 	sw	zero, 0(t0)
 	sw	zero, 0(t1)
+	sb	zero, 0(t2)
+	sb	zero, 0(t3)
+	sb	zero, 0(t4)
 	
 	call	InicializaPersonagens
 	

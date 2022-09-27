@@ -4,6 +4,10 @@
 
 SetupMapa:
 	addi	sp, sp, -4 	# aloca espaco na pilha
+	
+	la	t0, guardaSP		# guardando o sp expandido
+	sw	sp, 0(t0)
+	
 	sw	ra, 0(sp) 	# salva o ponteiro de retorno
 	mv	s4, a5 		# move o argumento recebido em a5 para s4 para termos o limite de personagens
 	li 	a1, 0
@@ -19,7 +23,25 @@ SetupMapa:
 	mv	s8, zero	# s8  = struct da posicao atual do cursor
 	mv	s9, zero	# s9  = ...
 	mv	s10,zero
-LoopGame: 	
+LoopGame: 
+	################ testes de funcoes de controle ####################
+	call	VerificaVez	# Vez <- 1 se for a vez do PC
+	la	t0, Vez
+	lb	t0, 0(t0)
+	bnez	t0, VezDoPC	# Vez = 1 ? PC joga (vez do PC ainda nao foi implementada)
+	
+	call	VerificaWin	# Win <- 1 se for PC morreu
+	la	t0, Win
+	lb	t0, 0(t0)
+	bnez	t0, ProximaFase	# Win ? fim da fase
+	
+	# Perdeu ainda n foi implementada
+	#call	VerificaGameOver	# GameOver <- 1 se jogador morreu
+	#la	t0, GameOver
+	#lb	t0, 0(t0)
+	#bnez	t0, Perdeu	# GameOver ? tela de derrota
+	####################################################################
+	
 	beqz	s9, PulaMovimento
 	########################## Trecho que permite movimentacao dinamica ##############################
 	# Esse trecho vai roubar o controle total do Movimenta Cursor, logo ele que vai decidir as Idles do personagem em
@@ -196,8 +218,45 @@ LoopLimpaPersonagens:
 	lw 	t2, 4(t1)
 	sw 	t2, 4(t0)
 	addi	s0, s0, 1		# incremento s0 (lembrar que ele controla qual a idle que eu quero printar)
+	
+	
+	############### teste da luta #############
+	#la	a0, Lyn
+	#la	a1, Brigand
+	#lb	t0, 20(a1)
+	#beqz	t0, pula
+	#call	Luta
+#pula:	
+	###########################################
 	j	LoopGame		# volta para LoopStandby
 	mv	sp, s2 			# retorna o valor de sp para s2
+ProximaFase:	
+	la	t0, guardaSP		# recuperando o sp expandido
+	lw	sp, 0(t0)
 	lw	ra, 0(sp) 		# carrega o valor de ra de sp
 	addi	sp, sp, 4 		# desaloca a memoria da pilha
 	ret 				# volta para quem chamou a funcao
+####################################
+
+
+
+
+
+
+
+
+
+
+VezDoPC:	# vez do pc ainda n foi implementada. No momento, apenas pula de fase
+	la	t0, Fase
+	lb	t0, 0(t0)
+	addi	t0, t0, 1
+	li	t1, 5
+	bgt	t0, t1, Fase1
+	li	t1, 2
+	beq	t0, t1, Fase2
+	li	t1, 3
+	beq	t0, t1, Fase3
+	li	t1, 4
+	beq	t0, t1, Fase4
+	j	Fase5

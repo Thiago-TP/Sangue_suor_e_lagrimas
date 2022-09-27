@@ -41,7 +41,7 @@ BarraEsquerda:
 	li	a1, 16			# x0 da barra esquerda
 LoopPrintHP:
 	beq	s1, s0, FimPrintHP	# quantidade de impressos = desejada ? imprime mais um : termina
-	call	PRINT			# impressao de um HP na tela
+	call	PrintByte		# impressao de um HP na tela
 	addi	s0, s0, 1		# cont++
 	bnez	s2, deslocaDireita 
 	addi	a1, a1, 4		# x += 4 (4 eh a largura do traco de um HP)
@@ -56,10 +56,10 @@ midi:
 GanhaVida:
 	call 	midiHP
 pulamidiHP:
-	mv	t2, a0
+	mv	t3, a0
 	li	a0, 50
 	call	Sleep			# sleep de 50 ms (nao funfa no RARS)
-	mv	a0, t2			
+	mv	a0, t3			
 	j	LoopPrintHP
 	
 FimPrintHP:		

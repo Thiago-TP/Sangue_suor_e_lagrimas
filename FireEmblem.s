@@ -1,6 +1,11 @@
 .data
+guardaSP:		.word 	0x00000000	# precisei disso pra guardar o sp certo na hora de retornar do Fase1.s
+
 MenuAtivado:	.byte	0	# indica se o menu está ativado
 Fase:		.byte	1	# numero da fase
+Vez:		.byte	0	# flag de vez do PC
+GameOver:	.byte	0 	# flag de derrota :(
+Win:		.byte	0	# flag de vitoria :)
 musicTime:	.word	0	# tempo em ms desde a ultima nota	
 noteCounter:	.word	0	# quantidade de notas tocadas
 
@@ -119,12 +124,18 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 .include "funcoes/PrintFala.s"
 .include "funcoes/PrintHP.s"
 .include "funcoes/PrintTiling.s"
+
 .include "funcoes/VerificaLuta.s"
+.include "funcoes/VerificaVez.s"
+.include "funcoes/VerificaGameOver.s"
+.include "funcoes/VerificaWin.s"
 
-
+.include "funcoes/AtualizaLuta.s"
+.include "funcoes/CobreMensagem.s"
 
 
 .data
+.include "sprites/tiles/miss.data"
 # datas de tilemap
 .include "sprites/tilemaps/tilemap_praia.data"
 .include "sprites/tilemaps/tilemap_floresta.data"

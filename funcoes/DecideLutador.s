@@ -62,6 +62,5 @@ ehSoldier2:
 	li	t0, 9
 	bne	a0, t0, FimDecideLutador
 	la	a0, LutaSoldier
-	j	FimDecideLutador
 FimDecideLutador:
 	ret
