@@ -1,0 +1,4 @@
+- Terrenos Especiais -
+* Arvores/Florestas	(tiles 8, 9, 15 e 24): 	reduz o dano aplicado em 1, 	se dano =/= 0
+* Montanhas/Pedras  	(tiles 6 e 23):		aumenta o dano aplicado em 2, 	se dano =/= 0
+* Fase 5: 					desacelera as animações de mapa

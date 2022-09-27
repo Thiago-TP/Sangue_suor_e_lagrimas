@@ -29,7 +29,7 @@ Luta:
 	li	a5, 15
 	call	ClearScreen
 	li	t0, 0xFF200604
-	sw	x0, 0(t0)	
+	sw	x0, 0(t0)	# mostra o frame 0	
 	
 	# imprime personagens
 	li	a1, 40		# x do lutador na esquerda
@@ -79,6 +79,8 @@ Luta:
 	lb	a0, 21(s0)	# a0 <- tipo de arma do jogador
 	lb	a1, 21(s1)	# a1 <- tipo de arma do pc
 	call	Ataque		# a0 <- dano
+	li	t0, 0
+	call	TerrenoEspecial	# modifica o dano de acordo com a posicao do atacante no mapa
 
 	call	AtualizaLuta
 	# atualizacao da barra de vida do PC
@@ -106,6 +108,8 @@ Luta:
 	lb	a0, 21(s1)	# a0 <- tipo de arma do pc
 	lb	a1, 21(s0)	# a1 <- tipo de arma do jogador
 	call	Ataque		# a0 <- dano
+	li	t0, 1
+	call	TerrenoEspecial	# modifica o dano de acordo com a posicao do atacante no mapa
 
 	call	AtualizaLuta
 	# atualizacao da barra de vida do jogador

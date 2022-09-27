@@ -1,7 +1,17 @@
+#########################################################
+#	# escolha de tilemap de acordo com a fase	#
+#########################################################
+#	- Inputs -	#
+#	nenhum		#
+#########################
+#	- Outputs -	#
+#	a0 = tilemap	#
+#########################
+
 DecideMapa:
 	la	t2, Fase		# t2 <- endereco do numero da fase
 	lb	t2, 0(t2)		# t2 <- numero da fase
-	# escolha de mapa de acordo com a fase
+	
 	li	t1, 1
 	beq	t2, t1, mapa1	
 	li	t1, 2
@@ -26,7 +36,6 @@ mapa4:
 	la 	a0, tilemap_FimDaEstrada
 	j	fimEscolheMapa
 mapa5:	
-	la 	a0, tilemap_himalaia
-	j	fimEscolheMapa		
+	la 	a0, tilemap_himalaia		
 fimEscolheMapa:
 	ret

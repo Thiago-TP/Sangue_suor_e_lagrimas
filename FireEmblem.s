@@ -133,6 +133,8 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 .include "funcoes/AtualizaLuta.s"
 .include "funcoes/CobreMensagem.s"
 
+.include "funcoes/TerrenoEspecial.s"
+
 
 .data
 .include "sprites/tiles/miss.data"

@@ -27,7 +27,7 @@ Ataque:
 	# numero "aleatorio" para crit e erro
 	csrr	t3, time
 	li	t1, 10
-	rem	t3, t3, t1	# t4 <- t4 mod 10
+	rem	t3, t3, t1	# t3 <- t3 mod 10
 	bnez	t3, NaoErrou	# nao errou ? calcula dano : retorna com 0 dano
 	mv	a0, x0
 	ret

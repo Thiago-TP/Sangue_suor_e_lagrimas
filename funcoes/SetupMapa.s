@@ -209,7 +209,15 @@ LoopLimpaPersonagens:
 	call	RecuperaSprite
 	addi	t6, t6, 1 		# incrementa contador
 	blt	t6, s4, LoopLimpaPersonagens # se a quantidade maxima for atingida sai da funcao	
-	li	a0, 150 
+	
+	li	a0, 140 
+	la	t0, Fase
+	lb	t0, 0(t0)
+	li	t1, 5
+	bne	t0, t1, sleepNormal
+	li	a0, 170			# sleep da fase 5
+sleepNormal:
+	
 	call 	Sleep			# este sleep so nao funciona no RARS
 	la	t0, PosicaoAnteriorCursor
 	la 	t1, PosicaoAtualCursor
@@ -221,12 +229,12 @@ LoopLimpaPersonagens:
 	
 	
 	############### teste da luta #############
-	#la	a0, Lyn
-	#la	a1, Brigand
-	#lb	t0, 20(a1)
-	#beqz	t0, pula
+	la	a0, Lyn
+	la	a1, Brigand
+	lb	t0, 20(a1)
+	beqz	t0, pula
 	#call	Luta
-#pula:	
+pula:	
 	###########################################
 	j	LoopGame		# volta para LoopStandby
 	mv	sp, s2 			# retorna o valor de sp para s2
