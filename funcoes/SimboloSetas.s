@@ -9,7 +9,7 @@ SimboloSetas:
 	li	t3, 2
 	
 	beqz	t0, espada	# jogador tem espada?
-	beq	t0, t1, machado	# jogador tem machado?	
+	beq	t0, t2, machado	# jogador tem machado?	
 				# jogador tem lanca
 	beqz	t1, forte	# contra espada
 	beq	t1, t2, fraco	# contra machado
