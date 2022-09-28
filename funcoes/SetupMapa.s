@@ -230,7 +230,7 @@ sleepNormal:
 	
 	############### teste da luta #############
 	la	a0, Lyn
-	la	a1, Assassin
+	la	a1, Brigand
 	lb	t0, 20(a0)
 	beqz	t0, pula
 	lb	t0, 20(a1)
@@ -239,7 +239,6 @@ sleepNormal:
 pula:	
 	###########################################
 	j	LoopGame		# volta para LoopStandby
-	mv	sp, s2 			# retorna o valor de sp para s2
 ProximaFase:	
 	la	t0, guardaSP		# recuperando o sp expandido
 	lw	sp, 0(t0)

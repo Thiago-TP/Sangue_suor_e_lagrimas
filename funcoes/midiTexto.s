@@ -25,7 +25,6 @@ fimMidi:
 	#call 	midiOut		# toca a nota (funciona apenas na fpga)
 	# sleep para cada char
 	li	a0, 30
-	#ecall			# executa o sleep
 	call	Sleep		# sleep versao FPGA/fpgrars
 	
 	lw	ra, 0(sp)

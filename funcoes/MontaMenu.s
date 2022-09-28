@@ -22,11 +22,11 @@ LoopMenu2:
 	li	a4, 2
 	la	a0,LadoMenu
 	call 	PrintByteInverso
-	la	a0,MioloMenu
+	la	a0, MioloMenu
 LoopMenu3:
 	addi	a1 ,a1, 20
 	addi	a4, a4, -1
-	call 	PRINT
+	call 	PrintByteInverso#PRINT
 	bnez	a4, LoopMenu3
 	addi	a1, a1, 20
 	addi	a5, a5, -1

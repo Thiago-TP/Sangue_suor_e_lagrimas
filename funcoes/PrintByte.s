@@ -3,7 +3,7 @@
 #	a0 = endereco da imagem			#
 #	a1 = posicao x incial do bitmap		#
 #	a2 = posicao y inicial do bitmap	#
-#	a3 = frame utilizado na funÃ§Ã£o	#
+#	a3 = frame utilizado na função	#
 #	t0 = Endereco do bitmap			#
 #################################################
 #	a4 = flag de cinza (0 ou 1)		#
@@ -19,13 +19,13 @@ PrintByte:
 	add 	t0, t0, a1 	# adiciona x ao t0
 	li 	t1, 320 	# t1 = 320
 	mul 	t1, t1, a2 	# multiplica y por t1
-	add 	t0, t0, t1 	# coloca o valor final do calculo do endereÃ§o em t0
+	add 	t0, t0, t1 	# coloca o valor final do calculo do endereço em t0
 	mv 	t1, zero 	# zera t2
 	mv 	t2, zero 	# zera t3
 	lw 	t3, 0(a0) 	# carrega a largura em t3
 	lw 	t4, 4(a0) 	# carrega a altura em t4
 	addi 	a7, a0, 8 	# salvo o endereco da imagem passada para a funcao em a0
-	# ate aqui estamos no primeiro endereco da imagem e no endereÃ§o que escolhemos no bitmap
+	# ate aqui estamos no primeiro endereco da imagem e no endereço que escolhemos no bitmap
 PRINT_LINHAByte:	
 	lbu 	t5, 0(a7) 	# carrega em t6 um byte (1 pixel) da imagem	
 	
