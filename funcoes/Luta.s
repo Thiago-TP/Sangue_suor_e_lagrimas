@@ -48,12 +48,19 @@ Luta:
 	mv	a0, s2		# a0 <- HP do jogador
 	li 	a1, 0		# a1=0 => barra esquerda (jogador)
 	li 	a2, 0		# a2=0 => aumenta a barra de vida
-	call 	PrintHP		# imprime a barra em si
+	call 	PrintHP		# imprime a barra em si		
 	li	a1, 24		# x
 	li	a2, 184		# y
 	li	a3, 0		# cor
 	li	a4, 0		# frame
 	call	printInt	# imprime a quantidade de HP
+	mv	a0, s0
+	call	SimboloArma	# a0 <- simbolo da arma
+	li	a1, 44
+	li	a2, 180
+	li	a3, 0
+	li	a4, 0
+	call	PrintByte
 	
 	
 	lb	s2, 20(s1)	# s2 <- HP do pc
@@ -65,7 +72,16 @@ Luta:
 	li	a2, 184		# y
 	li	a3, 0		# cor
 	li	a4, 0		# frame
-	call	printInt	# imprime a quantidade de HP			
+	call	printInt	# imprime a quantidade de HP
+	mv	a0, s1
+	call	SimboloArma	# a0 <- simbolo da arma
+	li	a1, 264
+	li	a2, 180
+	li	a3, 0
+	li	a4, 0
+	call	PrintByte	
+	
+	call	SimboloSetas		
 	
 	# 1 ataque do jogador
 	# mensagem
@@ -141,4 +157,4 @@ fimLuta:
 	lw	s1, 28(sp)
 	lw	s2, 32(sp)
 	addi	sp, sp, 36
-	ret
+	ret	

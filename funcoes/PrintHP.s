@@ -2,7 +2,7 @@
 #	esta funcao imprime na frame 0 a barra de  	#
 #	vida de acordo com a posicao e HP fornecidos	#
 #########################################################
-#	- Inputs -					#
+#	- Inputs -					#	
 #	a0 = quantidade de vida (pauzinhos)		#
 #	a1 = barra esquerda ou direita (0 ou 1)		#
 #	a2 = se a vida deve ser retirada (0 ou 1)	#
@@ -62,7 +62,7 @@ pulamidiHP:
 	mv	a0, t3			
 	j	LoopPrintHP
 	
-FimPrintHP:		
+FimPrintHP:				
 	lw	ra, 0(sp)
 	lw	a0, 4(sp)
 	lw	a1, 8(sp)

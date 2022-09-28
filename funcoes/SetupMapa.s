@@ -230,7 +230,9 @@ sleepNormal:
 	
 	############### teste da luta #############
 	la	a0, Lyn
-	la	a1, Brigand
+	la	a1, Assassin
+	lb	t0, 20(a0)
+	beqz	t0, pula
 	lb	t0, 20(a1)
 	beqz	t0, pula
 	#call	Luta

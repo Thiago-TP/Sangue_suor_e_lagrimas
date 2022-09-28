@@ -1,5 +1,5 @@
 .data
-guardaSP:		.word 	0x00000000	# precisei disso pra guardar o sp certo na hora de retornar do Fase1.s
+guardaSP:	.word 	0x00000000	# precisei disso pra guardar o sp certo na hora de retornar do Fase1.s
 
 MenuAtivado:	.byte	0	# indica se o menu está ativado
 Fase:		.byte	1	# numero da fase
@@ -135,9 +135,22 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 
 .include "funcoes/TerrenoEspecial.s"
 
+.include "funcoes/SimboloArma.s"
+.include "funcoes/SimboloSetas.s"
+
 
 .data
 .include "sprites/tiles/miss.data"
+.include "sprites/tiles/arrowUP.data"
+.include "sprites/tiles/arrowDOWN.data"
+.include "sprites/tiles/symbolAssassin.data"
+.include "sprites/tiles/symbolBrigand.data"
+.include "sprites/tiles/symbolDart.data"
+.include "sprites/tiles/symbolDorcas.data"
+.include "sprites/tiles/symbolLyn.data"
+.include "sprites/tiles/symbolSain.data"
+.include "sprites/tiles/symbolSoldier.data"
+.include "sprites/tiles/symbolYogi.data"
 # datas de tilemap
 .include "sprites/tilemaps/tilemap_praia.data"
 .include "sprites/tilemaps/tilemap_floresta.data"
