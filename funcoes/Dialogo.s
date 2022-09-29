@@ -71,6 +71,7 @@ Dialogo:
 	li	a1, 152		# x = 160
 	li	a2, 94		# y = 95
 	mv 	a3, s2		# a3 <- outra frame 
+	li	a4,0
 	call 	PrintByte	# impressao do rabinho direito
 	# imprime o balao dir e a fala dir
 	lw	a1, 8(sp)	# a1 = fala dir
