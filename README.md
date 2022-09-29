@@ -2,7 +2,7 @@
 Repositório do projeto final de OAC - 2022/2 - Grupo 5
 
 🤡  Lista de coisas para implementar  🤡
-- [ ] História do jogo (com caixas de diálogo)                           (0.5)
+- [x] História do jogo (com caixas de diálogo)                           (0.5)
 - [x] Música e efeitos sonoros                                           (0.5)
 - [x] Design das 5 telas jogáveis distintas                              (1.0)
 - [x] Cursor, áreas de movimentação e ataque dos personagens             (1.0)
@@ -12,7 +12,7 @@ Repositório do projeto final de OAC - 2022/2 - Grupo 5
 - [x] Cenas de batalhas                                                  (0.5)
 - [x] Menu de ações                                                      (0.5)
 - [x] Movimentação dos personagens                                       (0.5)
-- [ ] Dois tipos de terrenos especiais                                   (0.5)
+- [x] Dois tipos de terrenos especiais                                   (0.5)
 
 Alguns detalhes (tirados do .pdf de definições)
 - As telas podem ou não ser estáticas, com espaços abertos e paredes
