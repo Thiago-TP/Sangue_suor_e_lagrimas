@@ -8,7 +8,7 @@ AtualizaLuta:
 	li	a1, 136		# x
 	li	a2, 210		# y
 	li	a3, 0		# frame
-	li	a4, 0		# cor
+	li	a4, 0x0000ff00	# cor
 	call	PrintByte	# impressao da mensagem
 	lw	a0, 4(sp)
 	j	SFXatk
@@ -24,7 +24,7 @@ Crit:
 	la	a0, Critou	
 	li	a1, 128		# x
 	li	a2, 210		# y
-	li	a3, 0		# cor
+	li	a3, 0x0000ff00	# cor
 	li	a4, 0		# frame
 	call	printString	# impressao da mensagem
 	lw	a0, 4(sp)

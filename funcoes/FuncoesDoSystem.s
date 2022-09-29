@@ -98,12 +98,10 @@ printChar:
 		sw	s9, 20(sp)
 		sw	ra, 24(sp)
 		
-		#li 	t4, 0xFF	# t4 temporario
-		#slli 	t4, t4, 8	# t4 = 0x0000FF00 (no RARS, nao podemos fazer diretamente "andi rd, rs1, 0xFF00")
-		#and    t5, a3, t4   	# t5 obtem cor de fundo
-    		#srli	t5, t5, 8	# numero da cor de fundo
-    		#li 	t5, 183		# numero da cor de fundo (marrom claro)
-    		li	t5, 199		# numero da cor de fundo (transparente)
+		li 	t4, 0xFF	# t4 temporario
+		slli 	t4, t4, 8	# t4 = 0x0000FF00 (no RARS, nao podemos fazer diretamente "andi rd, rs1, 0xFF00")
+		and    	t5, a3, t4   	# t5 obtem cor de fundo
+    		srli	t5, t5, 8	# numero da cor de fundo
 		andi   	t6, a3, 0xFF    # t6 obtem cor de frente
 
 		li 	tp, ' '

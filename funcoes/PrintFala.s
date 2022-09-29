@@ -18,7 +18,7 @@ PrintFala:
 	mv 	a4, a3		# frame 
 	li 	a1, 10		# posicao x da impressao (coluna)
 	li	a2, 10		# posicao y da impressao (linha)
-	mv 	a3, zero	# cor da string => 0 = preto
+	li 	a3, 0x0000c700	# cor da string => 0 = preto
 	call 	printString	# impressao dastring na tela 
 	
 	# pausa	
@@ -28,7 +28,7 @@ PrintFala:
 	li 	a0, '>'		# caracter de proxima fala
 	li 	a1, 307		# pos. em x
 	li 	a2, 82		# pos. em y
-	li 	a3, 0xA0	# cor 
+	li 	a3, 0x0000c7a0	# cor 
 	call 	printChar	# impressao na tela	
 	# pausa	
 	li 	a0, 1000	# a0 = 1000 ms

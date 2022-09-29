@@ -92,7 +92,9 @@ FimVerificaAtaque:
 	li 	a1, 10		# posicao x da impressao (coluna)
 	mv	a2, a6		# posicao y da impressao (linha)
 	mv	a4, a5
-	lb 	a3, 0(t6)	# cor da string => 0 = preto
+	lbu 	a3, 0(t6)	# cor da string => 0 = preto
+	li	t0, 0x0000c700
+	add	a3, a3, t0
 	call 	printString
 	addi	a6,a6,10
 PulaAtaque:
@@ -101,7 +103,9 @@ PulaAtaque:
 	li 	a1, 10		# posicao x da impressao (coluna)
 	mv	a2, a6		# posicao y da impressao (linha)
 	mv	a4, a5
-	lb 	a3, 1(t6)	# cor da string => 0 = preto
+	lbu 	a3, 1(t6)	# cor da string => 0 = preto
+	li	t0, 0x0000c700
+	add	a3, a3, t0
 	call	printString
 	lw	ra, 0(sp)	# recupero o ponteiro de retorno da pilha
 	addi	sp, sp, 4 	# desaloco a memoria da pilha

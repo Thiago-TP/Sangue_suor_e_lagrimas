@@ -39,8 +39,8 @@ pulaHPesquerdo:
 	li	a3, 16		# largura
 	li	a4, 8		# altura
 	call	CobreMensagem	# cobre o valor antigo
-print2digitos:	
-	li	a3, 0		# cor
+
+	li	a3, 0x0000ff00	# cor
 	li	a4, 0		# frame
 	call	printInt	# imprime a quantidade de HP
 	

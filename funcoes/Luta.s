@@ -51,9 +51,15 @@ Luta:
 	call 	PrintHP		# imprime a barra em si		
 	li	a1, 24		# x
 	li	a2, 184		# y
-	li	a3, 0		# cor
+	li	a3, 0x0000ff00	# cor
 	li	a4, 0		# frame
 	call	printInt	# imprime a quantidade de HP
+	la	a0, square
+	li	a1, 42		# x
+	li	a2, 178		# y
+	li	a3, 0		# cor
+	li	a4, 0		# frame
+	call	PrintByte
 	mv	a0, s0
 	call	SimboloArma	# a0 <- simbolo da arma
 	li	a1, 44
@@ -70,9 +76,15 @@ Luta:
 	call 	PrintHP		# imprime a barra em si
 	li	a1, 284		# x
 	li	a2, 184		# y
-	li	a3, 0		# cor
+	li	a3, 0x0000ff00	# cor
 	li	a4, 0		# frame
 	call	printInt	# imprime a quantidade de HP
+	la	a0, square
+	li	a1, 262		# x
+	li	a2, 178		# y
+	li	a3, 0		# cor
+	li	a4, 0		# frame
+	call	PrintByte
 	mv	a0, s1
 	call	SimboloArma	# a0 <- simbolo da arma
 	li	a1, 264
@@ -88,7 +100,7 @@ Luta:
 	la	a0, VoceAtacou	# a0 <- "Voce atacou!"
 	li	a1, 112		# x
 	li	a2, 116		# y
-	li	a3, 0		# cor
+	li	a3, 0x0000ff00	# cor
 	li	a4, 0		# frame
 	call	printString	# impressao da mensagem
 	# ataque em si
@@ -117,7 +129,7 @@ Luta:
 	la	a0, PcAtacou	# a0 <- "O inimigo atacou!"
 	li	a1, 92		# x
 	li	a2, 116		# y
-	li	a3, 0		# cor
+	li	a3, 0x0000ff00	# cor
 	li	a4, 0		# frame
 	call	printString	# impressao da mensagem
 	# ataque em si
