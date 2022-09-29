@@ -141,6 +141,7 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 
 
 .data
+.include "sprites/tiles/square.data"
 .include "sprites/tiles/miss.data"
 .include "sprites/tiles/arrowUP.data"
 .include "sprites/tiles/arrowDOWN.data"
