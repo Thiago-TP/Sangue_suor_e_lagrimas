@@ -55,7 +55,8 @@ Dialogo:
 	la 	a0, rabo_esquerdo	# tilemap do balao	
 	li	a1, 144		# x = 154
 	li	a2, 94		# y = 95 
-	call 	PRINT		# impressao do rabinho esquerdo	
+	li	a4, 0
+	call 	PrintByte	# impressao do rabinho esquerdo	
 	# imprime o balao esq e a fala esq
 	lw	a1, 4(sp)	# a1 = fala esq
 	mv	a2, s1		# impressao na frame inicial
@@ -70,7 +71,7 @@ Dialogo:
 	li	a1, 152		# x = 160
 	li	a2, 94		# y = 95
 	mv 	a3, s2		# a3 <- outra frame 
-	call 	PRINT		# impressao do rabinho direito
+	call 	PrintByte	# impressao do rabinho direito
 	# imprime o balao dir e a fala dir
 	lw	a1, 8(sp)	# a1 = fala dir
 	mv	a2, s2		# impressao na outra frame
