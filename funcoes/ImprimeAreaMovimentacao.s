@@ -38,18 +38,17 @@ PulaCalculoTileMap1:
 	addi	t0,t0,-1
 PulaCalculoTileMap2:
 	add	a0,a0,t0
-	lw	a0,0(a0)
+	lb	a0,0(a0)
 	li	t3,3
-	bne	t3,a0,PulaTileMapVermelho
+	bne	t3,a0,PulaTileMapVermelho1
 	la	a0, seletor_verm
 	j	ImprimeTile
+PulaTileMapVermelho1:
 	li	t3,4
-	bne	t3,a0,PulaTileMapVermelho
+	bne	t3,a0,PulaTileMapVermelho2
 	la	a0, seletor_verm
 	j	ImprimeTile
-PulaTileMapVermelho:	
-###########################################
-
+PulaTileMapVermelho2:	
 	la	a0, seletor_azul
 	li	t6, 1					
 LoopVerificaInimigo.AreaMov:

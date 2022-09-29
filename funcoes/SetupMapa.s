@@ -52,22 +52,22 @@ LoopGame:
 	bne	a2,t0,PulaVerificaIgualdade
 	j	PulaEscolhaEixo
 PulaVerificaIgualdade:
-	addi	s11,s11,-1
-	bltz	s11,TipoMovimento2
-	bnez	s10,PulaDesvioX
-	addi	t0,a2,4
-	sw	t0,4(s7)
-	li	t0, 1			# moveset eh para baixo
-	sw	t0, 16(s7)
-	j	FimDesvio
-PulaDesvioX:
-	addi	t0,a1,4
-	sw	t0,0(s7)
-	li	t0, 2			# moveset eh para direita
-	sw	t0, 16(s7)		# atualiza o estado do personagem
-FimDesvio:
-	j	PulaEscolhaEixo
-TipoMovimento2:
+#	addi	s11,s11,-1
+#	bltz	s11,TipoMovimento2
+#	bnez	s10,PulaDesvioX
+#	addi	t0,a2,4
+#	sw	t0,4(s7)
+#	li	t0, 1			# moveset eh para baixo
+#	sw	t0, 16(s7)
+#	j	FimDesvio
+#PulaDesvioX:
+#	addi	t0,a1,4
+#	sw	t0,0(s7)
+#	li	t0, 2			# moveset eh para direita
+#	sw	t0, 16(s7)		# atualiza o estado do personagem
+#FimDesvio:
+#	j	PulaEscolhaEixo
+#TipoMovimento2:
 	bnez	s10,PulaEixoX
 	lw	t0, 0(s8)		# t0 <- x do cursor
 	bne	t0,a1,PulaTrocaMovimento1
@@ -78,24 +78,24 @@ PulaTrocaMovimento1:
 	bltz	t0, PulaEixoXPositivo	# x personagem > x cursor ? pula : move para a direita
 	#	aqui so entra se t0 for positivo quer dizer que o idle eh para a direita e preciso incrementar
 	addi	a1, a1, 4		# personagem move 4 pixeis para a direita
-	li	a6,1
-	call	VerificaColisao
-	beqz	a0,PulaTratamentoColisao1
-	li	s11,4
-	j	LoopGame
-PulaTratamentoColisao1:
+#	li	a6,1
+#	call	VerificaColisao
+#	beqz	a0,PulaTratamentoColisao1
+#	li	s11,4
+#	j	LoopGame
+#PulaTratamentoColisao1:
 	sw	a1, 0(s7)		# atualiza struct de posicao do personagem
 	li	t0, 2			# moveset eh para direita
 	sw	t0, 16(s7)		# atualiza o estado do personagem	
 	j	PulaEscolhaEixo
 PulaEixoXPositivo:
 	addi	a1, a1, -4		# personagem move 4 pixeis para a esquerda ("-4 para a direita")
-	li	a6,3
-	call	VerificaColisao
-	beqz	a0,PulaTratamentoColisao2
-	li	s11,4
-	j	LoopGame
-PulaTratamentoColisao2:
+#	li	a6,3
+#	call	VerificaColisao
+#	beqz	a0,PulaTratamentoColisao2
+#	li	s11,4
+#	j	LoopGame
+#PulaTratamentoColisao2:
 	sw	a1, 0(s7)		
 	li	t0, 3			# moveset eh para esquerda
 	sw	t0, 16(s7)	
@@ -110,24 +110,24 @@ PulaTrocaMovimento2:
 	sub	t0, t0, a2 		# se for negativo a1 eh maior que t0 entao preciso decrementar a1
 	bltz	t0, PulaEixoYPositivo	
 	addi	a2, a2, 4		# personagem move 4 pixeis para baixo
-	li	a6,2
-	call	VerificaColisao
-	beqz	a0,PulaTratamentoColisao3
-	li	s11,4
-	j	LoopGame
-PulaTratamentoColisao3:
+#	li	a6,2
+#	call	VerificaColisao
+#	beqz	a0,PulaTratamentoColisao3
+#	li	s11,4
+#	j	LoopGame
+#PulaTratamentoColisao3:
 	sw	a2, 4(s7)
 	li	t0, 1			# moveset eh para baixo
 	sw	t0, 16(s7)	
 	j	PulaEscolhaEixo
 PulaEixoYPositivo:
 	addi	a2, a2, -4		# personagem move 4 pixeis para a cima ("-4 pixeis para baixo")
-	li	a6,0
-	call	VerificaColisao
-	beqz	a0,PulaTratamentoColisao4
-	li	s11,4
-	j	LoopGame
-PulaTratamentoColisao4:
+#	li	a6,0
+#	call	VerificaColisao
+#	beqz	a0,PulaTratamentoColisao4
+#	li	s11,4
+#	j	LoopGame
+#PulaTratamentoColisao4:
 	sw	a2, 4(s7)
 	li	t0, 4			# moveset eh para cima
 	sw	t0, 16(s7)		
@@ -296,55 +296,55 @@ ProximaFase:
 	ret 				# volta para quem chamou a funcao
 ####################################
 
-VerificaColisao:
-	addi	sp, sp, -8 	# aloca espaco na pilha
-	sw	ra, 0(sp) 	# salva o ponteiro de retorno
-	sw	a1, 4(sp)
-	lw	t4,0(s7)
-	lw	t5,4(s7)
-	bnez 	a6,PulaColisaoCima
-	addi	t5,t5,-16
+#VerificaColisao:
+#	addi	sp, sp, -8 	# aloca espaco na pilha
+#	sw	ra, 0(sp) 	# salva o ponteiro de retorno
+#	sw	a1, 4(sp)
+#	lw	t4,0(s7)
+#	lw	t5,4(s7)
+#	bnez 	a6,PulaColisaoCima
+#	addi	t5,t5,-16
 	#	verificar a colisão com paredes seria facil só precisariamos aqui 
 	#	vê o tile map e nessa posição e vermos se ela é uma parede ou não
-	j	ComecoLoopVerificaColisao
-PulaColisaoCima:
-	li 	t0,1
-	bne 	a6,t0,PulaColisaoDireita
-	addi	t4,t4,16
+#	j	ComecoLoopVerificaColisao
+#PulaColisaoCima:
+#	li 	t0,1
+#	bne 	a6,t0,PulaColisaoDireita
+#	addi	t4,t4,16
 	#	verificar a colisão com paredes seria facil só precisariamos aqui 
 	#	vê o tile map e nessa posição e vermos se ela é uma parede ou não
-	j	ComecoLoopVerificaColisao
-PulaColisaoDireita:
-	li 	t0,2
-	bne	a6,t0,PulaColisaoBaixo
-	addi	t5,t5,16
+#	j	ComecoLoopVerificaColisao
+#PulaColisaoDireita:
+#	li 	t0,2
+#	bne	a6,t0,PulaColisaoBaixo
+#	addi	t5,t5,16
 	#	verificar a colisão com paredes seria facil só precisariamos aqui 
 	#	vê o tile map e nessa posição e vermos se ela é uma parede ou não
-	j	ComecoLoopVerificaColisao
-PulaColisaoBaixo:
-	addi	t4,t4,-16
+#	j	ComecoLoopVerificaColisao
+#PulaColisaoBaixo:
+#	addi	t4,t4,-16
 	#	verificar a colisão com paredes seria facil só precisariamos aqui 
 	#	vê o tile map e nessa posição e vermos se ela é uma parede ou não
-ComecoLoopVerificaColisao:
-	mv	t6,zero
-	mv	a0,zero
-	LoopVerificaColisao:
-	mv	a7, t6
-	call 	EscolhePersonagem 	# carrega em a1 a posicao que queremos 
-	lw	t2,0(a1)
-	bne	t2,t4,PulaPosicaoPersonagem
-	lw	t3,4(a1)
-	bne	t3,t5,PulaPosicaoPersonagem
-	li	a0,1
-	j	FimLoopVerificaColisao
-PulaPosicaoPersonagem:
-	addi	t6, t6, 1 		# incrementa contador
-	blt	t6, s4, LoopVerificaColisao # se a quantidade maxima for atingida sai da funcao
-FimLoopVerificaColisao:
-	lw	ra, 0(sp) 		# carrega o valor de ra de sp
-	lw	a1, 4(sp)
-	addi	sp, sp, 8 		# desaloca a memoria da pilha
-	ret
+#ComecoLoopVerificaColisao:
+#	mv	t6,zero
+#	mv	a0,zero
+#	LoopVerificaColisao:
+#	mv	a7, t6
+#	call 	EscolhePersonagem 	# carrega em a1 a posicao que queremos 
+#	lw	t2,0(a1)
+#	bne	t2,t4,PulaPosicaoPersonagem
+#	lw	t3,4(a1)
+#	bne	t3,t5,PulaPosicaoPersonagem
+#	li	a0,1
+#	j	FimLoopVerificaColisao
+#PulaPosicaoPersonagem:
+#	addi	t6, t6, 1 		# incrementa contador
+#	blt	t6, s4, LoopVerificaColisao # se a quantidade maxima for atingida sai da funcao
+#FimLoopVerificaColisao:
+#	lw	ra, 0(sp) 		# carrega o valor de ra de sp
+#	lw	a1, 4(sp)
+#	addi	sp, sp, 8 		# desaloca a memoria da pilha
+#	ret
 
 VezDoPC:	# vez do pc ainda n foi implementada. No momento, apenas pula de fase
 	la	t0, Fase
