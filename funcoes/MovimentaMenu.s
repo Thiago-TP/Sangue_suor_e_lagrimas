@@ -17,21 +17,70 @@ FimMovimentaMenu:
 	addi	sp, sp, 4			# desaloca a memoria da pilha
 	ret					# retorno para a funcao chamadora
 CHAR_ENTER.Menu:
-	la	t0, MenuBatalha
+		la	t0, MenuBatalha
 	lb	t1, 0(t0)
 	beqz	t1, PulaDecideAcao
-	# aqui eu imprimo a area de ataque
-	j	FimMovimentaMenu
-PulaDecideAcao:
-	li	t0,5
-	sw	t0,16(s7)
+	la	t0, MenuBatalha
+	sb	zero, 0(t0)
+	li	t1, 255
+	sb	t1, 1(t0)
 	li	a1, 0
 	li	a2, 0
 	li	a4, 6
 	li	a5, 6
 	call	ClearScreen
 	la	t0, MenuAtivado
-	sb	zero,0(t0)
+	sb	zero, 0(t0)
+	la	a0, seletor_verm
+	lw	a1,0(s7)
+	lw	a2,4(s7)
+	addi	a1,a1,16
+	li	t0,320
+	bgeu	a1,t0,PulaPrintAreaAtk1
+	li	a3, 1 						
+	call 	PrintByte					
+	li	a3, 0						
+	call 	PrintByte
+PulaPrintAreaAtk1:
+	addi	a1,a1,-32
+	li	t0,320
+	bgeu	a1,t0,PulaPrintAreaAtk2
+	li	a3, 1 						
+	call 	PrintByte					
+	li	a3, 0						
+	call 	PrintByte
+PulaPrintAreaAtk2:
+	addi	a1,a1,16
+	addi	a2,a2,16
+	li	t0,240
+	bgeu	a2,t0,PulaPrintAreaAtk3
+	li	a3, 1 						
+	call 	PrintByte					
+	li	a3, 0						
+	call 	PrintByte
+PulaPrintAreaAtk3:
+	addi	a2,a2,-32
+	li	t0,240
+	bgeu	a2,t0,PulaPrintAreaAtk4
+	li	a3, 1 						
+	call 	PrintByte					
+	li	a3, 0						
+	call 	PrintByte
+PulaPrintAreaAtk4:
+	la	t0, AtaqueAtivado
+	li	t1, 1
+	sb	t1, 0(t0)
+	j	FimMovimentaMenu
+PulaDecideAcao:
+	li	t0, 5
+	sw	t0, 16(s7)
+	li	a1, 0
+	li	a2, 0
+	li	a4, 6
+	li	a5, 6
+	call	ClearScreen
+	la	t0, MenuAtivado
+	sb	zero, 0(t0)
 	j	FimMovimentaMenu
 CHAR_CIMA.Menu:
 	li	t0,2

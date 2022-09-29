@@ -142,6 +142,8 @@ PulaInversao2:
 	mv	s7, a1 				# guardo a posicao do personagem em s7 (posicao inicial do movimento)
 	mv	s8, a0 				# guardo a posicao atual do cursor em s8 (posicao final do movimento) 
 	li	s9, 1				# carrego 1 em s9 indicando que agora existe um personagem em movimentacao 	
+	li	s11,-1
+	mv	s10,zero
 	lw	t0, 0(a1)
 	lw	t1, 4(a1)
 	li	t2,16

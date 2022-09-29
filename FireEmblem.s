@@ -1,6 +1,7 @@
 .data
 guardaSP:	.word 	0x00000000	# precisei disso pra guardar o sp certo na hora de retornar do Fase1.s
 
+AtaqueAtivado:	.byte	0
 MenuAtivado:	.byte	0	# indica se o menu está ativado
 Fase:		.byte	1	# numero da fase
 Vez:		.byte	0	# flag de vez do PC

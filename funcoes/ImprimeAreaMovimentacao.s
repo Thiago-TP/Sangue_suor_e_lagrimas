@@ -22,9 +22,37 @@ LoopImprimeArea:
 	bgeu	a2, t0, PulaEssaInteracaoY 	# condicao para saber se teve transbordo na area do bitmap display
 	li	t0, 320				# limite superior da condicao abaixo
 	bgeu	a1, t0, PulaEssaInteracaoX	# condicao para saber se teve transbordo na area do bitmap display
-	la	a0, seletor_azul				
+		##################### Arrumar issae ######################
+	call 	DecideMapa
+	mv	t0,zero
+	beqz	a2,PulaCalculoTileMap1
+	li	t1,16
+	div	t2,a2,t1
+	li	t1,20
+	mul	t0,t1,t2
+PulaCalculoTileMap1:
+	beqz	a1,PulaCalculoTileMap2
+	li	t1,16
+	div	t2,a1,t1
+	add	t0,t0,t2
+	addi	t0,t0,-1
+PulaCalculoTileMap2:
+	add	a0,a0,t0
+	lw	a0,0(a0)
+	li	t3,3
+	bne	t3,a0,PulaTileMapVermelho
+	la	a0, seletor_verm
+	j	ImprimeTile
+	li	t3,4
+	bne	t3,a0,PulaTileMapVermelho
+	la	a0, seletor_verm
+	j	ImprimeTile
+PulaTileMapVermelho:	
+###########################################
+
+	la	a0, seletor_azul
 	li	t6, 1					
-LoopVerificaInimigo:
+LoopVerificaInimigo.AreaMov:
 	mv	a7, t6
 	mv	s5,a1
 	call EscolhePersonagem # retorna em a1
@@ -32,20 +60,17 @@ LoopVerificaInimigo:
 	lw	t1, 4(a1)
 	mv	a1,s5
 	addi	t6, t6,2
-	
-	##################### ULTIMA MODIFICAÇÂO ###################################
-	# também preciso verificar se aqui a tileeeee do mapaaaaaa é intrasponivel #
-	############################################################################
-	
 	bne	t0,a1,PulaTileVermelho
 	bne	t1,a2,PulaTileVermelho
 	la	a0, seletor_verm
+	j	ImprimeTile
 PulaTileVermelho:
-	ble	t6, s4, LoopVerificaInimigo	# verifico se o contador eh diferente de s4 e se for volto pro Loop	
+	ble	t6, s4, LoopVerificaInimigo.AreaMov	# verifico se o contador eh diferente de s4 e se for volto pro Loop	
+ImprimeTile:
 	li	a3, 1 						
 	call 	PrintByte					
 	li	a3, 0						
-	call 	PrintByte					
+	call 	PrintByte				
 PulaEssaInteracaoX:
 	addi	a1, a1, 16 			# adiciono 16 em a1 para ir para o proximo quadrado em x
 	addi	t0, a6, 80 			# limite superior da condicao abaixo  
