@@ -126,7 +126,6 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 .include "funcoes/PrintHP.s"
 .include "funcoes/PrintTiling.s"
 
-.include "funcoes/VerificaLuta.s"
 .include "funcoes/VerificaVez.s"
 .include "funcoes/VerificaGameOver.s"
 .include "funcoes/VerificaWin.s"
