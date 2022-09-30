@@ -55,7 +55,7 @@ LoopVerificaPersonagemAtaque:
 	call 	EscolhePersonagem 	# carrega em a1 a posicao que queremos receber em t6 :)
 	li	t0,6
 	lw	t1,16(a1)
-	bge	t1,t0,FimVerificaAtaque
+	bge	t1,t0,Pula4Condicao
 	lw	t0,0(s8)
 	lw	t1,4(s8)
 	addi	t2,t0,16
