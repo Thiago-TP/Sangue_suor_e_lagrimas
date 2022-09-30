@@ -17,10 +17,8 @@ Luta:
 	sw	s0, 24(sp)
 	sw	s1, 28(sp)
 	sw	s2, 32(sp)
-	
 	mv 	s0, a0		# labels em registradores salvos para facilitar manipulacao
 	mv	s1, a1
-	
 	# imprime fundo
 	call	DecideMapa
 	li 	a1, 0
@@ -30,19 +28,16 @@ Luta:
 	call	ClearScreen
 	li	t0, 0xFF200604
 	sw	x0, 0(t0)	# mostra o frame 0	
-	
 	# imprime personagens
 	li	a1, 40		# x do lutador na esquerda
 	lb	a0, 22(s0)	# a0 <- codigo do personagem do time do jogador
 	call	DecideLutador	# a0 <- sprite de luta do personagem do jogador
 	li	a3, 0		# frame
 	call	PrintByte	# impressao no bitmap
-	
 	lb	a0, 22(s1)	# a0 <- codigo do personagem do time do pc
 	li	a1, 240		# x do lutador na direita
 	call	DecideLutador	# a0 <- sprite de luta do personagem do pc
 	call	PrintByte	# impressao no bitmap
-	
 	# imprime barras de vida
 	lb	s2, 20(s0)	# s2 <- HP do jogador
 	mv	a0, s2		# a0 <- HP do jogador
@@ -67,8 +62,6 @@ Luta:
 	li	a3, 0
 	li	a4, 0
 	call	PrintByte
-	
-	
 	lb	s2, 20(s1)	# s2 <- HP do pc
 	mv	a0, s2		# a0 <- HP do pc
 	li 	a1, 1		# a1=1 => barra direita (PC)
@@ -92,9 +85,7 @@ Luta:
 	li	a3, 0
 	li	a4, 0
 	call	PrintByte	
-	
 	call	SimboloSetas		
-	
 	# 1 ataque do jogador
 	# mensagem
 	la	a0, VoceAtacou	# a0 <- "Voce atacou!"
@@ -109,17 +100,14 @@ Luta:
 	call	Ataque		# a0 <- dano
 	li	t0, 0
 	call	TerrenoEspecial	# modifica o dano de acordo com a posicao do atacante no mapa
-
 	call	AtualizaLuta
 	# atualizacao da barra de vida do PC
 	lb	s2, 20(s1)	# s2 <- vida atual do pc
 	li	a1, 1		# a1 = 1 => barra direita
 	call	AtualizaHP	# imprime barra e numero de HP pos ataque
 				# a0 <- vida anterior - dano ou 0
-	
 	sb	a0, 20(s1)	# HP do struct do pc atualizado 
 	beqz	a0, fimLuta
-	
 	# 1 ataque do pc
 	li	a1, 112		# pos em x
 	li	a2, 116		# pos em y
@@ -138,17 +126,24 @@ Luta:
 	call	Ataque		# a0 <- dano
 	li	t0, 1
 	call	TerrenoEspecial	# modifica o dano de acordo com a posicao do atacante no mapa
-
 	call	AtualizaLuta
 	# atualizacao da barra de vida do jogador
 	lb	s2, 20(s0)	# s2 <- vida atual do jogador
 	li	a1, 0		# a1 = 0 => barra esquerda
 	call	AtualizaHP	# imprime barra e numero de HP pos ataque
 				# a0 <- vida anterior - dano
-
 	sb	a0, 20(s0)	# HP do struct do jogador atualizado 
-
 fimLuta:
+	lb	t0, 20(s0)
+	bnez	t0, PulaMorte1
+	li	t0, 6
+	sb	t0, 16(s0)
+PulaMorte1:
+	lb	t0, 20(s1)
+	bnez	t0, PulaMorte2
+	li	t0, 6
+	sb	t0, 16(s1)
+PulaMorte2:
 	li	a0, 800
 	call	Sleep		# sleep 
 	# imprime fundo
@@ -158,7 +153,6 @@ fimLuta:
 	li	a4, 20
 	li	a5, 15
 	call	ClearScreen
-	
 	lw	ra, 0(sp)
 	lw	a0, 4(sp)
 	lw	a1, 8(sp)
