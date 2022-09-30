@@ -9,6 +9,8 @@
 #########################################################################################
 #	a0 -> endereco da fala (string) da personagem 1/esquerda			#
 #	a1 -> endereco da fala (string) da personagem 2/direita				#
+#	a2 -> mugshot do personagem na esquerda						#
+#	a3 -> mugshot do personagem na direita						#
 #########################################################################################
 Dialogo:	
 	# armazenamento de seguranca dos registradores (os de cima mais ra)
@@ -43,7 +45,7 @@ Dialogo:
 	call 	PrintByte		# impressao do rabinho direito
 	
 	# mugshots da garota
-	la	a0, mugshot_Carol
+	lw	a0, 12(sp)		# a0 <- personagem na esquerda
 	li	a1, 0
 	li	a2, 164
 	li	a3, 0
@@ -53,7 +55,7 @@ Dialogo:
 	li	a4, 1
 	call	PrintByte		# cinza no frame 1
 	# mugshots da Lyn
-	la	a0, mugshot_Lyn
+	lw	a0, 16(sp)		# a0 <- personagem na esquerda
 	li	a1, 240
 	li	a2, 164
 	li	a3, 0
