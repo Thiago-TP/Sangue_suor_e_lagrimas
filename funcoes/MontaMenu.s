@@ -53,6 +53,9 @@ LoopMenu4:
 LoopVerificaPersonagemAtaque:
 	mv	a7,t6
 	call 	EscolhePersonagem 	# carrega em a1 a posicao que queremos receber em t6 :)
+	li	t0,6
+	lw	t1,16(a1)
+	bge	t1,t0,FimVerificaAtaque
 	lw	t0,0(s8)
 	lw	t1,4(s8)
 	addi	t2,t0,16

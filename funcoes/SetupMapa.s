@@ -1,13 +1,10 @@
 #################################################
 #	a5 = 	qntd aliados e inimigos		#
 #################################################
-
 SetupMapa:
 	addi	sp, sp, -4 	# aloca espaco na pilha
-	
 	la	t0, guardaSP		# guardando o sp expandido
 	sw	sp, 0(t0)
-	
 	sw	ra, 0(sp) 	# salva o ponteiro de retorno
 	mv	s4, a5 		# move o argumento recebido em a5 para s4 para termos o limite de personagens
 	li 	a1, 0
@@ -180,11 +177,15 @@ PulaMovimentaMenu:
 LoopSalvaSprites:
 	mv	a7, t6
 	call 	EscolhePersonagem 	# carrega em a1 a posicao que queremos receber em t6 :)
+	li	t1, 6
+	lw	t0, 16(a1)
+	bge	t0,t1,PulaSalvamentoPersonagem
 	lw	a2, 12(a1) 		# carrega y
 	lw	a1, 8(a1) 		# carrega x
 	li	a4, 28
 	li	a5, 28
 	call	SalvaSprite
+PulaSalvamentoPersonagem:
 	addi	t6, t6, 1
 	blt	t6, s4, LoopSalvaSprites # se a quantidade maxima for atingida sai da funcao
 	mv	t6, zero
@@ -195,6 +196,8 @@ LoopRecuperaArgumentos:
 	mv	a7, t6
 	call 	EscolhePersonagem 	# retorna em a1 o personagem da vez :)
 	lw	t0, 16(a1)
+	li	t1,6
+	bge	t0,t1,FinalEscolhaPrint
 	lw	a2, 4(a1) 		# carrega y
 	lw	a1, 0(a1) 		# carrega x
 	li	t1, 5
@@ -246,6 +249,9 @@ PulaImprimeMenu:
 LoopLimpaPersonagens:
 	mv	a7, t6
 	call 	EscolhePersonagem 	# carrega em a1 a posicao que queremos 
+	lw	t0,16(a1)
+	li	t1,6
+	bge	t0,t1,PulaRecuperaPersonagem
 	mv	t2, a1
 	lw	a2, 12(a1) 		# carrega y
 	lw	a1, 8(a1) 		# carrega x
@@ -256,6 +262,7 @@ LoopLimpaPersonagens:
 	li	a4, 28
 	li	a5, 28
 	call	RecuperaSprite
+PulaRecuperaPersonagem:
 	addi	t6, t6, 1 		# incrementa contador
 	blt	t6, s4, LoopLimpaPersonagens # se a quantidade maxima for atingida sai da funcao	
 	
@@ -266,7 +273,6 @@ LoopLimpaPersonagens:
 	bne	t0, t1, sleepNormal
 	li	a0, 170			# sleep da fase 5
 sleepNormal:
-	
 	call 	Sleep			# este sleep so nao funciona no RARS
 	la	t0, PosicaoAnteriorCursor
 	la 	t1, PosicaoAtualCursor
@@ -275,18 +281,6 @@ sleepNormal:
 	lw 	t2, 4(t1)
 	sw 	t2, 4(t0)
 	addi	s0, s0, 1		# incremento s0 (lembrar que ele controla qual a idle que eu quero printar)
-	
-	
-	############### teste da luta #############
-#	la	a0, Lyn
-#	la	a1, Brigand
-#	lb	t0, 20(a0)
-#	beqz	t0, pula
-#	lb	t0, 20(a1)
-#	beqz	t0, pula
-	#call	Luta
-#pula:	
-	###########################################
 	j	LoopGame		# volta para LoopStandby
 ProximaFase:	
 	la	t0, guardaSP		# recuperando o sp expandido
@@ -294,7 +288,6 @@ ProximaFase:
 	lw	ra, 0(sp) 		# carrega o valor de ra de sp
 	addi	sp, sp, 4 		# desaloca a memoria da pilha
 	ret 				# volta para quem chamou a funcao
-####################################
 
 #VerificaColisao:
 #	addi	sp, sp, -8 	# aloca espaco na pilha

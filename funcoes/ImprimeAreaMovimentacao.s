@@ -22,48 +22,51 @@ LoopImprimeArea:
 	bgeu	a2, t0, PulaEssaInteracaoY 	# condicao para saber se teve transbordo na area do bitmap display
 	li	t0, 320				# limite superior da condicao abaixo
 	bgeu	a1, t0, PulaEssaInteracaoX	# condicao para saber se teve transbordo na area do bitmap display
-		##################### Arrumar issae ######################
 	call 	DecideMapa
-	mv	t0,zero
-	beqz	a2,PulaCalculoTileMap1
-	li	t1,16
-	div	t2,a2,t1
-	li	t1,20
-	mul	t0,t1,t2
+	mv	t0, zero
+	beqz	a2, PulaCalculoTileMap1
+	li	t1, 16
+	div	t2, a2, t1
+	li	t1, 20
+	mul	t0, t1, t2
 PulaCalculoTileMap1:
-	beqz	a1,PulaCalculoTileMap2
-	li	t1,16
-	div	t2,a1,t1
-	add	t0,t0,t2
-	addi	t0,t0,-1
+	beqz	a1, PulaCalculoTileMap2
+	li	t1, 16
+	div	t2, a1, t1
+	add	t0, t0, t2
+	addi	t0, t0, -1
 PulaCalculoTileMap2:
-	add	a0,a0,t0
-	lb	a0,0(a0)
-	li	t3,3
-	bne	t3,a0,PulaTileMapVermelho1
+	add	a0, a0, t0
+	lb	a0, 0(a0)
+	li	t3, 3
+	bne	t3, a0, PulaTileMapVermelho1
 	la	a0, seletor_verm
 	j	ImprimeTile
 PulaTileMapVermelho1:
-	li	t3,4
-	bne	t3,a0,PulaTileMapVermelho2
+	li	t3, 4
+	bne	t3, a0,PulaTileMapVermelho2
 	la	a0, seletor_verm
 	j	ImprimeTile
 PulaTileMapVermelho2:	
 	la	a0, seletor_azul
-	li	t6, 1					
+	li	t6, 1				
 LoopVerificaInimigo.AreaMov:
 	mv	a7, t6
-	mv	s5,a1
+	mv	s5, a1	
 	call EscolhePersonagem # retorna em a1
+	li	t1, 6
+	lw	t0, 16(a1)
+	addi	t6, t6, 2
+	bge	t0, t1, PulaTileVermelho
 	lw	t0, 0(a1)
 	lw	t1, 4(a1)
-	mv	a1,s5
-	addi	t6, t6,2
-	bne	t0,a1,PulaTileVermelho
-	bne	t1,a2,PulaTileVermelho
+	mv	a1, s5
+	bne	t0, a1, PulaTileVermelho
+	bne	t1, a2, PulaTileVermelho
 	la	a0, seletor_verm
 	j	ImprimeTile
 PulaTileVermelho:
+	mv	a1, s5
 	ble	t6, s4, LoopVerificaInimigo.AreaMov	# verifico se o contador eh diferente de s4 e se for volto pro Loop	
 ImprimeTile:
 	li	a3, 1 						
