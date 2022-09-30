@@ -122,7 +122,6 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 .include "funcoes/Musica.s"
 .include "funcoes/PRINT.s"
 .include "funcoes/PrintByte.s"
-.include "funcoes/PrintFala.s"
 .include "funcoes/PrintHP.s"
 .include "funcoes/PrintTiling.s"
 
@@ -137,6 +136,8 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 
 .include "funcoes/SimboloArma.s"
 .include "funcoes/SimboloSetas.s"
+
+.include "funcoes/LimpaFala.s"
 
 
 .data

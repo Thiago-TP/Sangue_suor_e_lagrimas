@@ -9,8 +9,6 @@ Dialogo4:
 
 	la	a0, fala13	# fala do personagem da esquerda
 	la	a1, fala14	# fala do personagem da direita
-	la	a2, mugshot_Carol	# mugshot do personagem da esquerda
-	la	a3, mugshot_Lyn	# mugshot do personagem da direita
 	call	Dialogo		# imprime o dialogo de forma interativa
 
 	# segundo par de falas (ainda com mesmos mugshots, e, a principio, fundo)
