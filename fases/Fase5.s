@@ -19,7 +19,7 @@ Fase5:
 	li	t1, 5
 	sb	t1, 0(t0)		# num fase = 5
 	
-	call	Dialogo5
+	#call	Dialogo5
 				
 	li	a5, 10			# a5 <- quantidade de personagens (aliados + inimigos)
 	la	a0, tilemap_himalaia

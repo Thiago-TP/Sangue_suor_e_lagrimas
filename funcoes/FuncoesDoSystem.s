@@ -191,7 +191,7 @@ semMidi:
 #  a3    =    cor                           #
 #############################################
 
-printInt:	addi 	sp, sp, -8			# Aloca espaco
+#printInt:	addi 	sp, sp, -8			# Aloca espaco
 		sw 	ra, 0(sp)			# salva ra
 		sw 	a0, 4(sp)			# salva a0
 		

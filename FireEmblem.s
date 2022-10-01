@@ -139,9 +139,20 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 
 .include "funcoes/LimpaFala.s"
 .include "funcoes/Decoracoes.s"
+.include "funcoes/PrintInt.s"
 
 
 .data
+.include "sprites/numeros/numzero.data"
+.include "sprites/numeros/um.data"
+.include "sprites/numeros/dois.data"
+.include "sprites/numeros/tres.data"
+.include "sprites/numeros/quatro.data"
+.include "sprites/numeros/cinco.data"
+.include "sprites/numeros/seis.data"
+.include "sprites/numeros/sete.data"
+.include "sprites/numeros/oito.data"
+.include "sprites/numeros/nove.data"
 .include "sprites/tiles/quadroMarromE.data"
 .include "sprites/tiles/quadroVermE.data"
 .include "sprites/tiles/quadroAzulE.data"

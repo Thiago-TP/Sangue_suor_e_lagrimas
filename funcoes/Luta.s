@@ -48,11 +48,11 @@ Luta:
 	li 	a1, 0		# a1=0 => barra esquerda (jogador)
 	li 	a2, 0		# a2=0 => aumenta a barra de vida
 	call 	PrintHP		# imprime a barra em si		
-	li	a1, 24		# x
-	li	a2, 184		# y
-	li	a3, 0x0000ff00	# cor
-	li	a4, 0		# frame
-	call	printInt	# imprime a quantidade de HP
+	li	a1, 132		# x
+	li	a2, 204		# y
+	li	a3, 0		# frame
+	li	a4, 0		# cinza
+	call	PrintInt	# imprime a quantidade de HP
 	
 	mv	a0, s0
 	call	SimboloArma	# a0 <- simbolo da arma
@@ -67,11 +67,11 @@ Luta:
 	li 	a1, 1		# a1=1 => barra direita (PC)
 	li 	a2, 0		# a2=0 => aumenta a barra de vida
 	call 	PrintHP		# imprime a barra em si
-	li	a1, 284		# x
-	li	a2, 184		# y
-	li	a3, 0x0000ff00	# cor
-	li	a4, 0		# frame
-	call	printInt	# imprime a quantidade de HP
+	li	a1, 168		# x
+	li	a2, 204		# y
+	li	a3, 0		# frame
+	li	a4, 0		# cinza
+	call	PrintInt	# imprime a quantidade de HP
 	
 	mv	a0, s1
 	call	SimboloArma	# a0 <- simbolo da arma

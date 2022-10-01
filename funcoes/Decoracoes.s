@@ -9,9 +9,16 @@ Decoracoes:
 	call	PrintByte		# metade esquerda
 	li 	a1, 80
 	call	PrintByteInverso	# metade direita
+	li 	a3, 1
+	call	PrintByteInverso	
+	
 	la	a0, quadroVermE		# quadro vermelho
 	li 	a1, 160
+	li	a3, 0
 	call	PrintByte		# metade esquerda
+	li 	a3, 1
+	call	PrintByte		# metade esquerda
+	li	a3, 0
 	li 	a1, 240
 	call	PrintByteInverso	# metade direita
 		
@@ -73,9 +80,7 @@ fimEscolhe:
 stringLyn:	la	a0 strLyn
 		j 	fimEscolhe	
 stringBrigand:	la	a0 strBrigand
-		j 	fimEscolhe	
-stringBrigand:	la	a0 strBrigand
-		j 	fimEscolhe	
+		j 	fimEscolhe		
 stringYogi:	la 	a0 strYogi
 		j 	fimEscolhe	
 stringSoldier:	la 	a0 strSoldier

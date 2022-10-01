@@ -29,20 +29,20 @@ FimAtualizaHP:
 	li	t0, 10
 	slt	t0, a0, t0	# a0 < 10 ? t0=1 : t0=0
 
-	li	a2, 184		# y
+	li	a2, 204		# y
 	beqz	a1, HPesquerdo
-	li	a1, 284		# x direito
+	li	a1, 168		# x direito
 	j	pulaHPesquerdo
 HPesquerdo:
-	li	a1, 24		# x esquerdo
+	li	a1, 132		# x esquerdo
 pulaHPesquerdo:
 	li	a3, 16		# largura
 	li	a4, 8		# altura
 	call	CobreMensagem	# cobre o valor antigo
 
-	li	a3, 0x0000ff00	# cor
-	li	a4, 0		# frame
-	call	printInt	# imprime a quantidade de HP
+	li	a3, 0		# frame
+	li	a4, 0		# cinza
+	call	PrintInt	# imprime a quantidade de HP
 	
 	lw	ra, 0(sp)
 	addi 	sp, sp, 4
