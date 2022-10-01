@@ -68,8 +68,8 @@ LoopVerificaInimigo.MoviCursor:
 	bne	t1, t3,FimMovimentaCursor
 	la	t0, AtaqueAtivado
 	sb	zero, 0(t0)
-	#li	t0, 5
-	#sb	t0, 16(s7)
+	li	t0, 5
+	sb	t0, 16(s7)
 	mv	a0, s7
 	call	Luta
 	j	FimMovimentaCursor
