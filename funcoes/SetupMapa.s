@@ -32,19 +32,72 @@ LoopGame:
 	#lb	t0, 0(t0)
 	#bnez	t0, Perdeu	# GameOver ? tela de derrota
 	####################################################################
-	
 	call	VerificaVez	# Vez <- 1 se for a vez do PC
 	la	t0, Vez
 	lb	t0, 0(t0)
 	beqz	t0, PulaVezPC	# Vez = 1 ? PC joga (vez do PC ainda nao foi implementada)
-	
 	#################################################
 	#	aqui que implementariamos o vez pc	#
 	#################################################
-	
 	# aqui é onde faria a logica do pc #
 	# fazer a movimentação de cada personagem inimigo #
 	# buscando sempre o ataque e se não pudermos atingir escolhermos aguardar #
+	li	s5, 8300
+	sub	s5, s6, s5
+	li	t6,-1
+	sw	t6, 0(s5)
+	mv	t6, zero
+LoopEscolhePersonagemAtacado:
+	mv	a7, t6
+	mv	a6, t6
+	call	EscolhePersonagem # retorna em a1
+	lw	t2, 0(a1)
+	lw	t3, 4(a1)
+	li	t6, 1
+	li	s11, 500
+LoopEscolhePersonagemAtacante:
+	mv	a7, t6
+	call	EscolhePersonagem # retorna em a1
+	lw	t0, 0(a1)
+	lw	t1, 4(a1)
+	sub	t4, t2, t0
+	bgez	t4,PulaModuloX
+	sub	t4, zero, t4
+PulaModuloX:
+	sub	t5, t3, t1
+	bgez	t5,PulaModuloY
+	sub	t5, zero, t5
+PulaModuloY:
+	# aqui temos o valor da distancia de x em t4
+	# aqui temos o valor da distancia de y em t5
+	# salvar a minima distancia
+	mul	t4, t4, t4
+	mul	t5, t5, t5
+	add	t0, t4, t5
+	fcvt.s.w	ft0, t0
+	fsqrt.s	ft0, ft0
+	fcvt.w.s	t0, ft0
+	bge	t0, s11,PulaTrocaMinimo
+
+	# verifica na pilha se a1 ta la 
+	
+	mv	s11, t0
+	mv	a5, a1
+PulaTrocaMinimo:
+	addi	t6, t6, 2
+	blt	t6, s4, LoopEscolhePersonagemAtacante
+	sw	a5, 0(s5)
+	addi	s5,s5,-4
+	li	t6,-1
+	sw	t6, 0(s5)
+	mv	t6, a6
+	addi	t6, t6, 2
+	blt	t6, s4, LoopEscolhePersonagemAtacado
+	
+	# vamo verificar aqui se conseguimos isso kkkkkkkk
+	
+	li	a7,10
+	ecall
 	
 PulaVezPC:
 	beqz	s9, PulaMovimento
