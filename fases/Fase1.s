@@ -19,7 +19,7 @@ Fase1:
 	li	t1, 1
 	sb	t1, 0(t0)		# num fase = 1 (desnecessario para a fase 1)
 	
-	#call	Dialogo1	
+	call	Dialogo1	
 			
 	li	a5, 2			# a5 <- quantidade de personagens (aliados + inimigos)
 	la	a0, tilemap_praia
