@@ -27,7 +27,16 @@ Luta:
 	li	a5, 15
 	call	ClearScreen
 	li	t0, 0xFF200604
-	sw	x0, 0(t0)	# mostra o frame 0	
+	sw	x0, 0(t0)	# mostra o frame 0
+	
+	
+	la	a0, quadro
+	li 	a1, 16
+	li	a2, 200
+	li	a3, 0
+	call	PrintByte	
+			
+					
 	# imprime personagens
 	li	a1, 40		# x do lutador na esquerda
 	lb	a0, 22(s0)	# a0 <- codigo do personagem do time do jogador

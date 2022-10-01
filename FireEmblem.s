@@ -220,6 +220,7 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 .include "sprites/personagens/LutaYogi.data"
 .include "sprites/tiles/umHP.data"
 .include "sprites/tiles/umHPinvisivel.data"
+.include "quadro.data"
 
 # strings do jogo
 .include "falas/falas.s"
