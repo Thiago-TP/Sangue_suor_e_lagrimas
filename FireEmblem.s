@@ -14,8 +14,8 @@ noteCounter:	.word	0	# quantidade de notas tocadas
 MenuBatalha:	.byte	0, 255
 
 # posicoes em quantidade de pulos 16x16
-PosicaoAtualCursor: 	.word 0, 0
-PosicaoAnteriorCursor: 	.word 0, 0	# mudei esse aqui so de zueira / aqui não tem brincadeira >:(
+PosicaoAtualCursor: 	.word 80, 80
+PosicaoAnteriorCursor: 	.word 80, 80	# mudei esse aqui so de zueira / aqui não tem brincadeira >:(
 
 # posicoes em (x,y) do bitmap + parametro para tipo de animacao
 #		       	x    y  estado
@@ -141,6 +141,8 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 
 
 .data
+.include "sprites/tiles/quadroVermE.data"
+.include "sprites/tiles/quadroAzulE.data"
 .include "sprites/tiles/square.data"
 .include "sprites/tiles/miss.data"
 .include "sprites/tiles/arrowUP.data"
@@ -220,7 +222,6 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 .include "sprites/personagens/LutaYogi.data"
 .include "sprites/tiles/umHP.data"
 .include "sprites/tiles/umHPinvisivel.data"
-.include "quadro.data"
 
 # strings do jogo
 .include "falas/falas.s"

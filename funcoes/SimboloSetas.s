@@ -26,31 +26,23 @@ fimSetas:
 	lw	ra, 0(sp)
 	addi	sp, sp, 4
 	ret
+	
 # impressao das setas
 forte:
 	la	a0, arrowUP
-	li	a1, 58
-	li	a2, 176
-	li	a3, 0
-	li	a4, 0
+	li	a1, 128
+	li	a2, 198
 	call	PrintByte
 	la	a0, arrowDOWN
-	li	a1, 259
+	li	a1, 168
 	call	PrintByte
 	j	fimSetas
 fraco:
 	la	a0, arrowDOWN
-	li	a1, 58
-	li	a2, 176
-	li	a3, 0
-	li	a4, 0
+	li	a1, 128
+	li	a2, 198
 	call	PrintByte
 	la	a0, arrowUP
-	li	a1, 259
+	li	a1, 168
 	call	PrintByte
 	j	fimSetas
-
-
-
-
-

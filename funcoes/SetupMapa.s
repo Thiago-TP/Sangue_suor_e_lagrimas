@@ -187,7 +187,7 @@ PulaRecuperaPersonagem:
 	lb	t0, 0(t0)
 	li	t1, 5
 	bne	t0, t1, sleepNormal
-	li	a0, 170			# sleep da fase 5
+	li	a0, 160			# sleep da fase 5
 sleepNormal:
 	call 	Sleep			# este sleep so nao funciona no RARS
 	la	t0, PosicaoAnteriorCursor

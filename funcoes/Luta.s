@@ -30,11 +30,18 @@ Luta:
 	sw	x0, 0(t0)	# mostra o frame 0
 	
 	
-	la	a0, quadro
-	li 	a1, 16
-	li	a2, 200
+	la	a0, quadroAzulE
+	li 	a1, 0
+	li	a2, 194
 	li	a3, 0
 	call	PrintByte	
+	li 	a1, 80
+	call	PrintByteInverso	# quadro direito
+	la	a0, quadroVermE
+	li 	a1, 160
+	call	PrintByte	# quadro direito
+	li 	a1, 240
+	call	PrintByteInverso	# quadro direito
 			
 					
 	# imprime personagens
@@ -59,18 +66,16 @@ Luta:
 	li	a4, 0		# frame
 	call	printInt	# imprime a quantidade de HP
 	la	a0, square
-	li	a1, 42		# x
-	li	a2, 178		# y
+	li	a1, 130		# x
+	li	a2, 199		# y
 	li	a3, 0		# cor
 	li	a4, 0		# frame
-	call	PrintByte
+	call	PrintByte	# quadrado esquerdo da arma
 	mv	a0, s0
 	call	SimboloArma	# a0 <- simbolo da arma
-	li	a1, 44
-	li	a2, 180
-	li	a3, 0
-	li	a4, 0
-	call	PrintByte
+	addi	a1, a1, 2
+	addi	a2, a2, 2
+	call	PrintByte	# quadrado esquerdo da arma
 	lb	s2, 20(s1)	# s2 <- HP do pc
 	mv	a0, s2		# a0 <- HP do pc
 	li 	a1, 1		# a1=1 => barra direita (PC)
@@ -82,18 +87,17 @@ Luta:
 	li	a4, 0		# frame
 	call	printInt	# imprime a quantidade de HP
 	la	a0, square
-	li	a1, 262		# x
-	li	a2, 178		# y
+	li	a1, 170		# x
+	li	a2, 199		# y
 	li	a3, 0		# cor
 	li	a4, 0		# frame
 	call	PrintByte
 	mv	a0, s1
 	call	SimboloArma	# a0 <- simbolo da arma
-	li	a1, 264
-	li	a2, 180
-	li	a3, 0
-	li	a4, 0
-	call	PrintByte	
+	addi	a1, a1, 2
+	addi	a2, a2, 2
+	call	PrintByte
+		
 	call	SimboloSetas		
 	# 1 ataque do jogador
 	# mensagem
