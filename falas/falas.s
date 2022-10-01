@@ -12,7 +12,14 @@ menu1opcao2:	.string "Wait"
 VoceAtacou:	.string	"Voce atacou!"
 PcAtacou:	.string "O inimigo atacou!"
 Critou:		.string "Critico!"
-Errou:		.string "Errou!"
+strLyn:		.string	"Lyn"
+strBrigand:	.string	"Brigand"
+strYogi:	.string	"Yogi"
+strSoldier:	.string	"Soldier"
+strDorcas:	.string	"Dorcas"
+strAssassin:	.string	"Assassin"
+strDart:	.string	"Dart"
+strSain:	.string	"Sain"
 
 # fala impar => Carolina, fala par => Lyn
 # falas da fase 1

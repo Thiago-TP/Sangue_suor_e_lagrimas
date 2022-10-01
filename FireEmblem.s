@@ -138,9 +138,11 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 .include "funcoes/SimboloSetas.s"
 
 .include "funcoes/LimpaFala.s"
+.include "funcoes/Decoracoes.s"
 
 
 .data
+.include "sprites/tiles/quadroMarromE.data"
 .include "sprites/tiles/quadroVermE.data"
 .include "sprites/tiles/quadroAzulE.data"
 .include "sprites/tiles/square.data"

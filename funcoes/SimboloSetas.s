@@ -30,19 +30,19 @@ fimSetas:
 # impressao das setas
 forte:
 	la	a0, arrowUP
-	li	a1, 128
-	li	a2, 198
+	li	a1, 140
+	li	a2, 174
 	call	PrintByte
 	la	a0, arrowDOWN
-	li	a1, 168
+	li	a1, 272
 	call	PrintByte
 	j	fimSetas
 fraco:
 	la	a0, arrowDOWN
-	li	a1, 128
-	li	a2, 198
+	li	a1, 140
+	li	a2, 174
 	call	PrintByte
 	la	a0, arrowUP
-	li	a1, 168
+	li	a1, 272
 	call	PrintByte
 	j	fimSetas

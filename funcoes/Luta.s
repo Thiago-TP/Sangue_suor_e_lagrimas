@@ -17,6 +17,7 @@ Luta:
 	sw	s0, 24(sp)
 	sw	s1, 28(sp)
 	sw	s2, 32(sp)
+	
 	mv 	s0, a0		# labels em registradores salvos para facilitar manipulacao
 	mv	s1, a1
 	# imprime fundo
@@ -29,20 +30,7 @@ Luta:
 	li	t0, 0xFF200604
 	sw	x0, 0(t0)	# mostra o frame 0
 	
-	
-	la	a0, quadroAzulE
-	li 	a1, 0
-	li	a2, 194
-	li	a3, 0
-	call	PrintByte	
-	li 	a1, 80
-	call	PrintByteInverso	# quadro direito
-	la	a0, quadroVermE
-	li 	a1, 160
-	call	PrintByte	# quadro direito
-	li 	a1, 240
-	call	PrintByteInverso	# quadro direito
-			
+	call	Decoracoes	# imprime decoracoes e nomes dos personagens			
 					
 	# imprime personagens
 	li	a1, 40		# x do lutador na esquerda
@@ -65,17 +53,15 @@ Luta:
 	li	a3, 0x0000ff00	# cor
 	li	a4, 0		# frame
 	call	printInt	# imprime a quantidade de HP
-	la	a0, square
-	li	a1, 130		# x
-	li	a2, 199		# y
-	li	a3, 0		# cor
-	li	a4, 0		# frame
-	call	PrintByte	# quadrado esquerdo da arma
+	
 	mv	a0, s0
 	call	SimboloArma	# a0 <- simbolo da arma
-	addi	a1, a1, 2
-	addi	a2, a2, 2
-	call	PrintByte	# quadrado esquerdo da arma
+	li	a1, 141		# x
+	li	a2, 174		# y
+	li	a3, 0		# cor
+	li	a4, 0		# frame
+	call	PrintByte	# sprite da arma
+	
 	lb	s2, 20(s1)	# s2 <- HP do pc
 	mv	a0, s2		# a0 <- HP do pc
 	li 	a1, 1		# a1=1 => barra direita (PC)
@@ -86,16 +72,13 @@ Luta:
 	li	a3, 0x0000ff00	# cor
 	li	a4, 0		# frame
 	call	printInt	# imprime a quantidade de HP
-	la	a0, square
-	li	a1, 170		# x
-	li	a2, 199		# y
-	li	a3, 0		# cor
-	li	a4, 0		# frame
-	call	PrintByte
+	
 	mv	a0, s1
 	call	SimboloArma	# a0 <- simbolo da arma
-	addi	a1, a1, 2
-	addi	a2, a2, 2
+	li	a1, 276		# x
+	li	a2, 174		# y
+	li	a3, 0		# cor
+	li	a4, 0		# frame
 	call	PrintByte
 		
 	call	SimboloSetas		
