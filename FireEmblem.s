@@ -14,8 +14,8 @@ noteCounter:	.word	0	# quantidade de notas tocadas
 MenuBatalha:	.byte	0, 255
 
 # posicoes em quantidade de pulos 16x16
-PosicaoAtualCursor: 	.word 80, 80
-PosicaoAnteriorCursor: 	.word 80, 80	# mudei esse aqui so de zueira / aqui não tem brincadeira >:(
+PosicaoAtualCursor: 	.word 0, 0
+PosicaoAnteriorCursor: 	.word 0, 0	# mudei esse aqui so de zueira / aqui não tem brincadeira >:(
 
 # posicoes em (x,y) do bitmap + parametro para tipo de animacao
 #		       	x    y  estado
