@@ -1,59 +1,64 @@
 #################################################################
-#	esta funcao verifica se a vez do jogador acabou		#
+#	esta funcao verifica se a vez do jogador e da maquina	#
+#	acabaram						#
 #################################################################
 #	- Inputs -	#
 #	nenhum		#
 #########################
 #	- Outputs -	#
 #	0 ou 1 em Vez	#
-#########################################
-#	- Internas -			#
-#	t0 = label do personagem	#
-#	t1 - 5 (estado cinza)		#
-#	t2 = estado do personagem	#
-#	t3 = Fase			#
-#########################################
+#########################
+
+# >:) você que lute com as mudanças >:D #
 
 VerificaVez:
-	li	t1, 5
-	la	t4, Fase
-	lb	t4, 0(t4)
-	# verifica estado e HP de cada personagem dos personagens jogaveis
-	# Lyn
-	la	t0, Lyn
-	lw	t2, 16(t0)		
-	bne	t2, t1, fimVerificaVez	# estado = cinza ? fim : continua check
-	li	t0, 1
-	beq	t0, t4, VezMuda		# Fase = 1 ? fim : continua check
-	
-	# Yogi
-	la	t0, Yogi
-	lw	t2, 16(t0)		
-	bne	t2, t1, fimVerificaVez	# estado = cinza ? fim : continua check
-	li	t0, 2
-	beq	t0, t4, VezMuda		# Fase = 2 ? fim : continua check
-	
-	# Dorcas
-	la	t0, Dorcas
-	lw	t2, 16(t0)		
-	bne	t2, t1, fimVerificaVez	# estado = cinza ? fim : continua check
-	li	t0, 3
-	beq	t0, t4, VezMuda		# Fase = 3 ? fim : continua check
-	
-	# Dart
-	la	t0, Dart
-	lw	t2, 16(t0)		
-	bne	t2, t1, fimVerificaVez	# estado = cinza ? fim : continua check
-	li	t0, 4
-	beq	t0, t4, VezMuda		# Fase = 4 ? fim : continua check
-	
-	# Sain
-	la	t0, Sain
-	lw	t2, 16(t0)		
-	bne	t2, t1, fimVerificaVez	# estado = cinza ? fim : continua check
-VezMuda:	
+	addi	sp, sp, -4 	# aloca espaco na pilha
+	sw	ra, 0(sp) 	# salva o ponteiro de retorno
+	li	t5, 5
+	mv	t6, zero
+LoopVerificaCinzaAliado:
+	mv	a7, t6
+	call	EscolhePersonagem # retorna em a1
+	lb	t4, 16(a1)
+	bne	t4, t5, fimVerificaAliado
+	addi	t6, t6, 2
+	blt	t6, s4, LoopVerificaCinzaAliado
+	li	t1,1
+	j	VezMuda
+fimVerificaAliado:
+	li	t6, 1
+LoopVerificaCinzaInimigo:
+	mv	a7,t6
+	call	EscolhePersonagem # retorna em a1
+	lb	t4, 16(a1)
+	bne	t4,t5,fimVerificaVez
+	addi	t6, t6, 2
+	blt	t6,s4,LoopVerificaCinzaInimigo
+	li	t1,0
+VezMuda:
+	bnez	t1,PulaResetaAliado
+	mv	t6, zero
+LoopResetaCinzaAliado:
+	mv	a7, t6
+	call	EscolhePersonagem # retorna em a1
+	li	t4, 0
+	sb	t4, 16(a1)
+	addi	t6, t6, 2
+	blt	t6, s4, LoopResetaCinzaAliado
+	j	FimResetaCinza
+PulaResetaAliado:
+	li	t6, 1
+LoopResetaCinzaInimigo:
+	mv	a7, t6
+	call	EscolhePersonagem # retorna em a1
+	li	t4, 0
+	sb	t4, 16(a1)
+	addi	t6, t6, 2
+	blt	t6, s4, LoopResetaCinzaInimigo
+FimResetaCinza:	
 	la	t0, Vez
-	li	t1, 1
 	sb	t1, 0(t0)		# Vez = 1 => vez do PC
 fimVerificaVez:
-	ret	
+	lw	ra, 0(sp) 		# carrega o valor de ra de sp
+	addi	sp, sp, 4 		# desaloca a memoria da pilha
+	ret 				# volta para quem chamou a funcao

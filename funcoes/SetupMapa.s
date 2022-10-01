@@ -12,7 +12,6 @@ SetupMapa:
 	li	a4, 20
 	li	a5, 15
 	call	ClearScreen
-	# inicializacao dos registradores salvos
 	mv	s0, zero 	# iniciliaza s0 como zero
 	mv	s1, zero 	# inicializa s1 como zero
 	mv	s6, sp 		# salvo o endereco inicial de tudo para voltar toda vez depois do loop
@@ -23,16 +22,10 @@ SetupMapa:
 	mv	s11,zero
 LoopGame: 
 	################ testes de funcoes de controle ####################
-	#call	VerificaVez	# Vez <- 1 se for a vez do PC
-	#la	t0, Vez
-	#lb	t0, 0(t0)
-	#bnez	t0, VezDoPC	# Vez = 1 ? PC joga (vez do PC ainda nao foi implementada)
-	
 	#call	VerificaWin	# Win <- 1 se for PC morreu
 	#la	t0, Win
 	#lb	t0, 0(t0)
 	#bnez	t0, ProximaFase	# Win ? fim da fase
-	
 	# Perdeu ainda n foi implementada
 	#call	VerificaGameOver	# GameOver <- 1 se jogador morreu
 	#la	t0, GameOver
@@ -40,106 +33,27 @@ LoopGame:
 	#bnez	t0, Perdeu	# GameOver ? tela de derrota
 	####################################################################
 	
+	call	VerificaVez	# Vez <- 1 se for a vez do PC
+	la	t0, Vez
+	lb	t0, 0(t0)
+	beqz	t0, PulaVezPC	# Vez = 1 ? PC joga (vez do PC ainda nao foi implementada)
+	
+	#################################################
+	#	aqui que implementariamos o vez pc	#
+	#################################################
+	
+	# aqui é onde faria a logica do pc #
+	# fazer a movimentação de cada personagem inimigo #
+	# buscando sempre o ataque e se não pudermos atingir escolhermos aguardar #
+	
+PulaVezPC:
 	beqz	s9, PulaMovimento
-	lw 	a1, 0(s7)
-	lw 	a2, 4(s7)
-	lw	t0, 0(s8)
-	bne	a1,t0,PulaVerificaIgualdade
-	lw	t0, 4(s8)
-	bne	a2,t0,PulaVerificaIgualdade
-	j	PulaEscolhaEixo
-PulaVerificaIgualdade:
-#	addi	s11,s11,-1
-#	bltz	s11,TipoMovimento2
-#	bnez	s10,PulaDesvioX
-#	addi	t0,a2,4
-#	sw	t0,4(s7)
-#	li	t0, 1			# moveset eh para baixo
-#	sw	t0, 16(s7)
-#	j	FimDesvio
-#PulaDesvioX:
-#	addi	t0,a1,4
-#	sw	t0,0(s7)
-#	li	t0, 2			# moveset eh para direita
-#	sw	t0, 16(s7)		# atualiza o estado do personagem
-#FimDesvio:
-#	j	PulaEscolhaEixo
-#TipoMovimento2:
-	bnez	s10,PulaEixoX
-	lw	t0, 0(s8)		# t0 <- x do cursor
-	bne	t0,a1,PulaTrocaMovimento1
-	xori	s10,s10,1
-	j	PulaEixoX
-PulaTrocaMovimento1:
-	sub	t0, t0, a1 		# se for negativo a1 eh maior que t0 entao preciso decrementar a1
-	bltz	t0, PulaEixoXPositivo	# x personagem > x cursor ? pula : move para a direita
-	#	aqui so entra se t0 for positivo quer dizer que o idle eh para a direita e preciso incrementar
-	addi	a1, a1, 4		# personagem move 4 pixeis para a direita
-#	li	a6,1
-#	call	VerificaColisao
-#	beqz	a0,PulaTratamentoColisao1
-#	li	s11,4
-#	j	LoopGame
-#PulaTratamentoColisao1:
-	sw	a1, 0(s7)		# atualiza struct de posicao do personagem
-	li	t0, 2			# moveset eh para direita
-	sw	t0, 16(s7)		# atualiza o estado do personagem	
-	j	PulaEscolhaEixo
-PulaEixoXPositivo:
-	addi	a1, a1, -4		# personagem move 4 pixeis para a esquerda ("-4 para a direita")
-#	li	a6,3
-#	call	VerificaColisao
-#	beqz	a0,PulaTratamentoColisao2
-#	li	s11,4
-#	j	LoopGame
-#PulaTratamentoColisao2:
-	sw	a1, 0(s7)		
-	li	t0, 3			# moveset eh para esquerda
-	sw	t0, 16(s7)	
-	j	PulaEscolhaEixo
-PulaEixoX:	# Repete-se aqui, no eixo Y, o que foi feito no X
-	beqz	s10,PulaEscolhaEixo
-	lw	t0, 4(s8)
-	bne	t0,a2,PulaTrocaMovimento2
-	xori	s10,s10,1
-	j	LoopGame
-PulaTrocaMovimento2:
-	sub	t0, t0, a2 		# se for negativo a1 eh maior que t0 entao preciso decrementar a1
-	bltz	t0, PulaEixoYPositivo	
-	addi	a2, a2, 4		# personagem move 4 pixeis para baixo
-#	li	a6,2
-#	call	VerificaColisao
-#	beqz	a0,PulaTratamentoColisao3
-#	li	s11,4
-#	j	LoopGame
-#PulaTratamentoColisao3:
-	sw	a2, 4(s7)
-	li	t0, 1			# moveset eh para baixo
-	sw	t0, 16(s7)	
-	j	PulaEscolhaEixo
-PulaEixoYPositivo:
-	addi	a2, a2, -4		# personagem move 4 pixeis para a cima ("-4 pixeis para baixo")
-#	li	a6,0
-#	call	VerificaColisao
-#	beqz	a0,PulaTratamentoColisao4
-#	li	s11,4
-#	j	LoopGame
-#PulaTratamentoColisao4:
-	sw	a2, 4(s7)
-	li	t0, 4			# moveset eh para cima
-	sw	t0, 16(s7)		
-PulaEscolhaEixo:
-	lw	t0, 0(s7)
-	lw	t1, 0(s8)
-	bne	t0, t1, PulaMovimento	# x personagem =/= x cursor ? mais movimento : verifica x 
-	lw	t0, 4(s7)
-	lw	t1, 4(s8)
-	bne	t0, t1, PulaMovimento	# y personagem =/= y cursor ? mais movimento : chegamos ao destino
-	mv	s9, zero		# fim do movimento => s9 = 0
-	sw	zero, 16(s7)		# atualiza o estado do personagem para StandBy
-	li	t0, 1
-	la	t1, MenuAtivado
-	sb	t0, 0(t1)
+	mv	a0,s7
+	mv	a1,s8
+	call 	MovimentaPersonagem
+	la	t0, Vez
+	lb	t0, 0(t0)
+	bnez	t0,PulaMovimentaMenu
 PulaMovimento:
 	bnez	s9, PulaMovimentaMenu	# enquanto o personagem se move, o cursor permanece congelado
 	la	t0, MenuAtivado
@@ -217,6 +131,9 @@ FinalEscolhaPrint:
 	la	t0, MenuAtivado
 	lb	t1, 0(t0)
 	bnez	t1, PulaImprimeCursor
+	la	t0, Vez
+	lb	t1, 0(t0)
+	bnez	t1, PulaImprimeMenu
 	li	t0, 2			# carrego 2 em t0 para fazer o resto de a0 / 2
 	rem	t0, s0, t0		# uso resto 2 para escolher entre as duas sprites (generalizavel para todas)
 	bnez	t0, PulaCursor1		# se t0 for igual a zero pula para PulaCursor1
@@ -265,7 +182,6 @@ LoopLimpaPersonagens:
 PulaRecuperaPersonagem:
 	addi	t6, t6, 1 		# incrementa contador
 	blt	t6, s4, LoopLimpaPersonagens # se a quantidade maxima for atingida sai da funcao	
-	
 	li	a0, 140 
 	la	t0, Fase
 	lb	t0, 0(t0)
@@ -339,16 +255,109 @@ ProximaFase:
 #	addi	sp, sp, 8 		# desaloca a memoria da pilha
 #	ret
 
-VezDoPC:	# vez do pc ainda n foi implementada. No momento, apenas pula de fase
-	la	t0, Fase
-	lb	t0, 0(t0)
-	addi	t0, t0, 1
-	li	t1, 5
-	bgt	t0, t1, Fase1
-	li	t1, 2
-	beq	t0, t1, Fase2
-	li	t1, 3
-	beq	t0, t1, Fase3
-	li	t1, 4
-	beq	t0, t1, Fase4
-	j	Fase5
+MovimentaPersonagem:
+	addi	sp, sp, -4 	# aloca espaco na pilha
+	sw	ra, 0(sp) 	# salva o ponteiro de retorno
+	lw 	t5, 0(a0)
+	lw 	t6, 4(a0)
+	lw	t0, 0(a1)
+	bne	t5,t0,PulaVerificaIgualdade
+	lw	t0, 4(a1)
+	bne	t6,t0,PulaVerificaIgualdade
+	j	PulaEscolhaEixo
+PulaVerificaIgualdade:
+#	addi	s11,s11,-1
+#	bltz	s11,TipoMovimento2
+#	bnez	s10,PulaDesvioX
+#	addi	t0,a2,4
+#	sw	t0,4(s7)
+#	li	t0, 1			# moveset eh para baixo
+#	sw	t0, 16(s7)
+#	j	FimDesvio
+#PulaDesvioX:
+#	addi	t0,a1,4
+#	sw	t0,0(s7)
+#	li	t0, 2			# moveset eh para direita
+#	sw	t0, 16(s7)		# atualiza o estado do personagem
+#FimDesvio:
+#	j	PulaEscolhaEixo
+#TipoMovimento2:
+	bnez	s10,PulaEixoX
+	lw	t0, 0(a1)		# t0 <- x do cursor
+	bne	t5,t0,PulaTrocaMovimento1
+	xori	s10,s10,1
+	j	PulaEixoX
+PulaTrocaMovimento1:
+	sub	t0, t0, t5 		# se for negativo a1 eh maior que t0 entao preciso decrementar a1
+	bltz	t0, PulaEixoXPositivo	# x personagem > x cursor ? pula : move para a direita
+	#	aqui so entra se t0 for positivo quer dizer que o idle eh para a direita e preciso incrementar
+	addi	t5, t5, 4		# personagem move 4 pixeis para a direita
+#	li	a6,1
+#	call	VerificaColisao
+#	beqz	a0,PulaTratamentoColisao1
+#	li	s11,4
+#	j	LoopGame
+#PulaTratamentoColisao1:
+	sw	t5, 0(a0)		# atualiza struct de posicao do personagem
+	li	t0, 2			# moveset eh para direita
+	sw	t0, 16(a0)		# atualiza o estado do personagem	
+	j	PulaEscolhaEixo
+PulaEixoXPositivo:
+	addi	t5, t5, -4		# personagem move 4 pixeis para a esquerda ("-4 para a direita")
+#	li	a6,3
+#	call	VerificaColisao
+#	beqz	a0,PulaTratamentoColisao2
+#	li	s11,4
+#	j	LoopGame
+#PulaTratamentoColisao2:
+	sw	t5, 0(a0)		
+	li	t0, 3			# moveset eh para esquerda
+	sw	t0, 16(a0)	
+	j	PulaEscolhaEixo
+PulaEixoX:	# Repete-se aqui, no eixo Y, o que foi feito no X
+	beqz	s10,PulaEscolhaEixo
+	lw	t0, 4(a1)
+	bne	t6,t0,PulaTrocaMovimento2
+	xori	s10,s10,1
+	j	LoopGame
+PulaTrocaMovimento2:
+	sub	t0, t0, t6 		# se for negativo a1 eh maior que t0 entao preciso decrementar a1
+	bltz	t0, PulaEixoYPositivo	
+	addi	t6, t6, 4		# personagem move 4 pixeis para baixo
+#	li	a6,2
+#	call	VerificaColisao
+#	beqz	a0,PulaTratamentoColisao3
+#	li	s11,4
+#	j	LoopGame
+#PulaTratamentoColisao3:
+	sw	t6, 4(a0)
+	li	t0, 1			# moveset eh para baixo
+	sw	t0, 16(a0)	
+	j	PulaEscolhaEixo
+PulaEixoYPositivo:
+	addi	t6, t6, -4		# personagem move 4 pixeis para a cima ("-4 pixeis para baixo")
+#	li	a6,0
+#	call	VerificaColisao
+#	beqz	a0,PulaTratamentoColisao4
+#	li	s11,4
+#	j	LoopGame
+#PulaTratamentoColisao4:
+	sw	t6, 4(a0)
+	li	t0, 4			# moveset eh para cima
+	sw	t0, 16(a0)		
+PulaEscolhaEixo:
+	lw	t0, 0(a0)
+	lw	t1, 0(a1)
+	bne	t0, t1, FimMovimento	# x personagem =/= x cursor ? mais movimento : verifica x 
+	lw	t0, 4(a0)
+	lw	t1, 4(a1)
+	bne	t0, t1, FimMovimento	# y personagem =/= y cursor ? mais movimento : chegamos ao destino
+	mv	s9, zero		# fim do movimento => s9 = 0
+	sw	zero, 16(a0)		# atualiza o estado do personagem para StandBy
+	li	t0, 1
+	la	t1, MenuAtivado
+	sb	t0, 0(t1)
+FimMovimento:	
+	lw	ra, 0(sp) 		# carrega o valor de ra de sp
+	addi	sp, sp, 4 		# desaloca a memoria da pilha
+	ret 				# volta para quem chamou a funcao
