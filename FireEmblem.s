@@ -72,7 +72,7 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 			9		# classificacao do personagem => 2 = Soldier (2)
 .text
 	#call	Derrota		# teste da derrota
-	call	Vitoria		# teste da vitoria
+	#call	Vitoria		# teste da vitoria
 	
 	call	Fase1
 	call	Fase2
