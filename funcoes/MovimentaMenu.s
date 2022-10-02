@@ -17,7 +17,7 @@ FimMovimentaMenu:
 	addi	sp, sp, 4			# desaloca a memoria da pilha
 	ret					# retorno para a funcao chamadora
 CHAR_ENTER.Menu:
-		la	t0, MenuBatalha
+	la	t0, MenuBatalha
 	lb	t1, 0(t0)
 	beqz	t1, PulaDecideAcao
 	la	t0, MenuBatalha

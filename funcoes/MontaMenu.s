@@ -56,6 +56,7 @@ LoopVerificaPersonagemAtaque:
 	li	t0,6
 	lw	t1,16(a1)
 	bge	t1,t0,Pula4Condicao
+	la	a0,PosicaoAtualCursor
 	lw	t0,0(s8)
 	lw	t1,4(s8)
 	addi	t2,t0,16
@@ -80,7 +81,7 @@ Pula2Condicao:
 Pula3Condicao:
 	addi	t5,t1,-16
 	bne	t0,a1,Pula4Condicao
-	bne	t4,a2,Pula4Condicao
+	bne	t5,a2,Pula4Condicao
 	li	s10,2
 	j	FimVerificaAtaque
 Pula4Condicao:

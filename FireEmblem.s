@@ -13,6 +13,10 @@ noteCounter:	.word	0	# quantidade de notas tocadas
 # Cor do menu de batalha #
 MenuBatalha:	.byte	0, 255
 
+# posicao Ficticia Cursor
+
+PosicaoInimigo: .word 0, 0
+
 # posicoes em quantidade de pulos 16x16
 PosicaoAtualCursor: 	.word 0, 0
 PosicaoAnteriorCursor: 	.word 0, 0	# mudei esse aqui so de zueira / aqui não tem brincadeira >:(

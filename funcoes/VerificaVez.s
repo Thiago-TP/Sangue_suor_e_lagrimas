@@ -15,34 +15,41 @@ VerificaVez:
 	addi	sp, sp, -4 	# aloca espaco na pilha
 	sw	ra, 0(sp) 	# salva o ponteiro de retorno
 	li	t5, 5
+	la	t0, Vez
+	lb	t0, 0(t0)
+	bnez	t0,ComecoVerificaCinzaInimigo
 	mv	t6, zero
 LoopVerificaCinzaAliado:
 	mv	a7, t6
 	call	EscolhePersonagem # retorna em a1
 	lb	t4, 16(a1)
-	bne	t4, t5, fimVerificaAliado
+	blt	t4, t5, fimVerificaVez
 	addi	t6, t6, 2
 	blt	t6, s4, LoopVerificaCinzaAliado
 	li	t1,1
 	j	VezMuda
-fimVerificaAliado:
+ComecoVerificaCinzaInimigo:
 	li	t6, 1
 LoopVerificaCinzaInimigo:
 	mv	a7,t6
 	call	EscolhePersonagem # retorna em a1
 	lb	t4, 16(a1)
-	bne	t4,t5,fimVerificaVez
+	blt	t4,t5,fimVerificaVez
 	addi	t6, t6, 2
 	blt	t6,s4,LoopVerificaCinzaInimigo
 	li	t1,0
 VezMuda:
-	bnez	t1,PulaResetaAliado
+	li	t5,6
+	beqz	t1,PulaResetaAliado
 	mv	t6, zero
 LoopResetaCinzaAliado:
 	mv	a7, t6
 	call	EscolhePersonagem # retorna em a1
+	lw	t4, 16(a1)
+	bge	t4, t5, PulaResetaMortoAlido
 	li	t4, 0
 	sb	t4, 16(a1)
+PulaResetaMortoAlido:
 	addi	t6, t6, 2
 	blt	t6, s4, LoopResetaCinzaAliado
 	j	FimResetaCinza
@@ -51,8 +58,11 @@ PulaResetaAliado:
 LoopResetaCinzaInimigo:
 	mv	a7, t6
 	call	EscolhePersonagem # retorna em a1
+	lw	t4, 16(a1)
+	bge	t4, t5, PulaResetaMortoInimigo
 	li	t4, 0
 	sb	t4, 16(a1)
+PulaResetaMortoInimigo:
 	addi	t6, t6, 2
 	blt	t6, s4, LoopResetaCinzaInimigo
 FimResetaCinza:	
