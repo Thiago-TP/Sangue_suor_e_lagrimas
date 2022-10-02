@@ -16,8 +16,16 @@ midiDano:
 	li	a1, 20		# duracao em ms
 	li	a2, 2		# instrumento
 	li 	a3, 80		# volume/127
-	#call	midiOut		# midiOut so funciona na FPGA
+	
+	la	t0, FPGA
+	lb	t0, 0(t0)
+	li	t1, 1
+	bne	t0, t1, pulamidiOutDano
+	call	midiOut		# midiOut so funciona na FPGA
+	j	pulaecallDano
+pulamidiOutDano:
 	ecall			# ecall so nao funciona na FPGA
+pulaecallDano:
 	
 	lw	a0, 0(sp)	# recuperacao dos regs usados
 	lw	a1, 4(sp)

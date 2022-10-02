@@ -35,8 +35,15 @@ SFXcrit:
 SFXerro:
 	li	a2, 126		# instrumento do erro
 SFX:
-	#call	midiOut		# midiOut so funciona na FPGA
+	la	t0, FPGA
+	lb	t0, 0(t0)
+	li	t1, 1
+	bne	t0, t1, pulamidiOutAtaque
+	call	midiOut		# midiOut so funciona na FPGA
+	j	pulaecallAtaque
+pulamidiOutAtaque:
 	ecall			# ecall so nao funciona na FPGA
+pulaecallAtaque:
 	li	a0, 296
 	call	Sleep
 	

@@ -93,8 +93,16 @@ fimEscolheTrack:
 	lw 	a0, 0(t5)		# le o valor da nota
 	li 	a3, 80			# define o volume
 	li 	a7, 31			# define a chamada de syscall (trocar quando for usar FPGA)
-	ecall				# toca a nota
-	#call	midiOut
+	
+	la	t0, FPGA
+	lb	t0, 0(t0)
+	li	t1, 1
+	bne	t0, t1, pulamidiOutMusica
+	call	midiOut		# midiOut so funciona na FPGA
+	j	pulaecallMusica
+pulamidiOutMusica:
+	ecall			# ecall so nao funciona na FPGA
+pulaecallMusica:
 	
 	j 	pulaNota		# volta ao loop do jogo
 musicEnd:				# musica acabou -> tocamos tudo de novo

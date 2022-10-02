@@ -21,8 +21,15 @@ midiSeta:
 	li	a2, 40		# instrumento da seta 
 	li 	a3, 70		# volume/127
 fimMidi:		
-	ecall			# toca a nota
-	#call 	midiOut		# toca a nota (funciona apenas na fpga)
+	la	t0, FPGA
+	lb	t0, 0(t0)
+	li	t1, 1
+	bne	t0, t1, pulamidiOutTexto
+	call	midiOut		# midiOut so funciona na FPGA
+	j	pulaecallTexto
+pulamidiOutTexto:
+	ecall			# ecall so nao funciona na FPGA
+pulaecallTexto:
 	# sleep para cada char
 	li	a0, 30
 	call	Sleep		# sleep versao FPGA/fpgrars

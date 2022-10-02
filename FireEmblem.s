@@ -1,4 +1,5 @@
 .data
+FPGA:		.byte	0		#  1 => FPGA  
 guardaSP:	.word 	0x00000000	# precisei disso pra guardar o sp certo na hora de retornar do Fase1.s
 
 AtaqueAtivado:	.byte	0
