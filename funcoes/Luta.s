@@ -82,53 +82,25 @@ Luta:
 	call	PrintByte
 		
 	call	SimboloSetas		
-	# 1 ataque do jogador
-	# mensagem
-	la	a0, VoceAtacou	# a0 <- "Voce atacou!"
-	li	a1, 112		# x
-	li	a2, 116		# y
-	li	a3, 0x0000ff00	# cor
-	li	a4, 0		# frame
-	call	printString	# impressao da mensagem
-	# ataque em si
-	lb	a0, 21(s0)	# a0 <- tipo de arma do jogador
-	lb	a1, 21(s1)	# a1 <- tipo de arma do pc
-	call	Ataque		# a0 <- dano
-	li	t0, 0
-	call	TerrenoEspecial	# modifica o dano de acordo com a posicao do atacante no mapa
-	call	AtualizaLuta
-	# atualizacao da barra de vida do PC
-	lb	s2, 20(s1)	# s2 <- vida atual do pc
-	li	a1, 1		# a1 = 1 => barra direita
-	call	AtualizaHP	# imprime barra e numero de HP pos ataque
-				# a0 <- vida anterior - dano ou 0
+	
+	la	t0, Vez
+	lb	t0, 0(t0)
+	bnez	t0, PCprimeiro
+	
+	call	AtaqueJogador	
 	sb	a0, 20(s1)	# HP do struct do pc atualizado 
 	beqz	a0, fimLuta
-	# 1 ataque do pc
-	li	a1, 112		# pos em x
-	li	a2, 116		# pos em y
-	li	a3, 96		# largura
-	li	a4, 8		# altura
-	call	CobreMensagem	# cobre a mensagem anterior
-	la	a0, PcAtacou	# a0 <- "O inimigo atacou!"
-	li	a1, 92		# x
-	li	a2, 116		# y
-	li	a3, 0x0000ff00	# cor
-	li	a4, 0		# frame
-	call	printString	# impressao da mensagem
-	# ataque em si
-	lb	a0, 21(s1)	# a0 <- tipo de arma do pc
-	lb	a1, 21(s0)	# a1 <- tipo de arma do jogador
-	call	Ataque		# a0 <- dano
-	li	t0, 1
-	call	TerrenoEspecial	# modifica o dano de acordo com a posicao do atacante no mapa
-	call	AtualizaLuta
-	# atualizacao da barra de vida do jogador
-	lb	s2, 20(s0)	# s2 <- vida atual do jogador
-	li	a1, 0		# a1 = 0 => barra esquerda
-	call	AtualizaHP	# imprime barra e numero de HP pos ataque
-				# a0 <- vida anterior - dano
+	
+	call	AtaquePC
+	sb	a0, 20(s0)	# HP do struct do jogador atualizado
+	j	fimLuta
+PCprimeiro:
+	call	AtaquePC	
 	sb	a0, 20(s0)	# HP do struct do jogador atualizado 
+	beqz	a0, fimLuta
+	
+	call	AtaqueJogador
+	sb	a0, 20(s1)	# HP do struct do pc atualizado
 fimLuta:
 	lb	t0, 20(s0)
 	bnez	t0, PulaMorte1
@@ -160,3 +132,68 @@ PulaMorte2:
 	lw	s2, 32(sp)
 	addi	sp, sp, 36
 	ret	
+
+# 1 ataque do jogador
+AtaqueJogador:
+	addi	sp, sp, -4
+	sw	ra, 0(sp)	
+	# mensagem
+	li	a1, 92		# pos em x
+	li	a2, 116		# pos em y
+	li	a3, 136		# largura
+	li	a4, 8		# altura
+	call	CobreMensagem	# cobre a mensagem anterior ("O inimigo atacou!")
+	la	a0, VoceAtacou	# a0 <- "Voce atacou!"
+	li	a1, 112		# x
+	li	a2, 116		# y
+	li	a3, 0x0000ff00	# cor
+	li	a4, 0		# frame
+	call	printString	# impressao da mensagem
+	# ataque em si
+	lb	a0, 21(s0)	# a0 <- tipo de arma do jogador
+	lb	a1, 21(s1)	# a1 <- tipo de arma do pc
+	call	Ataque		# a0 <- dano
+	li	t0, 0
+	call	TerrenoEspecial	# modifica o dano de acordo com a posicao do atacante no mapa
+	call	AtualizaLuta
+	# atualizacao da barra de vida do PC
+	lb	s2, 20(s1)	# s2 <- vida atual do pc
+	li	a1, 1		# a1 = 1 => barra direita
+	call	AtualizaHP	# imprime barra e numero de HP pos ataque
+				# a0 <- vida anterior - dano ou 0
+	lw	ra, 0(sp)
+	addi	sp, sp, 4
+	ret
+
+# 1 ataque do pc
+AtaquePC:
+	addi	sp, sp, -4
+	sw	ra, 0(sp)
+
+	li	a1, 112		# pos em x
+	li	a2, 116		# pos em y
+	li	a3, 96		# largura
+	li	a4, 8		# altura
+	call	CobreMensagem	# cobre a mensagem anterior ("Voce atacou!")
+	la	a0, PcAtacou	# a0 <- "O inimigo atacou!"
+	li	a1, 92		# x
+	li	a2, 116		# y
+	li	a3, 0x0000ff00	# cor
+	li	a4, 0		# frame
+	call	printString	# impressao da mensagem
+	# ataque em si
+	lb	a0, 21(s1)	# a0 <- tipo de arma do pc
+	lb	a1, 21(s0)	# a1 <- tipo de arma do jogador
+	call	Ataque		# a0 <- dano
+	li	t0, 1
+	call	TerrenoEspecial	# modifica o dano de acordo com a posicao do atacante no mapa
+	call	AtualizaLuta
+	# atualizacao da barra de vida do jogador
+	lb	s2, 20(s0)	# s2 <- vida atual do jogador
+	li	a1, 0		# a1 = 0 => barra esquerda
+	call	AtualizaHP	# imprime barra e numero de HP pos ataque
+				# a0 <- vida anterior - dano
+	lw	ra, 0(sp)
+	addi	sp, sp, 4
+	ret
+	 
