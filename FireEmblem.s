@@ -72,11 +72,9 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 			2,		# tipo de arma => 2 = lanca
 			9		# classificacao do personagem => 2 = Soldier (2)
 .text
-<<<<<<< HEAD
+
 	#call	Derrota		# teste da derrota
 	#call	Vitoria		# teste da vitoria
-=======
->>>>>>> 99b33fb (integra luta aliado)
 	
 	call	Fase1
 	call	Fase2
@@ -175,13 +173,11 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 .include "funcoes/MontaMenu2.s"
 
 .data
-<<<<<<< HEAD
+
 .include "sprites/personagens/LamarVitoria.data"
 .include "sprites/personagens/LamarVitoria2.data"
 .include "sprites/personagens/LamarDerrota.data"
-=======
 
->>>>>>> 99b33fb (integra luta aliado)
 .include "sprites/numeros/numzero.data"
 .include "sprites/numeros/um.data"
 .include "sprites/numeros/dois.data"
