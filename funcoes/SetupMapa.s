@@ -171,8 +171,91 @@ LoopSalvaSprites:
 	li	t1, 6
 	lw	t0, 16(a1)
 	bge	t0,t1,PulaSalvamentoPersonagem
+	li	t1,7
+	lb	t0,22(a1)
+	bne	t0,t1,PulaArrumaBrigand2.Salva
+	j	PulaBrigand2.Salva
+PulaArrumaBrigand2.Salva:
+	li	t1,1
+	bne	t0,t1,PulaArrumaBrigand.Salva
+PulaBrigand2.Salva:
+	lw	t0,16(a1)
+	li	t1,5
+	bne	t0,t1,PulaConcertoBrigandCinza.Salva
+	li	t0,10
+	j	FimEscolheAlturaBrigand.Salva
+PulaConcertoBrigandCinza.Salva:
+	bnez	t0,PulaConcertoBrigandStandBy.Salva
+	li	t0,10
+	j	FimEscolheAlturaBrigand.Salva
+PulaConcertoBrigandStandBy.Salva:
+	li	t0,10
+FimEscolheAlturaBrigand.Salva:
 	lw	a2, 12(a1) 		# carrega y
 	lw	a1, 8(a1) 		# carrega x
+	sub	a2,a2,t0
+	j	FimConcerto.Salva
+PulaArrumaBrigand.Salva:
+	li	t1,6
+	bne	t0,t1,PulaArrumaDart.Salva
+	lw	t0,16(a1)
+	li	t1,5
+	bne	t0,t1,PulaConcertoDartCinza.Salva
+	li	t0,10
+	j	FimEscolheAlturaDart.Salva
+PulaConcertoDartCinza.Salva:
+	bnez	t0,PulaConcertoDartStandBy.Salva
+	li	t0,10
+	j	FimEscolheAlturaDart.Salva
+PulaConcertoDartStandBy.Salva:
+	li	t0,10
+FimEscolheAlturaDart.Salva:
+	lw	a2, 12(a1) 		# carrega y
+	lw	a1, 8(a1) 		# carrega x
+	sub	a2,a2,t0
+	j	FimConcerto.Salva
+PulaArrumaDart.Salva:
+	li	t1,4
+	bne	t0,t1,PulaArrumaDorcas.Salva
+	lw	t0,16(a1)
+	li	t1,5
+	bne	t0,t1,PulaConcertoDorcasCinza.Salva
+	li	t0,10
+	j	FimEscolheAlturaDorcas.Salva
+PulaConcertoDorcasCinza.Salva:
+	bnez	t0,PulaConcertoDorcasStandBy.Salva
+	li	t0,10
+	j	FimEscolheAlturaDorcas.Salva
+PulaConcertoDorcasStandBy.Salva:
+	li	t0,10
+FimEscolheAlturaDorcas.Salva:
+	lw	a2, 12(a1) 		# carrega y
+	lw	a1, 8(a1) 		# carrega x
+	sub	a2,a2,t0
+	j	FimConcerto.Salva
+PulaArrumaDorcas.Salva:
+	li	t1,8
+	bne	t0,t1,PulaArrumaSain.Salva
+	lw	t0,16(a1)
+	li	t1,5
+	bne	t0,t1,PulaConcertoSainCinza.Salva
+	li	t0,10
+	j	FimEscolheAlturaSain.Salva
+PulaConcertoSainCinza.Salva:
+	bnez	t0,PulaConcertoSainStandBy.Salva
+	li	t0,10
+	j	FimEscolheAlturaSain.Salva
+PulaConcertoSainStandBy.Salva:
+	li	t0,10
+FimEscolheAlturaSain.Salva:
+	lw	a2, 12(a1) 		# carrega y
+	lw	a1, 8(a1) 		# carrega x
+	sub	a2,a2,t0
+	j	FimConcerto.Salva
+PulaArrumaSain.Salva:
+	lw	a2, 12(a1) 		# carrega y
+	lw	a1, 8(a1) 		# carrega x
+FimConcerto.Salva:
 	li	a4, 28
 	li	a5, 28
 	call	SalvaSprite
@@ -187,10 +270,95 @@ LoopRecuperaArgumentos:
 	mv	a7, t6
 	call 	EscolhePersonagem 	# retorna em a1 o personagem da vez :)
 	lw	t0, 16(a1)
+	mv	a7, t0
 	li	t1,6
 	bge	t0,t1,FinalEscolhaPrint
+	li	t1,7
+	lb	t0,22(a1)
+	bne	t0,t1,PulaArrumaBrigand2
+	j	PulaBrigand2
+PulaArrumaBrigand2:
+	li	t1,1
+	bne	t0,t1,PulaArrumaBrigand
+PulaBrigand2:
+	lw	t0,16(a1)
+	li	t1,5
+	bne	t0,t1,PulaConcertoBrigandCinza
+	li	t0,3
+	j	FimEscolheAlturaBrigand
+PulaConcertoBrigandCinza:
+	bnez	t0,PulaConcertoBrigandStandBy
+	li	t0,3
+	j	FimEscolheAlturaBrigand
+PulaConcertoBrigandStandBy:
+	li	t0,10
+FimEscolheAlturaBrigand:
 	lw	a2, 4(a1) 		# carrega y
 	lw	a1, 0(a1) 		# carrega x
+	sub	a2,a2,t0
+	j	FimConcerto
+PulaArrumaBrigand:
+	li	t1,6
+	bne	t0,t1,PulaArrumaDart
+	lw	t0,16(a1)
+	li	t1,5
+	bne	t0,t1,PulaConcertoDartCinza
+	li	t0,7
+	j	FimEscolheAlturaDart
+PulaConcertoDartCinza:
+	bnez	t0,PulaConcertoDartStandBy
+	li	t0,7
+	j	FimEscolheAlturaDart
+PulaConcertoDartStandBy:
+	li	t0,10
+FimEscolheAlturaDart:
+	lw	a2, 4(a1) 		# carrega y
+	lw	a1, 0(a1) 		# carrega x
+	sub	a2,a2,t0
+	j	FimConcerto
+PulaArrumaDart:
+	li	t1,4
+	bne	t0,t1,PulaArrumaDorcas
+	lw	t0,16(a1)
+	li	t1,5
+	bne	t0,t1,PulaConcertoDorcasCinza
+	li	t0,7
+	j	FimEscolheAlturaDorcas
+PulaConcertoDorcasCinza:
+	bnez	t0,PulaConcertoDorcasStandBy
+	li	t0,7
+	j	FimEscolheAlturaDorcas
+PulaConcertoDorcasStandBy:
+	li	t0,10
+FimEscolheAlturaDorcas:
+	lw	a2, 4(a1) 		# carrega y
+	lw	a1, 0(a1) 		# carrega x
+	sub	a2,a2,t0
+	j	FimConcerto
+PulaArrumaDorcas:
+	li	t1,8
+	bne	t0,t1,PulaArrumaSain
+	lw	t0,16(a1)
+	li	t1,5
+	bne	t0,t1,PulaConcertoSainCinza
+	li	t0,5
+	j	FimEscolheAlturaSain
+PulaConcertoSainCinza:
+	bnez	t0,PulaConcertoSainStandBy
+	li	t0,5
+	j	FimEscolheAlturaSain
+PulaConcertoSainStandBy:
+	li	t0,10
+FimEscolheAlturaSain:
+	lw	a2, 4(a1) 		# carrega y
+	lw	a1, 0(a1) 		# carrega x
+	sub	a2,a2,t0
+	j	FimConcerto
+PulaArrumaSain:
+	lw	a2, 4(a1) 		# carrega y
+	lw	a1, 0(a1) 		# carrega x
+FimConcerto:
+	mv	t0,a7
 	li	t1, 5
 	bltu	t0, t1, colorido
 	li	a4, 1
@@ -205,6 +373,9 @@ PulaEscolhaPrint:
 FinalEscolhaPrint:
 	addi	t6, t6, 1 		# incrementa o contador
 	blt	t6, s4, LoopRecuperaArgumentos # se a quantidade maxima for atingida sai da funcao
+	la	t0, Vez
+	lb	t1, 0(t0)
+	bnez	t1,PulaImprimeMenu
 	la	t0, MenuAtivado
 	lb	t1, 0(t0)
 	bnez	t1, PulaImprimeCursor
@@ -244,8 +415,91 @@ LoopLimpaPersonagens:
 	li	t1,6
 	bge	t0,t1,PulaRecuperaPersonagem
 	mv	t2, a1
+	li	t1,7
+	lb	t0,22(a1)
+	bne	t0,t1,PulaArrumaBrigand2.Recupera
+	j	PulaBrigand2.Recupera
+PulaArrumaBrigand2.Recupera:
+	li	t1,1
+	bne	t0,t1,PulaArrumaBrigand.Recupera
+PulaBrigand2.Recupera:
+	lw	t0,16(a1)
+	li	t1,5
+	bne	t0,t1,PulaConcertoBrigandCinza.Recupera
+	li	t0,10
+	j	FimEscolheAlturaBrigand.Recupera
+PulaConcertoBrigandCinza.Recupera:
+	bnez	t0,PulaConcertoBrigandStandBy.Recupera
+	li	t0,10
+	j	FimEscolheAlturaBrigand.Recupera
+PulaConcertoBrigandStandBy.Recupera:
+	li	t0,10
+FimEscolheAlturaBrigand.Recupera:
 	lw	a2, 12(a1) 		# carrega y
 	lw	a1, 8(a1) 		# carrega x
+	sub	a2,a2,t0
+	j	FimConcerto.Recupera
+PulaArrumaBrigand.Recupera:
+	li	t1,6
+	bne	t0,t1,PulaArrumaDart.Recupera
+	lw	t0,16(a1)
+	li	t1,5
+	bne	t0,t1,PulaConcertoDartCinza.Recupera
+	li	t0,10
+	j	FimEscolheAlturaDart.Recupera
+PulaConcertoDartCinza.Recupera:
+	bnez	t0,PulaConcertoDartStandBy.Recupera
+	li	t0,10
+	j	FimEscolheAlturaDart.Recupera
+PulaConcertoDartStandBy.Recupera:
+	li	t0,10
+FimEscolheAlturaDart.Recupera:
+	lw	a2, 12(a1) 		# carrega y
+	lw	a1, 8(a1) 		# carrega x
+	sub	a2,a2,t0
+	j	FimConcerto.Recupera
+PulaArrumaDart.Recupera:
+	li	t1,4
+	bne	t0,t1,PulaArrumaDorcas.Recupera
+	lw	t0,16(a1)
+	li	t1,5
+	bne	t0,t1,PulaConcertoDorcasCinza.Recupera
+	li	t0,10
+	j	FimEscolheAlturaDorcas.Recupera
+PulaConcertoDorcasCinza.Recupera:
+	bnez	t0,PulaConcertoDorcasStandBy.Recupera
+	li	t0,10
+	j	FimEscolheAlturaDorcas.Recupera
+PulaConcertoDorcasStandBy.Recupera:
+	li	t0,10
+FimEscolheAlturaDorcas.Recupera:
+	lw	a2, 12(a1) 		# carrega y
+	lw	a1, 8(a1) 		# carrega x
+	sub	a2,a2,t0
+	j	FimConcerto.Recupera
+PulaArrumaDorcas.Recupera:
+	li	t1,8
+	bne	t0,t1,PulaArrumaSain.Recupera
+	lw	t0,16(a1)
+	li	t1,5
+	bne	t0,t1,PulaConcertoSainCinza.Recupera
+	li	t0,10
+	j	FimEscolheAlturaSain.Recupera
+PulaConcertoSainCinza.Recupera:
+	bnez	t0,PulaConcertoSainStandBy.Recupera
+	li	t0,10
+	j	FimEscolheAlturaSain.Recupera
+PulaConcertoSainStandBy.Recupera:
+	li	t0,10
+FimEscolheAlturaSain.Recupera:
+	lw	a2, 12(a1) 		# carrega y
+	lw	a1, 8(a1) 		# carrega x
+	sub	a2,a2,t0
+	j	FimConcerto.Recupera
+PulaArrumaSain.Recupera:
+	lw	a2, 12(a1) 		# carrega y
+	lw	a1, 8(a1) 		# carrega x
+FimConcerto.Recupera:
 	lw	t0, 0(t2)
 	lw	t1, 4(t2)
 	sw	t0, 8(t2)
@@ -297,32 +551,24 @@ LoopAtaqueOportunoInimigo1:
 	lw	t0, 0(a1)
 	lw	t1, 4(a1)
 	addi	t4,t2,-16
-	# verifica esquerda
 	bne	t4,t0,PulaVerificaEsquerda1
 	bne	t3,t1,PulaVerificaEsquerda1
 	j	FinalizaAtaqueOportunoInimigo1
-	#	se passar dessas duas condições é porque aquele personagem estava lá
 PulaVerificaEsquerda1:
 	addi	t4,t2,16
-	# verifica direita
 	bne	t4,t0,PulaVerificaDireita1
 	bne	t3,t1,PulaVerificaDireita1
 	j	FinalizaAtaqueOportunoInimigo1
-	#	se passar dessas duas condições é porque aquele personagem estava lá
 PulaVerificaDireita1:
 	addi	t5,t3,-16
-	# verifica cima
 	bne	t2,t0,PulaVerificaCima1
 	bne	t5,t1,PulaVerificaCima1
 	j	FinalizaAtaqueOportunoInimigo1
-	#	se passar dessas duas condições é porque aquele personagem estava lá
 PulaVerificaCima1:
 	addi	t5,t3,16
-	# verifica baixo
 	bne	t2,t0,PulaVerificaBaixo1
 	bne	t5,t1,PulaVerificaBaixo1
 	j	FinalizaAtaqueOportunoInimigo1
-	#	se passar dessas duas condições é porque aquele personagem estava lá
 PulaVerificaBaixo1:
 	addi	t6,t6,2
 	blt	t6,s4,LoopAtaqueOportunoInimigo1
@@ -436,6 +682,7 @@ FinalizaAtaqueOportunoInimigo2:
 	mv	a0,a1
 	mv	a1,s7
 	call	Luta
+	j	FimMovimento
 PulaAcaoOportunoInimigo2:
 	li	t0, 5
 	sw	t0, 16(s7)

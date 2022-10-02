@@ -70,9 +70,9 @@ PulaTileVermelho:
 	ble	t6, s4, LoopVerificaInimigo.AreaMov	# verifico se o contador eh diferente de s4 e se for volto pro Loop	
 ImprimeTile:
 	li	a3, 1 						
-	call 	PrintByte					
+	call 	PRINT					
 	li	a3, 0						
-	call 	PrintByte				
+	call 	PRINT				
 PulaEssaInteracaoX:
 	addi	a1, a1, 16 			# adiciono 16 em a1 para ir para o proximo quadrado em x
 	addi	t0, a6, 80 			# limite superior da condicao abaixo  
