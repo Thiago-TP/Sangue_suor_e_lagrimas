@@ -21,6 +21,7 @@ SetupMapa:
 	mv	s10,zero
 	mv	s11,zero
 LoopGame: 
+		
 	################ testes de funcoes de controle ####################
 	#call	VerificaWin	# Win <- 1 se for PC morreu
 	#la	t0, Win
@@ -37,23 +38,99 @@ LoopGame:
 	la	t0, Vez
 	lb	t0, 0(t0)
 	beqz	t0, PulaVezPC	# Vez = 1 ? PC joga (vez do PC ainda nao foi implementada)
-	
-	#################################################
-	#	aqui que implementariamos o vez pc	#
-	#################################################
-	
-	# aqui é onde faria a logica do pc #
-	# fazer a movimentação de cada personagem inimigo #
-	# buscando sempre o ataque e se não pudermos atingir escolhermos aguardar #
-	
+	bnez	s9, PulaVezPC
+	mv	a7,s11
+	call	EscolhePersonagem # retorna em a1
+	li	t1,6
+	lw	t0, 16(a1)
+	beq	t0,t1,PulaEscolheAtacado
+	la	a0,PosicaoInimigo
+	lw	t2,0(a1)
+	lw	t3,4(a1)
+	sw	t2,0(a0)
+	sw	t3,4(a0)
+	mv	s8,a0
+	li	t6, 1
+	li	s10, 500
+LoopEscolhePersonagemAtacante:
+	mv	a7, t6
+	call	EscolhePersonagem # retorna em a1
+	lw	t0, 16(a1)
+	li	t1, 5
+	bge	t0, t1, PulaTrocaMinimo
+	lw	t0, 0(a1)
+	lw	t1, 4(a1)
+	sub	t4, t2, t0
+	bgez	t4,PulaModuloX
+	sub	t4, zero, t4
+PulaModuloX:
+	sub	t5, t3, t1
+	bgez	t5,PulaModuloY
+	sub	t5, zero, t5
+PulaModuloY:
+	mul	t4, t4, t4
+	mul	t5, t5, t5
+	add	t0, t4, t5
+	fcvt.s.w	ft0, t0
+	fsqrt.s	ft0, ft0
+	fcvt.w.s	t0, ft0
+	bge	t0, s10,PulaTrocaMinimo
+	mv	s10, t0
+	mv	a5, a1
+PulaTrocaMinimo:
+	addi	t6, t6, 2
+	blt	t6, s4, LoopEscolhePersonagemAtacante
+	li	t0,500
+	beq	s10,t0,PulaVezPC
+PulaTratamentoMorteTotal:
+	mv	s7, a5
+	lw	t0, 0(s7)
+	lw	t1, 0(s8)
+	sub	t2, t1, t0
+	bgez	t2,PulaModuloDistX
+	sub	t2, zero, t2
+PulaModuloDistX:
+	li	t3, 64
+	blt	t2, t3, PulaLimiteX
+	sub	t2, t2, t3
+	blt	t1, t0, AdicionaX
+	sub	t1, t1, t2
+	j	FimDecideLimiteX
+AdicionaX:
+	add	t1, t1, t2
+FimDecideLimiteX:
+	sw	t1, 0(s8)
+PulaLimiteX:
+	lw	t0, 4(s7)
+	lw	t1, 4(s8)
+	sub	t2, t1, t0
+	bgez	t2,PulaModuloDistY
+	sub	t2, zero, t2
+PulaModuloDistY:
+	li	t3, 64
+	blt	t2, t3, PulaLimiteY
+	sub	t2, t2, t3
+	blt	t1, t0, AdicionaY
+	sub	t1, t1, t2
+	j	FimDecideLimiteY
+AdicionaY:
+	add	t1, t1, t2
+FimDecideLimiteY:
+	sw	t1, 4(s8)
+PulaLimiteY:	
+	li	s9, 1
+	mv	s10, zero
+PulaEscolheAtacado:
+	addi	s11, s11, 2
+	blt	s11,s4,PulaVezPC
+	mv	s11,zero
 PulaVezPC:
 	beqz	s9, PulaMovimento
-	mv	a0,s7
-	mv	a1,s8
 	call 	MovimentaPersonagem
 	la	t0, Vez
 	lb	t0, 0(t0)
 	bnez	t0,PulaMovimentaMenu
+	mv	s11,zero
 PulaMovimento:
 	bnez	s9, PulaMovimentaMenu	# enquanto o personagem se move, o cursor permanece congelado
 	la	t0, MenuAtivado
@@ -131,9 +208,6 @@ FinalEscolhaPrint:
 	la	t0, MenuAtivado
 	lb	t1, 0(t0)
 	bnez	t1, PulaImprimeCursor
-	la	t0, Vez
-	lb	t1, 0(t0)
-	bnez	t1, PulaImprimeMenu
 	li	t0, 2			# carrego 2 em t0 para fazer o resto de a0 / 2
 	rem	t0, s0, t0		# uso resto 2 para escolher entre as duas sprites (generalizavel para todas)
 	bnez	t0, PulaCursor1		# se t0 for igual a zero pula para PulaCursor1
@@ -205,85 +279,73 @@ ProximaFase:
 	addi	sp, sp, 4 		# desaloca a memoria da pilha
 	ret 				# volta para quem chamou a funcao
 
-#VerificaColisao:
-#	addi	sp, sp, -8 	# aloca espaco na pilha
-#	sw	ra, 0(sp) 	# salva o ponteiro de retorno
-#	sw	a1, 4(sp)
-#	lw	t4,0(s7)
-#	lw	t5,4(s7)
-#	bnez 	a6,PulaColisaoCima
-#	addi	t5,t5,-16
-	#	verificar a colisão com paredes seria facil só precisariamos aqui 
-	#	vê o tile map e nessa posição e vermos se ela é uma parede ou não
-#	j	ComecoLoopVerificaColisao
-#PulaColisaoCima:
-#	li 	t0,1
-#	bne 	a6,t0,PulaColisaoDireita
-#	addi	t4,t4,16
-	#	verificar a colisão com paredes seria facil só precisariamos aqui 
-	#	vê o tile map e nessa posição e vermos se ela é uma parede ou não
-#	j	ComecoLoopVerificaColisao
-#PulaColisaoDireita:
-#	li 	t0,2
-#	bne	a6,t0,PulaColisaoBaixo
-#	addi	t5,t5,16
-	#	verificar a colisão com paredes seria facil só precisariamos aqui 
-	#	vê o tile map e nessa posição e vermos se ela é uma parede ou não
-#	j	ComecoLoopVerificaColisao
-#PulaColisaoBaixo:
-#	addi	t4,t4,-16
-	#	verificar a colisão com paredes seria facil só precisariamos aqui 
-	#	vê o tile map e nessa posição e vermos se ela é uma parede ou não
-#ComecoLoopVerificaColisao:
-#	mv	t6,zero
-#	mv	a0,zero
-#	LoopVerificaColisao:
-#	mv	a7, t6
-#	call 	EscolhePersonagem 	# carrega em a1 a posicao que queremos 
-#	lw	t2,0(a1)
-#	bne	t2,t4,PulaPosicaoPersonagem
-#	lw	t3,4(a1)
-#	bne	t3,t5,PulaPosicaoPersonagem
-#	li	a0,1
-#	j	FimLoopVerificaColisao
-#PulaPosicaoPersonagem:
-#	addi	t6, t6, 1 		# incrementa contador
-#	blt	t6, s4, LoopVerificaColisao # se a quantidade maxima for atingida sai da funcao
-#FimLoopVerificaColisao:
-#	lw	ra, 0(sp) 		# carrega o valor de ra de sp
-#	lw	a1, 4(sp)
-#	addi	sp, sp, 8 		# desaloca a memoria da pilha
-#	ret
-
 MovimentaPersonagem:
 	addi	sp, sp, -4 	# aloca espaco na pilha
 	sw	ra, 0(sp) 	# salva o ponteiro de retorno
-	lw 	t5, 0(a0)
-	lw 	t6, 4(a0)
+	la	t2, Vez
+	lb	t3, 0(t2)
+	beqz	t3,PulaAcaoOportunoInimigo1	
+	lw	t2, 0(s7)
+	lw	t3, 4(s7)
+	mv	t6, zero
+LoopAtaqueOportunoInimigo1:
+	mv	a7,t6
+	call 	EscolhePersonagem
+	li	t0,6
+	lw	t1,16(a1)
+	bge	t1,t0,PulaVerificaBaixo1
 	lw	t0, 0(a1)
+	lw	t1, 4(a1)
+	addi	t4,t2,-16
+	# verifica esquerda
+	bne	t4,t0,PulaVerificaEsquerda1
+	bne	t3,t1,PulaVerificaEsquerda1
+	j	FinalizaAtaqueOportunoInimigo1
+	#	se passar dessas duas condições é porque aquele personagem estava lá
+PulaVerificaEsquerda1:
+	addi	t4,t2,16
+	# verifica direita
+	bne	t4,t0,PulaVerificaDireita1
+	bne	t3,t1,PulaVerificaDireita1
+	j	FinalizaAtaqueOportunoInimigo1
+	#	se passar dessas duas condições é porque aquele personagem estava lá
+PulaVerificaDireita1:
+	addi	t5,t3,-16
+	# verifica cima
+	bne	t2,t0,PulaVerificaCima1
+	bne	t5,t1,PulaVerificaCima1
+	j	FinalizaAtaqueOportunoInimigo1
+	#	se passar dessas duas condições é porque aquele personagem estava lá
+PulaVerificaCima1:
+	addi	t5,t3,16
+	# verifica baixo
+	bne	t2,t0,PulaVerificaBaixo1
+	bne	t5,t1,PulaVerificaBaixo1
+	j	FinalizaAtaqueOportunoInimigo1
+	#	se passar dessas duas condições é porque aquele personagem estava lá
+PulaVerificaBaixo1:
+	addi	t6,t6,2
+	blt	t6,s4,LoopAtaqueOportunoInimigo1
+	j	PulaAcaoOportunoInimigo1
+FinalizaAtaqueOportunoInimigo1:
+	li	t0, 5
+	sw	t0, 16(s7)
+	mv	a0,a1
+	mv	a1,s7
+	call	Luta
+	mv	s9, zero		# fim do movimento => s9 = 0
+	j	PulaEscolhaEixo
+PulaAcaoOportunoInimigo1:
+	lw 	t5, 0(s7)
+	lw 	t6, 4(s7)
+	lw	t0, 0(s8)
 	bne	t5,t0,PulaVerificaIgualdade
-	lw	t0, 4(a1)
+	lw	t0, 4(s8)
 	bne	t6,t0,PulaVerificaIgualdade
 	j	PulaEscolhaEixo
 PulaVerificaIgualdade:
-#	addi	s11,s11,-1
-#	bltz	s11,TipoMovimento2
-#	bnez	s10,PulaDesvioX
-#	addi	t0,a2,4
-#	sw	t0,4(s7)
-#	li	t0, 1			# moveset eh para baixo
-#	sw	t0, 16(s7)
-#	j	FimDesvio
-#PulaDesvioX:
-#	addi	t0,a1,4
-#	sw	t0,0(s7)
-#	li	t0, 2			# moveset eh para direita
-#	sw	t0, 16(s7)		# atualiza o estado do personagem
-#FimDesvio:
-#	j	PulaEscolhaEixo
-#TipoMovimento2:
 	bnez	s10,PulaEixoX
-	lw	t0, 0(a1)		# t0 <- x do cursor
+	lw	t0, 0(s8)		# t0 <- x do cursor
 	bne	t5,t0,PulaTrocaMovimento1
 	xori	s10,s10,1
 	j	PulaEixoX
@@ -292,31 +354,19 @@ PulaTrocaMovimento1:
 	bltz	t0, PulaEixoXPositivo	# x personagem > x cursor ? pula : move para a direita
 	#	aqui so entra se t0 for positivo quer dizer que o idle eh para a direita e preciso incrementar
 	addi	t5, t5, 4		# personagem move 4 pixeis para a direita
-#	li	a6,1
-#	call	VerificaColisao
-#	beqz	a0,PulaTratamentoColisao1
-#	li	s11,4
-#	j	LoopGame
-#PulaTratamentoColisao1:
-	sw	t5, 0(a0)		# atualiza struct de posicao do personagem
+	sw	t5, 0(s7)		# atualiza struct de posicao do personagem
 	li	t0, 2			# moveset eh para direita
-	sw	t0, 16(a0)		# atualiza o estado do personagem	
+	sw	t0, 16(s7)		# atualiza o estado do personagem	
 	j	PulaEscolhaEixo
 PulaEixoXPositivo:
 	addi	t5, t5, -4		# personagem move 4 pixeis para a esquerda ("-4 para a direita")
-#	li	a6,3
-#	call	VerificaColisao
-#	beqz	a0,PulaTratamentoColisao2
-#	li	s11,4
-#	j	LoopGame
-#PulaTratamentoColisao2:
-	sw	t5, 0(a0)		
+	sw	t5, 0(s7)		
 	li	t0, 3			# moveset eh para esquerda
-	sw	t0, 16(a0)	
+	sw	t0, 16(s7)	
 	j	PulaEscolhaEixo
 PulaEixoX:	# Repete-se aqui, no eixo Y, o que foi feito no X
 	beqz	s10,PulaEscolhaEixo
-	lw	t0, 4(a1)
+	lw	t0, 4(s8)
 	bne	t6,t0,PulaTrocaMovimento2
 	xori	s10,s10,1
 	j	LoopGame
@@ -324,36 +374,73 @@ PulaTrocaMovimento2:
 	sub	t0, t0, t6 		# se for negativo a1 eh maior que t0 entao preciso decrementar a1
 	bltz	t0, PulaEixoYPositivo	
 	addi	t6, t6, 4		# personagem move 4 pixeis para baixo
-#	li	a6,2
-#	call	VerificaColisao
-#	beqz	a0,PulaTratamentoColisao3
-#	li	s11,4
-#	j	LoopGame
-#PulaTratamentoColisao3:
-	sw	t6, 4(a0)
+	sw	t6, 4(s7)
 	li	t0, 1			# moveset eh para baixo
-	sw	t0, 16(a0)	
+	sw	t0, 16(s7)	
 	j	PulaEscolhaEixo
 PulaEixoYPositivo:
 	addi	t6, t6, -4		# personagem move 4 pixeis para a cima ("-4 pixeis para baixo")
-#	li	a6,0
-#	call	VerificaColisao
-#	beqz	a0,PulaTratamentoColisao4
-#	li	s11,4
-#	j	LoopGame
-#PulaTratamentoColisao4:
-	sw	t6, 4(a0)
+	sw	t6, 4(s7)
 	li	t0, 4			# moveset eh para cima
-	sw	t0, 16(a0)		
+	sw	t0, 16(s7)		
 PulaEscolhaEixo:
-	lw	t0, 0(a0)
-	lw	t1, 0(a1)
+	lw	t0, 0(s7)
+	lw	t1, 0(s8)
 	bne	t0, t1, FimMovimento	# x personagem =/= x cursor ? mais movimento : verifica x 
-	lw	t0, 4(a0)
-	lw	t1, 4(a1)
+	lw	t0, 4(s7)
+	lw	t1, 4(s8)
 	bne	t0, t1, FimMovimento	# y personagem =/= y cursor ? mais movimento : chegamos ao destino
+	mv	s10,zero
 	mv	s9, zero		# fim do movimento => s9 = 0
-	sw	zero, 16(a0)		# atualiza o estado do personagem para StandBy
+	sw	zero, 16(s7)		# atualiza o estado do personagem para StandBy
+	la	t0, Vez
+	lb	t1, 0(t0)
+	beqz	t1,PulaTransformaInimigoCinza
+	lw	t2, 0(s7)
+	lw	t3, 4(s7)
+	mv	t6, zero
+LoopAtaqueOportunoInimigo2:
+	mv	a7,t6
+	call 	EscolhePersonagem
+	li	t0,6
+	lw	t1,16(a1)
+	bge	t1,t0,PulaVerificaBaixo2
+	lw	t0, 0(a1)
+	lw	t1, 4(a1)
+	addi	t4,t2,-16
+	bne	t4,t0,PulaVerificaEsquerda2
+	bne	t3,t1,PulaVerificaEsquerda2
+	j	FinalizaAtaqueOportunoInimigo2
+PulaVerificaEsquerda2:
+	addi	t4,t2,16
+	bne	t4,t0,PulaVerificaDireita2
+	bne	t3,t1,PulaVerificaDireita2
+	j	FinalizaAtaqueOportunoInimigo2
+PulaVerificaDireita2:
+	addi	t5,t3,-16
+	bne	t2,t0,PulaVerificaCima2
+	bne	t5,t1,PulaVerificaCima2
+	j	FinalizaAtaqueOportunoInimigo2
+PulaVerificaCima2:
+	addi	t5,t3,16
+	bne	t2,t0,PulaVerificaBaixo2
+	bne	t5,t1,PulaVerificaBaixo2
+	j	FinalizaAtaqueOportunoInimigo2
+PulaVerificaBaixo2:
+	addi	t6,t6,2
+	blt	t6,s4,LoopAtaqueOportunoInimigo2
+	j	PulaAcaoOportunoInimigo2
+FinalizaAtaqueOportunoInimigo2:
+	li	t0, 5
+	sw	t0, 16(s7)
+	mv	a0,a1
+	mv	a1,s7
+	call	Luta
+PulaAcaoOportunoInimigo2:
+	li	t0, 5
+	sw	t0, 16(s7)
+	j	FimMovimento
+PulaTransformaInimigoCinza:
 	li	t0, 1
 	la	t1, MenuAtivado
 	sb	t0, 0(t1)
