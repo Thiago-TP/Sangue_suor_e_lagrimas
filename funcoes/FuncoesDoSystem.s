@@ -43,9 +43,12 @@ LabelTabChar:
 #  a4 	 =  frame (0 ou 1)	    #
 #####################################
 
-printString:	addi 	sp, sp, -8
+printString:	addi 	sp, sp, -20
 		sw	ra, 0(sp)
 		sw	s0, 4(sp)
+		sw	a0, 8(sp)
+		sw	a1, 12(sp)
+		sw	a2, 16(sp)
 		
     		mv	s0, a0              		# s0 = endereco do caractere na string
 
@@ -65,7 +68,10 @@ NaoPulaLinha:	addi    s0, s0, 1			# proximo caractere
 
 fimloopprintString:	lw	ra, 0(sp)
 			lw	s0, 4(sp)
-			addi 	sp, sp, 8
+			lw	a0, 8(sp)
+			lw	a1, 12(sp)
+			lw	a2, 16(sp)
+			addi 	sp, sp, 20
 fimprintString:		ret      	    		# retorna
 
 

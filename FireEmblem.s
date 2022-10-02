@@ -169,9 +169,13 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 .include "funcoes/ImprimeDorcas.s"
 .include "funcoes/ImprimeDart.s"
 .include "funcoes/ImprimeSain.s"
+.include "funcoes/MontaMenu2.s"
 
 
 .data
+.include "sprites/personagens/LamarVitoria.data"
+.include "sprites/personagens/LamarVitoria2.data"
+.include "sprites/personagens/LamarDerrota.data"
 .include "sprites/numeros/numzero.data"
 .include "sprites/numeros/um.data"
 .include "sprites/numeros/dois.data"

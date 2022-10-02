@@ -27,7 +27,9 @@ mudaEstado:
 	sw	t2, 0(t0)
 	la	t0, animTime23
 	sw	t2, 0(t0)
+
 	addi	s1, s1, 1
+	
 	j	fimAnimaInimigos
 estado2:
 	la	t0, animTime23
