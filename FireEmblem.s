@@ -10,8 +10,14 @@ Win:		.byte	0	# flag de vitoria :)
 musicTime:	.word	0	# tempo em ms desde a ultima nota	
 noteCounter:	.word	0	# quantidade de notas tocadas
 
-# Cor do menu de batalha #
-MenuBatalha:	.byte	0, 255
+# tempos para animacoes (estados) da tela de vitoria/derrota
+animTime12:	.word	0x00000000	# tempo em ms desde que o estado 1 foi atingido
+animTime23:	.word	0x00000000	# tempo em ms desde que o estado 2 foi atingido
+animTime31:	.word	0x00000000	# tempo em ms desde que o estado 3 foi atingido
+
+# Cores do menu	#
+MenuBatalha:	.byte	0, 255			# Cor do menu de batalha 
+MenuFinais:	.word	0x0000c73f, 0x0000c703	# Cor do menu de vitoria/derrota  
 
 # posicao Ficticia Cursor
 
@@ -65,7 +71,8 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 			2,		# tipo de arma => 2 = lanca
 			9		# classificacao do personagem => 2 = Soldier (2)
 .text
-	#call	Derrota		# teszte da derrota
+	#call	Derrota		# teste da derrota
+	call	Vitoria		# teste da vitoria
 	
 	call	Fase1
 	call	Fase2
@@ -147,7 +154,21 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 .include "funcoes/Decoracoes.s"
 .include "funcoes/PrintInt.s"
 
+.include "funcoes/Vitoria.s"
 .include "funcoes/Derrota.s"
+.include "funcoes/ImprimeBrigand.s"
+.include "funcoes/ImprimeSoldier.s"
+.include "funcoes/ImprimeAssassin.s"
+.include "funcoes/AtualizaEstados.s"
+.include "funcoes/CobreTela.s"
+.include "funcoes/ImprimeOpcoes.s"
+.include "funcoes/MovimentaCursor2.s"
+
+.include "funcoes/ImprimeLyn.s"
+.include "funcoes/ImprimeYogi.s"
+.include "funcoes/ImprimeDorcas.s"
+.include "funcoes/ImprimeDart.s"
+.include "funcoes/ImprimeSain.s"
 
 
 .data

@@ -1,7 +1,7 @@
 #	s0 = 0 se sim esta selecionado
 #	s1 = 0, 1 ou 2 eh o estado da animacao
 #	s2 = frame
-Derrota:
+Vitoria:
 	addi	sp, sp, -4
 	sw	ra, 0(sp)
 	
@@ -21,13 +21,13 @@ Derrota:
 	li	a0, 1
 	call	CobreTela		# fundo  preto em ambos os frames
 	
-	la	a0, perdeu
+	la	a0, ganhou
 	li	a1, 96
 	li	a2, 40
 	li	a3, 0x0000c7ff
 	li	a4, 0
 	call	printString		# imprime "Voce ganhou" (frame 0)
-	la	a0, perdeu
+	la	a0, ganhou
 	li	a1, 96
 	li	a2, 40
 	li	a3, 0x0000c7ff
@@ -48,18 +48,20 @@ Derrota:
 	mv	s0, zero		# "sim" selecionado
 	mv	s1, zero		# estado 0 da animacao
 	mv	s2, zero		# frame
-SetupDerrota:	
+SetupVitoria:	
    	call	MovimentaCursor2	# decide se quer jogar de novo ou nao
    	call	ImprimeOpcoes
-   	call	AtualizaEstados		# estado e frame mudam
-   	call	ImprimeAssassin		# sprites sao impressas no novo frame
-   	call	ImprimeBrigand
-   	call	ImprimeSoldier
+   	call	AtualizaEstados		# estado e frame mudam		
+   	call	ImprimeLyn		# sprites sao impressas no novo frame
+   	call	ImprimeYogi
+   	call	ImprimeDorcas
+   	call	ImprimeDart
+   	call	ImprimeSain
    	
    	li	t0, 0xFF200604
 	sw	s2, 0(t0)		# muda o frame exibido
 	
-	j	SetupDerrota	
+	j	SetupVitoria	
 	
 	lw	ra, 0(sp)
 	addi	sp, sp, 4

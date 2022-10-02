@@ -3,10 +3,16 @@
 #	e frases que usaremos no projeto,				#
 #'	e deve ser incluida no campo .data				#
 #########################################################################
+# satrings de telas finais
+ganhou:		.string	"Voce ganhou ! :)"
+perdeu:		.string "Voce perdeu ! :("
+denovo:		.string "Jogar de novo?"
 
 # strings do menu
-menu1opcao1:	.string "Attack"	
-menu1opcao2:	.string "Wait"
+menu1opcao1:	.string "Atacar"	
+menu1opcao2:	.string "Esperar"
+sim:		.string "Sim"
+nao:		.string "Nao"
 
 # strings da luta
 VoceAtacou:	.string	"Voce atacou!"
