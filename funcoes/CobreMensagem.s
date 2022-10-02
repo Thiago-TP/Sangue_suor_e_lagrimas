@@ -31,10 +31,10 @@ CobreLinha:
 	blt 	t2, t3, CobreLinha	# se contador da coluna < largura,  continue imprimindo
 	addi	t0, t0, 320 		# t0 += 320
 	sub 	t0, t0, t3 		# t0 -= largura da imagem
-	addi	t6, t6, 320 		# t0 += 320
-	sub 	t6, t6, t3 		# t0 -= largura da imagem
+	addi	t6, t6, 320 		# t6 += 320
+	sub 	t6, t6, t3 		# t6 -= largura da imagem
 	# ^ isso serve pra "pular" de linha no bitmap display
-	mv 	t2, zero 		# zera t3 (contador de coluna)
+	mv 	t2, zero 		# zera t2 (contador de coluna)
 	addi 	t1, t1, 1 		# incrementa contador de linha
 	bgt 	t4, t1, CobreLinha # se altura > contador de linha, continue imprimindo
 	ret
