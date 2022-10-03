@@ -18,7 +18,7 @@ SimboloArma:
 	li	t1, 8
 	beq	t0, t1, printSain
 	li	t1, 9
-	beq	t0, t1, printBrigand
+	beq	t0, t1, printSoldier
 	
 printLyn:
 	la	a0, symbolLyn
