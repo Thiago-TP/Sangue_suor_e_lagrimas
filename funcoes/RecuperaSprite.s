@@ -24,14 +24,21 @@ RecuperaSprite:
 	mv	t2, zero			# inicializa o contador de linhas em t2
 	mv	t3, zero			# inicializa o contador de colunas em t3
 LoopRecuperaSprite:
-	addi	a6, a6, -4			# decrementa o valor do endereco da pilha ja
-	lw	t1, 0(a6) 			# carrega a word que foi salva na pilha
-	sw 	t1, 0(t0) 			# imprime no bitmap a word (4 pixeis) que foi salva na pilha
-	addi 	t0, t0, 4			# incrementa endereco do bitmap
-	addi	t3, t3, 4			# incrementa o contador de colunas em 4
+	add	t1,a2,t2
+	sltiu	t1,t1,240
+	beqz	t1,SaiLoopRecuperaX
+	add	t1,a1,t3
+	sltiu	t1,t1,320
+	beqz	t1,SaiLoopRecuperaX
+	addi	a6, a6, -1			# decrementa o valor do endereco da pilha ja
+	lb	t1, 0(a6) 			# carrega a word que foi salva na pilha
+	sb 	t1, 0(t0) 			# imprime no bitmap a word (4 pixeis) que foi salva na pilha
+	addi 	t0, t0, 1			# incrementa endereco do bitmap
+	addi	t3, t3, 1			# incrementa o contador de colunas em 4
 	blt 	t3, t4, LoopRecuperaSprite	# se contador da coluna < largura, continue imprimindo
+SaiLoopRecuperaX:
 	addi 	t0, t0, 320 			# t0 += 320
-	sub 	t0, t0, t4 			# t0 -= largura da imagem
+	sub 	t0, t0, t3 			# t0 -= largura da imagem
 	mv 	t3, zero			# zera t3 (contador de coluna)
 	addi 	t2, t2, 1			# incrementa o contador de linhas em 1
 	bgt 	t5, t2, LoopRecuperaSprite 	# se altura > contador de linha, continue imprimindo

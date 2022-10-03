@@ -20,14 +20,21 @@ SalvaSprite:
 	mv	t5, a5			# move o valor de y maximo para t5
 	mv	t4, a4			# move o valor de x maximo para t4
 LoopSalvaSprite:
-	addi	sp, sp, -4		# aloca espaco na pilha 
-	lw	t1, 0(t0) 		# carrega do bit map e coloca na pilha
-	sw	t1, 0(sp)		# salva na pilha de 4 em quatro os byte que estavam no bitmap
-	addi	t0, t0, 4		# incrementa endereco do bitmap
-	addi	t3, t3, 4		# incrementa o contador de colunas em 4
+	add	t1,a2,t2
+	sltiu	t1,t1,240
+	beqz	t1,SaiLoopSalvaX
+	add	t1,a1,t3
+	sltiu	t1,t1,320
+	beqz	t1,SaiLoopSalvaX
+	addi	sp, sp, -1		# aloca espaco na pilha 
+	lb	t1, 0(t0) 		# carrega do bit map e coloca na pilha
+	sb	t1, 0(sp)		# salva na pilha de 4 em quatro os byte que estavam no bitmap
+	addi	t0, t0, 1		# incrementa endereco do bitmap
+	addi	t3, t3, 1		# incrementa o contador de colunas em 4
 	blt 	t3, t4, LoopSalvaSprite # Se contador da coluna < largura, continue imprimindo
+SaiLoopSalvaX:
 	addi 	t0, t0, 320 		# t0 += 320
-	sub 	t0, t0, t4 		# t0 -= largura da imagem
+	sub 	t0, t0, t3 		# t0 -= largura da imagem
 	mv 	t3, zero		# zera t3 (contador de coluna)
 	addi	t2, t2, 1		# incrementa o contador de linhas em 1
 	bgt	t5, t2, LoopSalvaSprite	# Se altura > contador de linha, continue imprimindo
