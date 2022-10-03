@@ -167,7 +167,7 @@ PulaMinimoX2:
 	mv	a2, zero
 PulaMinimoY2:
 	addi	a4, a4, 5
-	li	t0, 20
+	li	t5, 20
 	blt	a4, t5, PulaMaximoX2
 	li	a4, 20
 PulaMaximoX2:

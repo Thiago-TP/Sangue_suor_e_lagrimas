@@ -26,9 +26,14 @@ PrintByte:
 	lw 	t4, 4(a0) 	# carrega a altura em t4
 	addi 	a7, a0, 8 	# salvo o endereco da imagem passada para a funcao em a0
 	# ate aqui estamos no primeiro endereco da imagem e no endereço que escolhemos no bitmap
-PRINT_LINHAByte:	
+PRINT_LINHAByte:
+	add	t5,a2,t1
+	sltiu	t5,t5,240
+	beqz	t5,PulaInteracaoByte
+	add	t5,a1,t2
+	sltiu	t5,t5,320
+	beqz	t5,PulaInteracaoByte	
 	lbu 	t5, 0(a7) 	# carrega em t6 um byte (1 pixel) da imagem	
-	
 	addi	sp, sp, -16
 	sw	t0, 0(sp)
 	sw	t1, 4(sp)
@@ -47,14 +52,14 @@ pulaByteCinza:
 	lw	t2, 8(sp)
 	lw	t3, 12(sp)
 	addi	sp, sp, 16
-	
 	sb 	t5, 0(t0) 		# imprime no bitmap a word (4 pixeis) da imagem
+PulaInteracaoByte:
 	addi 	t0, t0, 1 		# incrementa endereco do bitmap
 	addi 	a7, a7, 1 		# incrementa endereco da imagem
 	addi 	t2, t2, 1 		# incrementa contador de coluna
 	blt 	t2, t3, PRINT_LINHAByte # se contador da coluna < largura,  continue imprimindo
 	addi	t0, t0, 320 		# t0 += 320
-	sub 	t0, t0, t3 		# t0 -= largura da imagem
+	sub 	t0, t0, t3		# t0 -= largura da imagem
 	# ^ isso serve pra "pular" de linha no bitmap display
 	mv 	t2, zero 		# zera t3 (contador de coluna)
 	addi 	t1, t1, 1 		# incrementa contador de linha

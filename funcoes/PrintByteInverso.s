@@ -24,8 +24,15 @@ InicioPRINT_LINHAByteInverte:
 	# até aqui estamos no primeiro endereço da imagem e no endereço que escolhemos no bitmap
 PRINT_LINHAByteInverte:	
 	addi 	a7,a7,-1	# incrementa endereco da imagem
+	add	t5,a2,t1
+	sltiu	t5,t5,240
+	beqz	t5,PulaInteracaoByteInverso
+	add	t5,a1,t2
+	sltiu	t5,t5,320
+	beqz	t5,PulaInteracaoByteInverso
 	lb 	t5,0(a7) 	# carrega em t6 uma word (4 pixeis) da imagem
 	sb 	t5,0(t0) 	# imprime no bitmap a word (4 pixeis) da imagem
+PulaInteracaoByteInverso:
 	addi 	t0,t0,1		# incrementa endereco do bitmap
 	addi 	t2,t2,1 	# incrementa contador de coluna
 	blt 	t2,t3,PRINT_LINHAByteInverte 	# se contador da coluna < largura, continue imprimindo
