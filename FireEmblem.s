@@ -72,6 +72,7 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 			2,		# tipo de arma => 2 = lanca
 			9		# classificacao do personagem => 2 = Soldier (2)
 .text
+
 	#call	Derrota		# teste da derrota
 	#call	Vitoria		# teste da vitoria
 	
@@ -80,8 +81,7 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 	call	Fase3
 	call	Fase4
 	call	Fase5
-	fim: 	j fim	
-																
+	fim: 	j fim																
 
 .include "fases/Fase1.s"
 .include "fases/Fase2.s"
@@ -172,11 +172,12 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 .include "funcoes/ImprimeSain.s"
 .include "funcoes/MontaMenu2.s"
 
-
 .data
+
 .include "sprites/personagens/LamarVitoria.data"
 .include "sprites/personagens/LamarVitoria2.data"
 .include "sprites/personagens/LamarDerrota.data"
+
 .include "sprites/numeros/numzero.data"
 .include "sprites/numeros/um.data"
 .include "sprites/numeros/dois.data"
@@ -202,7 +203,9 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 .include "sprites/tiles/symbolSain.data"
 .include "sprites/tiles/symbolSoldier.data"
 .include "sprites/tiles/symbolYogi.data"
+
 # datas de tilemap
+
 .include "sprites/tilemaps/tilemap_praia.data"
 .include "sprites/tilemaps/tilemap_floresta.data"
 .include "sprites/tilemaps/tilemap_estrada.data"
@@ -210,6 +213,7 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 .include "sprites/tilemaps/tilemap_himalaia.data"
 
 # sprites da fase 1
+
 .include "sprites/tiles/TileAreia.data"
 .include "sprites/tiles/TileBeiraMar.data"
 .include "sprites/tiles/TileMar.data"
@@ -218,10 +222,12 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 .include "sprites/tiles/TilePedra.data"
 
 # sprites da fase 2
+
 .include "sprites/tiles/TileGrama.data"
 .include "sprites/tiles/TileFloresta.data"
 
 # sprites da fase 3
+
 .include "sprites/tiles/TileGramaTarde.data"
 .include "sprites/tiles/TileFlorestaTarde.data"
 .include "sprites/tiles/TileChao.data"
@@ -229,11 +235,13 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 .include "sprites/tiles/TileGramaChaoE.data"
 
 # sprites da fase 4
+
 .include "sprites/tiles/TileNeve.data"
 .include "sprites/tiles/TilePedraFria.data"
 .include "sprites/tiles/TileArvoreNeve.data"
 
 # sprites da fase 5
+
 .include "sprites/tiles/TileGramaNoite.data"
 .include "sprites/tiles/TileFlorestaNoite.data"
 .include "sprites/tiles/TileGramaChaoNoite.data"
@@ -244,11 +252,13 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 .include "sprites/tiles/TileFim.data"
 
 # sprites de mugshots
+
 .include "sprites/personagens/mugshot_juLynete.data"	
 .include "sprites/personagens/mugshot_Lyn.data"	
 .include "sprites/personagens/mugshot_Carolina.data"	
 
 # sprites de mapa dos personagens
+
 .include "sprites/personagens/Lyn_datas.data"
 .include "sprites/personagens/Knight_datas.data"
 .include "sprites/personagens/Dorcas_datas.data"
@@ -259,6 +269,7 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 .include "sprites/personagens/Assassin_datas.data"
 
 # sprites de luta
+
 .include "sprites/personagens/LutaAssassin.data"
 .include "sprites/personagens/LutaBrigand.data"
 .include "sprites/personagens/LutaDart.data"
@@ -271,9 +282,11 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 .include "sprites/tiles/umHPinvisivel.data"
 
 # strings do jogo
+
 .include "falas/falas.s"
 
 # sprites de menu
+
 .include "sprites/menus/LadoMenu.data"
 .include "sprites/menus/BordaMenuC.data"
 .include "sprites/menus/LadoMenuB.data"
@@ -282,12 +295,14 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 .include "sprites/menus/MioloMenu.data"
 
 # sprites de cursor
+
 .include "sprites/cursor/Cursor1.s"
 .include "sprites/cursor/Cursor2.s"
 .include "sprites/cursor/seletor_verm.data"
 .include "sprites/cursor/seletor_azul.data"
 
 # sprites do balao
+
 .include "sprites/tiles/cantoSD.data"
 .include "sprites/tiles/cantoID.data"
 .include "sprites/tiles/arestaD.data"

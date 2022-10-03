@@ -16,16 +16,15 @@ PRINT:
 	add 	t0, t0, t1 		# coloca o valor final do calculo do endereco em t0
 	mv 	t1, zero 		# zera t2
 	mv 	t2, zero 		# zera t3
-	mv	t6, a0			# carrega o data em t6 para evitar mudar a0
-	lw 	t3, 0(t6) 		# carrega a largura em t3
-	lw 	t4, 4(t6) 		# carrega a altura em t4
-	addi 	t6, t6, 8 		# salvo o endereco da imagem passada para a funcao em a0
+	lw 	t3, 0(a0) 		# carrega a largura em t3
+	lw 	t4, 4(a0) 		# carrega a altura em t4
+	addi 	a7, a0, 8 		# salvo o endereco da imagem passada para a funcao em a0
 	# ate aqui estamos no primeiro endereco da imagem e no endereco que escolhemos no bitmap
 PRINT_LINHA:	
-	lw 	t5, 0(t6)	 	# carrega em t5 uma word (4 pixeis) da imagem
+	lw 	t5, 0(a7)	 	# carrega em t5 uma word (4 pixeis) da imagem
 	sw 	t5, 0(t0) 		# imprime no bitmap a word (4 pixeis) da imagem
 	addi 	t0, t0, 4	 	# incrementa endereco do bitmap
-	addi 	t6, t6, 4	 	# incrementa endereco da imagem
+	addi 	a7, a7, 4	 	# incrementa endereco da imagem
 	addi 	t2, t2, 4	 	# incrementa contador de coluna
 	blt 	t2, t3, PRINT_LINHA 	# se contador da coluna < largura, continue imprimindo
 	addi 	t0, t0, 320 		# t0 += 320
