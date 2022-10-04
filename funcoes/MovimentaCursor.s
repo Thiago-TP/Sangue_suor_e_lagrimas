@@ -19,16 +19,8 @@ MovimentaCursor:
 	beq 	t2, t0, CHAR_BAIXO		# se tecla pressionada for 's',  chama CHAR_CIMA
 	li 	t0, 'd'				# carrego o valor do caracter 'd' para fazer a comparacao abaixo
 	beq 	t2, t0, CHAR_DIR		# se tecla pressionada for 'd',  chama CHAR_CIMA 
-	li 	t0, '1'				# carrego o valor do caracter 'd' para fazer a comparacao abaixo
-	beq 	t2, t0, FASE1			# se tecla pressionada for '1',  inicia a fase 1 
-	li 	t0, '2'				# carrego o valor do caracter 'd' para fazer a comparacao abaixo
-	beq 	t2, t0, FASE2			# se tecla pressionada for '2',  inicia a fase 2 
-	li 	t0, '3'				# carrego o valor do caracter 'd' para fazer a comparacao abaixo
-	beq 	t2, t0, FASE3			# se tecla pressionada for '3',  inicia a fase 3 
-	li 	t0, '4'				# carrego o valor do caracter 'd' para fazer a comparacao abaixo
-	beq 	t2, t0, FASE4			# se tecla pressionada for '4',  inicia a fase 4 
-	li 	t0, '5'				# carrego o valor do caracter 'd' para fazer a comparacao abaixo
-	beq 	t2, t0, FASE5			# se tecla pressionada for '5',  inicia a fase 5 
+	li	t0, 'p'
+	beq	t2, t0, MENU_PAUSE
 FimMovimentaCursor:	
 	lw	ra, 0(sp)			# recupero o ponteiro de retorno da pilha
 	addi	sp, sp, 4			# desaloca a memoria da pilha
@@ -112,9 +104,8 @@ CHAR_BAIXO:
 	bgeu 	t1, t4, FimMovimentaCursor
 	sw 	t1, 4(t0)			# atualiza posicao x do cursor	
 	j	FimMovimentaCursor
-
-FASE1:	j	Fase1
-FASE2:	j	Fase2
-FASE3:	j	Fase3
-FASE4:	j	Fase4
-FASE5:	j	Fase5
+MENU_PAUSE:	
+	la	t1, MenuAtivado2
+	li	t0, 1
+	sb	t0, 0(t1)
+	j	FimMovimentaCursor

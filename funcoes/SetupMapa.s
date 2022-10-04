@@ -3,8 +3,6 @@
 #################################################
 SetupMapa:
 	addi	sp, sp, -4 	# aloca espaco na pilha
-	la	t0, guardaSP		# guardando o sp expandido
-	sw	sp, 0(t0)
 	sw	ra, 0(sp) 	# salva o ponteiro de retorno
 	mv	s4, a5 		# move o argumento recebido em a5 para s4 para termos o limite de personagens
 	li 	a1, 0
@@ -13,6 +11,9 @@ SetupMapa:
 	li	a5, 15
 	call	ClearScreen
 	mv	s0, zero 	# iniciliaza s0 como zero
+	mv	s2, zero
+	mv	s5, zero
+	mv	s3, zero
 	mv	s1, zero 	# inicializa s1 como zero
 	mv	s6, sp 		# salvo o endereco inicial de tudo para voltar toda vez depois do loop
 	mv	s7, zero	# s7  = struct de posicao do personagem sendo movimentado
@@ -21,19 +22,14 @@ SetupMapa:
 	mv	s10,zero
 	mv	s11,zero
 LoopGame: 
-		
-	################ testes de funcoes de controle ####################
-	#call	VerificaWin	# Win <- 1 se for PC morreu
-	#la	t0, Win
-	#lb	t0, 0(t0)
-	#bnez	t0, ProximaFase	# Win ? fim da fase
-	# Perdeu ainda n foi implementada
-	#call	VerificaGameOver	# GameOver <- 1 se jogador morreu
-	#la	t0, GameOver
-	#lb	t0, 0(t0)
-	#bnez	t0, Perdeu	# GameOver ? tela de derrota
-	####################################################################
-	
+	call	VerificaGameOver	# GameOver <- 1 se jogador morreu
+	la	t0, GameOver
+	lb	t0, 0(t0)
+	bnez	t0, ProximaFase	# GameOver ? tela de derrota
+	call	VerificaWin	# Win <- 1 se for PC morreu
+	la	t0, Win
+	lb	t0, 0(t0)
+	bnez	t0, ProximaFase	# Win ? fim da fase
 	call	VerificaVez	# Vez <- 1 se for a vez do PC
 	la	t0, Vez
 	lb	t0, 0(t0)
@@ -133,6 +129,9 @@ PulaVezPC:
 	mv	s11,zero
 PulaMovimento:
 	bnez	s9, PulaMovimentaMenu	# enquanto o personagem se move, o cursor permanece congelado
+	la	t0, MenuAtivado2
+	lb	t1, 0(t0)	
+	bnez	t1, PulaMovimentaMenu2
 	la	t0, MenuAtivado
 	lb	t1, 0(t0)	
 	bnez	t1, PulaMovimentaCursor
@@ -140,6 +139,12 @@ PulaMovimento:
 	j	PulaMovimentaMenu
 PulaMovimentaCursor:
 	call 	MovimentaMenu
+	j	PulaMovimentaMenu
+PulaMovimentaMenu2:
+	call	MovimentaMenu2
+	la	t0,GuardaHack
+	lb	t1,0(t0)
+	bnez	t1,ProximaFase
 PulaMovimentaMenu:
 	mv	sp, s6 			# reinicio o ponteiro da pilha
 	addi	sp, sp, -40 		# aloco espaco de memoria na pilha (40 = 4*(10 personagens))
@@ -376,6 +381,9 @@ FinalEscolhaPrint:
 	la	t0, Vez
 	lb	t1, 0(t0)
 	bnez	t1,PulaImprimeMenu
+	la	t0, MenuAtivado2
+	lb	t1, 0(t0)
+	bnez	t1, PulaImprimeMenu2
 	la	t0, MenuAtivado
 	lb	t1, 0(t0)
 	bnez	t1, PulaImprimeCursor
@@ -394,6 +402,9 @@ FimEscolheCursor:
 	j	PulaImprimeMenu 
 PulaImprimeCursor:
 	call 	MontaMenu
+	j	PulaImprimeMenu
+PulaImprimeMenu2:
+	call	MontaMenu3
 PulaImprimeMenu:	
 	li 	t0, 0xFF200604 		# carrega em t0 o endereco de troca de frame
 	sw 	s1, 0(t0) 		# troca de frame
@@ -527,8 +538,7 @@ sleepNormal:
 	addi	s0, s0, 1		# incremento s0 (lembrar que ele controla qual a idle que eu quero printar)
 	j	LoopGame		# volta para LoopStandby
 ProximaFase:	
-	la	t0, guardaSP		# recuperando o sp expandido
-	lw	sp, 0(t0)
+	mv	sp,s6
 	lw	ra, 0(sp) 		# carrega o valor de ra de sp
 	addi	sp, sp, 4 		# desaloca a memoria da pilha
 	ret 				# volta para quem chamou a funcao
@@ -615,7 +625,6 @@ PulaEixoX:	# Repete-se aqui, no eixo Y, o que foi feito no X
 	lw	t0, 4(s8)
 	bne	t6,t0,PulaTrocaMovimento2
 	xori	s10,s10,1
-	j	LoopGame
 PulaTrocaMovimento2:
 	sub	t0, t0, t6 		# se for negativo a1 eh maior que t0 entao preciso decrementar a1
 	bltz	t0, PulaEixoYPositivo	

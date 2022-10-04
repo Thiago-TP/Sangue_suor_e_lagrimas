@@ -44,20 +44,6 @@ Vitoria:
 	mv	s1, zero		# estado 0 da animacao
 	mv	s2, zero		# frame
 	
-	la	a0, LamarVitoria
-	li	a1, 0
-	li	a2, 172
-	li	a3, 0
-	li	a4, 0
-	call	PrintByte
-	li	a3, 1
-	call	PrintByte
-	la	a0, LamarVitoria2
-	li	a1, 30
-	li	a2, 140
-	call	PrintByte
-	li	a3, 0
-	call	PrintByte
 SetupVitoria:	
    	call	MovimentaCursor2	# decide se quer jogar de novo ou nao
    	call	ImprimeOpcoes
@@ -67,12 +53,10 @@ SetupVitoria:
    	call	ImprimeDorcas
    	call	ImprimeDart
    	call	ImprimeSain
-   	
    	li	t0, 0xFF200604
 	sw	s2, 0(t0)		# muda o frame exibido
-	
 	j	SetupVitoria	
-	
+FimSetupVitoria:
 	lw	ra, 0(sp)
 	addi	sp, sp, 4
 	ret

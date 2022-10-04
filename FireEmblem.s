@@ -1,8 +1,9 @@
 .data
 FPGA:		.byte	0		#  1 => FPGA  
-guardaSP:	.word 	0x00000000	# precisei disso pra guardar o sp certo na hora de retornar do Fase1.s
+GuardaHack:	.byte 	0	# precisei disso pra guardar o sp certo na hora de retornar do Fase1.s
 
 AtaqueAtivado:	.byte	0
+MenuAtivado2:	.byte	0
 MenuAtivado:	.byte	0	# indica se o menu estÃ¡ ativado
 Fase:		.byte	1	# numero da fase
 Vez:		.byte	0	# flag de vez do PC
@@ -15,6 +16,8 @@ noteCounter:	.word	0	# quantidade de notas tocadas
 animTime12:	.word	0x00000000	# tempo em ms desde que o estado 1 foi atingido
 animTime23:	.word	0x00000000	# tempo em ms desde que o estado 2 foi atingido
 animTime31:	.word	0x00000000	# tempo em ms desde que o estado 3 foi atingido
+
+MenuPause: 	.byte 255,0,0,0,0,0,0	# o ultimo diz sobre o qual está sendo selecionado
 
 # Cores do menu	#
 MenuBatalha:	.byte	0, 255			# Cor do menu de batalha 
@@ -72,16 +75,74 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 			2,		# tipo de arma => 2 = lanca
 			9		# classificacao do personagem => 2 = Soldier (2)
 .text
-
-	#call	Derrota		# teste da derrota
-	#call	Vitoria		# teste da vitoria
 	
+TrataHack:
+	la	t0,GuardaHack
+	lb	t1,0(t0)
+	beqz	t1,PulaTratamentoHack
+	sb	zero,0(t0)
+	li	t0,1
+	beq	t1,t0,FASE1
+	li	t0,2
+	beq	t1,t0,FASE2
+	li	t0,3
+	beq	t1,t0,FASE3
+	li	t0,4
+	beq	t1,t0,FASE4
+	li	t0,5
+	beq	t1,t0,FASE5
+PulaTratamentoHack:
+FASE1:
 	call	Fase1
+	la	t0,GameOver
+	lb	t1,0(t0)
+	bnez	t1,PulaParaDerrota
+	la	t0,GuardaHack
+	lb	t1,0(t0)
+	bnez	t1,TrataHack
+FASE2:
 	call	Fase2
+	la	t0,GameOver
+	lb	t1,0(t0)
+	bnez	t1,PulaParaDerrota
+	la	t0,GuardaHack
+	lb	t1,0(t0)
+	bnez	t1,TrataHack
+FASE3:
 	call	Fase3
+	la	t0,GameOver
+	lb	t1,0(t0)
+	bnez	t1,PulaParaDerrota
+	la	t0,GuardaHack
+	lb	t1,0(t0)
+	bnez	t1,TrataHack
+FASE4:
 	call	Fase4
+	la	t0,GameOver
+	lb	t1,0(t0)
+	bnez	t1,PulaParaDerrota
+	la	t0,GuardaHack
+	lb	t1,0(t0)
+	bnez	t1,TrataHack
+FASE5:
 	call	Fase5
-	fim: 	j fim																
+	la	t0,GameOver
+	lb	t1,0(t0)
+	bnez	t1,PulaParaDerrota
+	la	t0,GuardaHack
+	lb	t1,0(t0)
+	bnez	t1,TrataHack
+	call	Vitoria
+	la	t0,GuardaHack
+	lb	t1,0(t0)
+	bnez	t1,TrataHack
+	j fim
+PulaParaDerrota:
+	call	Derrota
+	la	t0,GuardaHack
+	lb	t1,0(t0)
+	bnez	t1,TrataHack
+fim: 	j fim													
 
 .include "fases/Fase1.s"
 .include "fases/Fase2.s"
@@ -171,12 +232,10 @@ Soldier2: 	.word 	208, 144, 208, 144, 0	# Inimigo 5
 .include "funcoes/ImprimeDart.s"
 .include "funcoes/ImprimeSain.s"
 .include "funcoes/MontaMenu2.s"
+.include "funcoes/MontaMenu3.s"
+.include "funcoes/MovimentaMenu2.s"
 
 .data
-
-.include "sprites/personagens/LamarVitoria.data"
-.include "sprites/personagens/LamarVitoria2.data"
-.include "sprites/personagens/LamarDerrota.data"
 
 .include "sprites/numeros/numzero.data"
 .include "sprites/numeros/um.data"

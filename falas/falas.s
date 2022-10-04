@@ -11,6 +11,13 @@ denovo:		.string "Jogar de novo?"
 # strings do menu
 menu1opcao1:	.string "Atacar"	
 menu1opcao2:	.string "Esperar"
+menu2opcao1:	.string "Sair"	
+menu2opcao2:	.string "Fase 1"
+menu2opcao3:	.string "Fase 2"	
+menu2opcao4:	.string "Fase 3"
+menu2opcao5:	.string "Fase 4"	
+menu2opcao6:	.string "Fase 5"
+
 sim:		.string "Sim"
 nao:		.string "Nao"
 
