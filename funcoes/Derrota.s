@@ -4,7 +4,6 @@
 Derrota:
 	addi	sp, sp, -4
 	sw	ra, 0(sp)
-	
 	li	t0, 0xFF200604
 	sw	zero, 0(t0)		# fixa o frame em 0
 	
@@ -44,16 +43,8 @@ Derrota:
 	mv	s1, zero		# estado 0 da animacao
 	mv	s2, zero		# frame
 	
-	la	a0, LamarDerrota
-	li	a1, 0
-	li	a2, 184
-	li	a3, 0
-	li	a4, 0
-	call	PrintByte
-	li	a3, 1
-	call	PrintByte
 SetupDerrota:	
-   	call	MovimentaCursor2	# decide se quer jogar de novo ou nao
+   	call	MovimentaCursor3	# decide se quer jogar de novo ou nao
    	call	ImprimeOpcoes
    	call	AtualizaEstados		# estado e frame mudam
    	call	ImprimeAssassin		# sprites sao impressas no novo frame
@@ -64,7 +55,7 @@ SetupDerrota:
 	sw	s2, 0(t0)		# muda o frame exibido
 	
 	j	SetupDerrota	
-	
+FimSetupDerrota:
 	lw	ra, 0(sp)
 	addi	sp, sp, 4
 	ret												

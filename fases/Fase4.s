@@ -7,11 +7,20 @@ Fase4:
 	la	t2, Vez
 	la	t3, GameOver
 	la	t4, Win
+	la	t5, MenuPause
+	li	t6,255
 	sw	zero, 0(t0)
 	sw	zero, 0(t1)
 	sb	zero, 0(t2)
 	sb	zero, 0(t3)
 	sb	zero, 0(t4)
+	sb	t6, 0(t5)
+	sb	zero, 1(t5)
+	sb	zero, 2(t5)
+	sb	zero, 3(t5)
+	sb	zero, 4(t5)
+	sb	zero, 5(t5)
+	sb	zero, 6(t5)
 	
 	call	InicializaPersonagens
 	

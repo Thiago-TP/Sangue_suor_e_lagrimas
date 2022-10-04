@@ -177,6 +177,9 @@ printChar.endForChar2I:
 			la	t0, MenuAtivado
 			lb	t0, 0(t0)
 			bnez	t0, semMidi
+			la	t0, MenuAtivado2
+			lb	t0, 0(t0)
+			bnez	t0, semMidi
 			call 	midiTexto		# barulhinho/sleep de cada char
 semMidi:							
 			lw	a0, 0(sp)

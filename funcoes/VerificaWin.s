@@ -1,5 +1,20 @@
 #################################################################
 #	esta funcao verifica se o jogador ganhou a fase,	#
+#	i. e., todos os personagens inimigos morreram		#
+#################################################################
+#	- Inputs -	#
+#	nenhum		#
+#################################
+#	- Outputs -		#
+#	0 ou 1 em GameOver	#
+#########################################
+#	- Internas -			#
+#	t0 = label do personagem	#
+#	t1 - hp do personagem		#
+#	t2 = Fase			#
+#########################################
+#################################################################
+#	esta funcao verifica se o jogador ganhou a fase,	#
 #	i. e., todos os personagens morreram			#
 #################################################################
 #	- Inputs -	#
@@ -54,4 +69,4 @@ Ganhou:
 	li	t1, 1
 	sb	t1, 0(t0)		# Win = 1 => ganhou a fase
 fimVerificaWin:
-	ret
+	ret			# volta para quem chamou a funcao
