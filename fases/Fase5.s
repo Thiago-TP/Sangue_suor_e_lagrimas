@@ -21,6 +21,12 @@ Fase5:
 	sb	zero, 4(t5)
 	sb	zero, 5(t5)
 	sb	zero, 6(t5)
+	la	t6, MenuAtivado
+	sb	zero, 0(t6)
+	la	t6, MenuAtivado2
+	sb	zero, 0(t6)
+	la	t6, AtaqueAtivado
+	sb	zero, 0(t6)
 	
 	call	InicializaPersonagens
 	

@@ -31,7 +31,6 @@ CHAR_ENTER2:
 	beq 	t2, t1, PulaParaFase4			# se tecla pressionada for '4',  inicia a fase 4 
 	lbu	t1, 5(t0)
 	beq 	t2, t1, PulaParaFase5			# se tecla pressionada for '5',  inicia a fase 5
-	# fazer o sair aqui rapaz
 	la	t0,GameOver
 	li	t2, 1
 	sb	t2, 0(t0)
