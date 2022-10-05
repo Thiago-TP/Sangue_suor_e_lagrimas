@@ -1,10 +1,10 @@
 .data
-FPGA:		.byte	1		#  1 => FPGA  
+FPGA:		.byte	0	#  1 => FPGA  
 GuardaHack:	.byte 	0	# precisei disso pra guardar o sp certo na hora de retornar do Fase1.s
 GuardaLugarMenu: .byte	0
 AtaqueAtivado:	.byte	0
 MenuAtivado2:	.byte	0
-MenuAtivado:	.byte	0	# indica se o menu está ativado
+MenuAtivado:	.byte	0	# indica se o menu estÃ¡ ativado
 Fase:		.byte	1	# numero da fase
 Vez:		.byte	0	# flag de vez do PC
 GameOver:	.byte	0 	# flag de derrota :(
@@ -17,7 +17,7 @@ animTime12:	.word	0x00000000	# tempo em ms desde que o estado 1 foi atingido
 animTime23:	.word	0x00000000	# tempo em ms desde que o estado 2 foi atingido
 animTime31:	.word	0x00000000	# tempo em ms desde que o estado 3 foi atingido
 
-MenuPause: 	.byte 255,0,0,0,0,0,0	# o ultimo diz sobre o qual est� sendo selecionado
+MenuPause: 	.byte 255,0,0,0,0,0,0	# o ultimo diz sobre o qual está sendo selecionado
 
 # Cores do menu	#
 MenuBatalha:	.byte	0, 255			# Cor do menu de batalha 
@@ -29,7 +29,7 @@ PosicaoInimigo: .word 0, 0
 
 # posicoes em quantidade de pulos 16x16
 PosicaoAtualCursor: 	.word 0, 0
-PosicaoAnteriorCursor: 	.word 0, 0	# mudei esse aqui so de zueira / aqui não tem brincadeira >:(
+PosicaoAnteriorCursor: 	.word 0, 0	# mudei esse aqui so de zueira / aqui nÃ£o tem brincadeira >:(
 
 # posicoes em (x,y) do bitmap + parametro para tipo de animacao
 #		       	x    y  estado
