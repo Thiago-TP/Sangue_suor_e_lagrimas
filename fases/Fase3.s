@@ -28,6 +28,31 @@ Fase3:
 	la	t6, AtaqueAtivado
 	sb	zero, 0(t6)
 	
+	la	t0, animTime12
+	la	t1, animTime23
+	la	t2, animTime31
+	la	t3, MenuBatalha
+	li	t4, 255
+	li	t5, 0x0000c73f
+	li	t6, 0x0000c703
+	sw	zero, 0(t0) 
+	la	t0, MenuFinais
+	sw	zero, 0(t1)
+	la	t1, PosicaoInimigo
+	sw	zero, 0(t2)
+	la	t2, PosicaoAtualCursor
+	sb	zero, 0(t3)
+	sb	t4, 1(t3)
+	la	t3, PosicaoAnteriorCursor
+	sw	t5, 0(t0)
+	sw	t6, 4(t0)
+	sw	zero, 0(t1)
+	sw	zero, 4(t1)
+	sw	zero, 0(t2)
+	sw	zero, 4(t2)
+	sw	zero, 0(t3)
+	sw	zero, 4(t3)
+	
 	call	InicializaPersonagens
 	
 	la	t0, Fase

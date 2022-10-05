@@ -30,9 +30,12 @@ LoopGame:
 	la	t0, Win
 	lb	t0, 0(t0)
 	bnez	t0, ProximaFase	# Win ? fim da fase
+	la	t0, Vez
+	lb	a7, (t0)
 	call	VerificaVez	# Vez <- 1 se for a vez do PC
 	la	t0, Vez
 	lb	t0, 0(t0)
+	bne	a7,t0,PulaMovimentaMenu # condição feita para a troca de turnos não ser tão abrupta
 	beqz	t0, PulaVezPC	# Vez = 1 ? PC joga (vez do PC ainda nao foi implementada)
 	bnez	s9, PulaVezPC
 	mv	a7,s11

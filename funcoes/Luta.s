@@ -153,9 +153,8 @@ AtaqueJogador:
 	lb	a0, 21(s0)	# a0 <- tipo de arma do jogador
 	lb	a1, 21(s1)	# a1 <- tipo de arma do pc
 	call	Ataque		# a0 <- dano
-	li	t0, 0
-	call	TerrenoEspecial	# modifica o dano de acordo com a posicao do atacante no mapa
 	call	AtualizaLuta
+	call	TerrenoEspecial	# modifica o dano de acordo com a posicao do atacante no mapa
 	# atualizacao da barra de vida do PC
 	lb	s2, 20(s1)	# s2 <- vida atual do pc
 	li	a1, 1		# a1 = 1 => barra direita
@@ -185,9 +184,8 @@ AtaquePC:
 	lb	a0, 21(s1)	# a0 <- tipo de arma do pc
 	lb	a1, 21(s0)	# a1 <- tipo de arma do jogador
 	call	Ataque		# a0 <- dano
-	li	t0, 1
-	call	TerrenoEspecial	# modifica o dano de acordo com a posicao do atacante no mapa
 	call	AtualizaLuta
+	call	TerrenoEspecial	# modifica o dano de acordo com a posicao do atacante no mapa
 	# atualizacao da barra de vida do jogador
 	lb	s2, 20(s0)	# s2 <- vida atual do jogador
 	li	a1, 0		# a1 = 0 => barra esquerda

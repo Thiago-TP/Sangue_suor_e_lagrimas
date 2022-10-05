@@ -24,10 +24,20 @@ CHAR_ENTER.Menu:
 	sb	zero, 0(t0)
 	li	t1, 255
 	sb	t1, 1(t0)
+	la	t2, GuardaLugarMenu
+	lb	t1, 0(t2)
+	beqz	t1,PulaClearMenu1
+	li	a1, 14
+	li	a2, 0
+	li	a4, 20
+	li	a5, 6
+	j	ClearMenu1
+PulaClearMenu1:
 	li	a1, 0
 	li	a2, 0
 	li	a4, 6
 	li	a5, 6
+ClearMenu1:
 	call	ClearScreen
 	la	t0, MenuAtivado
 	sb	zero, 0(t0)
@@ -74,10 +84,21 @@ PulaPrintAreaAtk4:
 PulaDecideAcao:
 	li	t0, 5
 	sw	t0, 16(s7)
+	
+	la	t2, GuardaLugarMenu
+	lb	t1, 0(t2)
+	beqz	t1,PulaClearMenu2
+	li	a1, 14
+	li	a2, 0
+	li	a4, 20
+	li	a5, 6
+	j	ClearMenu2
+PulaClearMenu2:
 	li	a1, 0
 	li	a2, 0
 	li	a4, 6
 	li	a5, 6
+ClearMenu2:
 	call	ClearScreen
 	la	t0, MenuAtivado
 	sb	zero, 0(t0)

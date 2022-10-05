@@ -1,4 +1,6 @@
 VerificaVez:
+	addi	sp, sp, -4 	# aloca espaco na pilha
+	sw	ra, 0(sp) 	# salva o ponteiro de retorno
 	la	t0, Vez
 	lb	t0, 0(t0)
 	bnez	t0, VerificaVezInimigo
@@ -68,9 +70,11 @@ PulaResetaDart:
 PulaResetaSain:
 	la	t0, Vez
 	li	t1, 1
-	sb	t1, 0(t0)		# Vez = 1 => vez do PC
+	sb	t1, 0(t0)
 fimVerificaVez:
-	ret	
+	lw	ra, 0(sp) 		# carrega o valor de ra de sp
+	addi	sp, sp, 4 		# desaloca a memoria da pilha
+	ret 				# volta para quem chamou a funcao
 	
 VerificaVezInimigo:
 	li	t1, 5
@@ -134,6 +138,8 @@ PulaResetaBrigand2:
 PulaResetaSoldier2:
 	la	t0, Vez
 	li	t1, 0
-	sb	t1, 0(t0)		# Vez = 1 => vez do PC
+	sb	t1, 0(t0)
 fimVerificaVezInimigo:
-	ret	
+	lw	ra, 0(sp) 		# carrega o valor de ra de sp
+	addi	sp, sp, 4 		# desaloca a memoria da pilha
+	ret 				# volta para quem chamou a funcao
