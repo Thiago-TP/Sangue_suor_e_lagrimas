@@ -1,6 +1,16 @@
 # Sangue_suor_e_lagrimas
 Repositório do projeto final de OAC - 2022/2 - Grupo 5
 
+## Monitores olhem para cá
+Para facilitar o câmbio de compatibilidade com a FPGA, criamos a flag "FPGA" no arquivo main do jogo, o FireEmblem.s.
+No momento ela está em 0, o que indica que não serve para a FPGA, mas sim para o FPGRARS. Caso estivesse em 1, essa situação se inverte.
+Façam um favor a si mesmos e não rodem o jogo no RARS, ele nem roda direito lá.
+
+
+
+
+
+## Canto reservado para mandrakes 
 🤡  Lista de coisas para implementar  🤡
 - [x] História do jogo (com caixas de diálogo)                           (0.5)
 - [x] Música e efeitos sonoros                                           (0.5)
