@@ -1,7 +1,7 @@
 .data
 FPGA:		.byte	1		#  1 => FPGA  
 GuardaHack:	.byte 	0	# precisei disso pra guardar o sp certo na hora de retornar do Fase1.s
-
+GuardaLugarMenu: .byte	0
 AtaqueAtivado:	.byte	0
 MenuAtivado2:	.byte	0
 MenuAtivado:	.byte	0	# indica se o menu está ativado

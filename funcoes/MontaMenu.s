@@ -4,8 +4,25 @@ MontaMenu:
 	li	a5, 2
 	la	a0, BordaMenuC
 	li	a4, 2
+	la	t0, GuardaLugarMenu
+	sb	zero, 0(t0)
+	lw	t0, 0(s7)
+	lw	t2, 4(s7)
+	slti	t1, t0, 96
+	beqz	t1, PulaVerificaPersonagemAreaMenu# o personagem não ta no x passo pro proximo
+	slti	t1, t2, 96
+	beqz	t1, PulaVerificaPersonagemAreaMenu# o personagem não ta no y passo pro proximo
+	la	t0, GuardaLugarMenu
+	li	t1, 1
+	sb	t1, 0(t0)
+PulaVerificaPersonagemAreaMenu:
 	li	a1, 5
 	li	a2, 5
+	la	t0, GuardaLugarMenu
+	lb	t1, 0(t0)
+	beqz	t1,PulaIncrimentaXMenu1
+	addi	a1,a1,225
+PulaIncrimentaXMenu1:
 	call 	PrintByteInverso
 	la	a0, LadoMenuC
 LoopMenu1:
@@ -19,6 +36,11 @@ LoopMenu1:
 LoopMenu2:
 	addi	a2, a2, 20
 	li	a1, 5
+	la	t0, GuardaLugarMenu
+	lb	t1, 0(t0)
+	beqz	t1,PulaIncrimentaXMenu2
+	addi	a1,a1,225
+PulaIncrimentaXMenu2:
 	li	a4, 2
 	la	a0,LadoMenu
 	call 	PrintByteInverso
@@ -35,6 +57,11 @@ LoopMenu3:
 	bnez	a5, LoopMenu2
 	addi	a2, a2, 20			
 	li	a1, 5
+	la	t0, GuardaLugarMenu
+	lb	t1, 0(t0)
+	beqz	t1,PulaIncrimentaXMenu3
+	addi	a1,a1,225
+PulaIncrimentaXMenu3:
 	la	a0, BordaMenuB
 	li	a4, 2
 	call 	PrintByteInverso
@@ -94,6 +121,11 @@ FimVerificaAtaque:
 	beq	s10,t0,PulaAtaque
 	la	a0, menu1opcao1
 	li 	a1, 10		# posicao x da impressao (coluna)
+	la	t2, GuardaLugarMenu
+	lb	t1, 0(t2)
+	beqz	t1,PulaIncrimentaXMenu4
+	addi	a1,a1,225
+PulaIncrimentaXMenu4:
 	mv	a2, a6		# posicao y da impressao (linha)
 	mv	a4, a5
 	lbu 	a3, 0(t6)	# cor da string => 0 = preto
@@ -105,6 +137,11 @@ PulaAtaque:
 	la	t6, MenuBatalha	
 	la	a0,menu1opcao2
 	li 	a1, 10		# posicao x da impressao (coluna)
+	la	t2, GuardaLugarMenu
+	lb	t1, 0(t2)
+	beqz	t1,PulaIncrimentaXMenu5
+	addi	a1,a1,225
+PulaIncrimentaXMenu5:
 	mv	a2, a6		# posicao y da impressao (linha)
 	mv	a4, a5
 	lbu 	a3, 1(t6)	# cor da string => 0 = preto
