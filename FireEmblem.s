@@ -1,7 +1,7 @@
 .data
 FPGA:		.byte	0	#  1 => FPGA  
 GuardaHack:	.byte 	0	# precisei disso pra guardar o sp certo na hora de retornar do Fase1.s
-GuardaLugarMenu: .byte	0
+GuardaLugarMenu:.byte	0
 AtaqueAtivado:	.byte	0
 MenuAtivado2:	.byte	0
 MenuAtivado:	.byte	0	# indica se o menu estÃ¡ ativado
@@ -312,7 +312,7 @@ fim: 	j fim
 
 # sprites de mugshots
 
-.include "sprites/personagens/mugshot_juLynete.data"	
+.include "sprites/personagens/mugshot_JuLynete.data"	
 .include "sprites/personagens/mugshot_Lyn.data"	
 .include "sprites/personagens/mugshot_Carolina.data"	
 

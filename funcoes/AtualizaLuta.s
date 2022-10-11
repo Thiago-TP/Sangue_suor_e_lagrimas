@@ -18,7 +18,7 @@ Hit:
 	li	t1, 11
 	beq	a0, t1, Crit
 	li	t1, 15
-	beq	a0, t1, Crit
+	bgt	a0, t1, Crit
 	j	SFXatk
 Crit:
 	la	a0, Critou	

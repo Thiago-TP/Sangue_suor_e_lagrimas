@@ -18,7 +18,6 @@ TerrenoEspecial:
 	mv	t1, s0			# t1 <- label do jogador
 	beqz	t0, jogadorAtacando
 	mv	t1, s1			# t1 <- label do pc
-	#ebreak
 jogadorAtacando:
 	lw	t2, 0(t1)		# t2 <- x (sempre multiplo de 16)
 	lw	t3, 4(t1)		# t3 <- y (sempre multiplo de 16)
